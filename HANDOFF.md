@@ -54,6 +54,14 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
 - **詢價信**：寄到 conwencf@ms19.hinet.net（寄件者 Formspree，建議設安全
   寄件者）；用量到 formspree.io 後台看（免費 50 封/月；超量時客戶端自動
   退回 mailto，不會漏單）
+- **表單防濫用應變手冊**（平時不用做事）：
+  1. **每月順手看一次 Formspree 後台用量**——收件匣正常但額度異常飆高
+     ＝蜜罐已被繞過的唯一訊號
+  2. 真被灌時的兩條升級路（都不用租主機）：
+     a. Formspree 付費版開 reCAPTCHA（約 US$10/月，含額度 1000 封）
+     b. DNS 從 HiNet 搬到 Cloudflare 免費版 + 開 Bot Fight Mode
+        （順便拿到 WAF；搬 NS 在 HiNet「DNS異動&查詢」頁改，
+        記得先在 Cloudflare 把現有 A/CNAME/TXT 記錄照抄）
 - **DNS**：HiNet 代管（dnmgt.hinet.net「DNS 紀錄管理」）；apex 四筆 A →
   185.199.108-111.153、www CNAME → demonbane0.github.io，**不要動**
 
