@@ -25,13 +25,10 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
 
 - [ ] **約 2026-07-20 後**：確認新網域運作穩定 → **退租 Cloudways**
   （舊主機 139.162.121.129；退租前網站已完全不依賴它，僅作切換保險）
-- [ ] **業主註冊 Google Search Console**（免費、強烈建議）：
-  1. 用 Google 帳號到 search.google.com/search-console → 新增資源 →
-     選「網域」輸入 conwen.com.tw
-  2. Google 會給一組 TXT 驗證值 → 到 HiNet DNS 紀錄管理**新加一列**：
-     Ldata 空白、類型 TXT、Rdata 貼上驗證值 → 儲存 → 回 GSC 按驗證
-  3. 驗證後到「Sitemap」提交 `https://conwen.com.tw/sitemap-index.xml`
-  4. 之後可在 GSC 看：哪些關鍵字帶來曝光/點擊、收錄狀況、行動裝置問題
+- [x] ~~Google Search Console~~：✅ **已完成**（2026-07-07 業主完成網域驗證
+  與 sitemap 提交，狀態「成功」，網頁陸續收錄中）。之後到 GSC 看
+  關鍵字曝光/點擊與收錄進度（「網頁」報表）；新增產品後 sitemap 會自動
+  更新，不用重提交
 - [ ]（可選）流量分析工具：業主若想看訪客數/來源，申請 GA4 取得
   評估 ID（G-XXXXXXX）給 Claude 接上即可；不裝也不影響 SEO
 
