@@ -1,0 +1,304 @@
+---
+import { getCollection, render } from "astro:content";
+import ProductCard from "../../../components/ProductCard.astro";
+import { categories } from "../../../data/categories";
+import Layout from "../../../layouts/Layout.astro";
+import { withBase } from "../../../utils/url";
+
+export async function getStaticPaths() {
+  const products = await getCollection("products");
+
+  return products.map((product) => {
+    const [category, slug] = product.id.split("/");
+
+    return {
+      params: { category, slug },
+      props: { product },
+    };
+  });
+}
+
+const { product } = Astro.props;
+const [categorySlug] = product.id.split("/");
+const category = categories.find((item) => item.slug === categorySlug);
+const { Content } = await render(product);
+
+const relatedProducts = (await getCollection("products"))
+  .filter((item) => item.data.category === product.data.category && item.id !== product.id)
+  .sort((a, b) => {
+    const orderDiff = (a.data.order ?? Number.MAX_SAFE_INTEGER) - (b.data.order ?? Number.MAX_SAFE_INTEGER);
+
+    if (orderDiff !== 0) {
+      return orderDiff;
+    }
+
+    return a.data.model.localeCompare(b.data.model, "zh-Hant-TW");
+  })
+  .slice(0, 4);
+
+const productPath = (id: string) => {
+  const [itemCategory, itemSlug] = id.split("/");
+  return `/products/${itemCategory}/${itemSlug}/`;
+};
+
+const productSearchText = (item: (typeof relatedProducts)[number]) =>
+  `${item.data.model} ${item.data.title} ${item.data.brand ?? ""}`.toLowerCase();
+---
+
+<Layout title={`${product.data.model} ${product.data.title}`}>
+  <section class="section">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href={withBase("/")}>首頁</a>
+        <span aria-hidden="true">›</span>
+        <a href={withBase("/products/")}>產品介紹</a>
+        <span aria-hidden="true">›</span>
+        {
+          category ? (
+            <a href={withBase(`/products/${category.slug}/`)}>{category.name}</a>
+          ) : (
+            <span>{product.data.category}</span>
+          )
+        }
+        <span aria-hidden="true">›</span>
+        <span>{product.data.model}</span>
+      </nav>
+
+      <article class="product-detail">
+        <div class="product-detail__media">
+          <img
+            src={withBase(product.data.image)}
+            alt={`${product.data.model} ${product.data.title} 產品圖片`}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+
+        <div class="card product-detail__info">
+          <p class="eyebrow">Product</p>
+          <h1>{product.data.title}</h1>
+          <dl class="product-meta">
+            <div>
+              <dt>型號</dt>
+              <dd>{product.data.model}</dd>
+            </div>
+            {
+              product.data.brand && (
+                <div>
+                  <dt>品牌</dt>
+                  <dd>{product.data.brand}</dd>
+                </div>
+              )
+            }
+          </dl>
+
+          {
+            product.data.features.length > 0 && (
+              <ul class="feature-list" aria-label="產品特色">
+                {product.data.features.map((feature) => (
+                  <li>
+                    <span aria-hidden="true">◆</span>
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            )
+          }
+
+          {
+            product.body?.trim() && (
+              <div class="product-body">
+                <Content />
+              </div>
+            )
+          }
+
+          <div class="product-actions">
+            <button
+              class="btn btn-accent product-add"
+              type="button"
+              data-inquiry-add
+              data-slug={product.id}
+              data-model={product.data.model}
+              data-title={product.data.title}
+            >
+              加入詢價單
+            </button>
+            <a class="btn" href={withBase("/contact/")}>聯絡我們詢問</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  {
+    relatedProducts.length > 0 && (
+      <section class="section section-muted">
+        <div class="container">
+          <div class="section-title">
+            <p class="eyebrow">Related Products</p>
+            <h2>同分類其他產品</h2>
+          </div>
+          <div class="related-grid">
+            {relatedProducts.map((item) => (
+              <ProductCard
+                href={productPath(item.id)}
+                image={item.data.image}
+                model={item.data.model}
+                title={item.data.title}
+                brand={item.data.brand}
+                slug={item.id}
+                search={productSearchText(item)}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+</Layout>
+
+<style>
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-bottom: var(--space-3);
+    color: var(--color-muted);
+    font-size: 0.95rem;
+  }
+
+  .breadcrumb a {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .product-detail {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.95fr) minmax(0, 1.05fr);
+    gap: var(--space-4);
+    align-items: start;
+  }
+
+  .product-detail__media {
+    display: flex;
+    aspect-ratio: 4 / 3;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: var(--shadow-card);
+  }
+
+  .product-detail__media img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .product-detail__info {
+    padding: var(--space-4);
+  }
+
+  .product-detail__info h1 {
+    margin-bottom: var(--space-2);
+  }
+
+  .product-meta {
+    display: grid;
+    gap: var(--space-1);
+    margin: 0 0 var(--space-3);
+  }
+
+  .product-meta div {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 1fr);
+    gap: var(--space-1);
+    align-items: baseline;
+  }
+
+  .product-meta dt {
+    color: var(--color-muted);
+    font-weight: 700;
+  }
+
+  .product-meta dd {
+    margin: 0;
+    color: var(--color-primary-dark);
+    font-weight: 800;
+  }
+
+  .feature-list {
+    display: grid;
+    gap: 0.65rem;
+    margin: 0 0 var(--space-3);
+    padding: 0;
+    list-style: none;
+  }
+
+  .feature-list li {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.5rem;
+    color: var(--color-text);
+  }
+
+  .feature-list span[aria-hidden="true"] {
+    color: var(--color-accent);
+    font-size: 0.85rem;
+    line-height: 1.9;
+  }
+
+  .product-body {
+    margin-top: var(--space-3);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .product-body :global(:last-child) {
+    margin-bottom: 0;
+  }
+
+  .product-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  .product-add {
+    min-width: 180px;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  @media (max-width: 960px) {
+    .product-detail,
+    .related-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .product-detail__info {
+      padding: var(--space-3);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .product-detail,
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .product-actions {
+      display: grid;
+    }
+  }
+</style>

@@ -1,7 +1,7 @@
 # HANDOFF — Session 交接文件
 
 > 每個 session 結束前更新本檔；新 session 開始先讀本檔 + CLAUDE.md。
-> 最後更新：2026-07-06 19:10（第一波 codex 執行中）
+> 最後更新：2026-07-06 19:42（第一波完成並已 push；第二波 codex 執行中）
 
 ## 專案目標
 
@@ -28,16 +28,27 @@
 - [x] GitHub repo：https://github.com/demonbane0/conwenweb（public，remote origin 已設，**尚未 push**）
 - [x] `.github/workflows/deploy.yml`（GitHub Pages，push master 觸發；**repo 的
       Pages 設定需切成 "GitHub Actions" 來源** — push 後到 Settings → Pages 確認）
-- [ ] **第一波 codex（5 個，19:03 起跑，執行中）**：
-  - S 骨架+靜態頁：codex job `task-mr942n32-he0yxc`
-  - E1 抽取 electrical-testing/environmental/infrared：`task-mr942n3q-155f26`
-  - E2 抽取 pressure/temperature/resistance-recorders：`task-mr942n5m-go9uwe`
-  - E3 抽取 clamp-meters/power-quality：`task-mr942n5i-pvmgdw`
-  - E4 抽取 field-testing/high-voltage：`task-mr942n4e-2cx4q1`
-- [ ] 第二波 codex（未派）：/products 列表（分類篩選+搜尋）、產品詳細頁、
-      詢價車（localStorage `conwen-inquiry` + 自訂事件 `inquiry:change`）、
-      /inquiry 表單頁、header 徽章接線
-- [ ] 最終驗證（build、連結、視覺）→ commit → push → Pages 上線
+- [x] **第一波 codex 完成並驗收**（commit 7fb5781，已 push）：
+      骨架 + 6 靜態頁 + 231 產品（10 分類）+ 232 產品圖 + 8 廠牌；
+      build 通過、全部圖片引用有效、零 placeholder；
+      5 個含中文檔名的產品 .md 已改 ASCII slug
+- [x] GitHub Pages 已啟用（build_type=workflow）；**分支已改名 main**（Pages 環境
+      保護規則不允許 master 部署），deploy.yml 觸發分支同步改 main，舊 master 已刪
+- [x] **第一波已上線**：https://demonbane0.github.io/conwenweb/ 回應 200
+- [ ] **第二波 codex（執行中）**：codex job `task-mr95flj2-wl5le3` —
+      /products 總覽（分類 chips+搜尋）、分類頁、產品詳細頁、ProductCard、
+      詢價車（localStorage `conwen-inquiry`、事件 `inquiry:change`、header 徽章）、
+      /inquiry 表單（Formspree 或 mailto fallback）
+- [ ] 第二波驗收：build、抽查 dist 產品頁與 inquiry 頁、base path 檢查、
+      用瀏覽器/curl 實測詢價車流程 → commit → push
+- [ ] 最終視覺驗證與收尾（更新本檔、確認線上網址）
+
+## 已知注意事項
+
+- `.claude/settings.local.json` 會被 harness 的「always allow」覆寫 —
+  session 結束前把通用規則（PowerShell/Bash 的 git/gh/node/npm/npx、Get-* 唯讀類）
+  重新 merge 回去（使用者政策：同指令確認兩次以上就加 allowlist）
+- news 只遷移出 1 則（pmt-eva-625）；舊 news.html 若還有可用內容可再補
 
 ## 監看 codex 的方法（重要 know-how）
 

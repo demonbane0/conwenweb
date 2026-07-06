@@ -1,0 +1,221 @@
+---
+import { getCollection } from "astro:content";
+import ProductCard from "../../../components/ProductCard.astro";
+import CategoryChips from "../../../components/CategoryChips.astro";
+import { categories } from "../../../data/categories";
+import Layout from "../../../layouts/Layout.astro";
+import { withBase } from "../../../utils/url";
+
+export async function getStaticPaths() {
+  const allProducts = await getCollection("products");
+
+  return categories.map((category) => ({
+    params: { category: category.slug },
+    props: {
+      category,
+      products: allProducts
+        .filter((product) => product.data.category === category.slug)
+        .sort((a, b) => {
+          const orderDiff =
+            (a.data.order ?? Number.MAX_SAFE_INTEGER) - (b.data.order ?? Number.MAX_SAFE_INTEGER);
+
+          if (orderDiff !== 0) {
+            return orderDiff;
+          }
+
+          return a.data.model.localeCompare(b.data.model, "zh-Hant-TW");
+        }),
+    },
+  }));
+}
+
+const { category, products } = Astro.props;
+
+const productPath = (id: string) => {
+  const [categorySlug, slug] = id.split("/");
+  return `/products/${categorySlug}/${slug}/`;
+};
+
+const productSearchText = (product: (typeof products)[number]) =>
+  `${product.data.model} ${product.data.title} ${product.data.brand ?? ""}`.toLowerCase();
+---
+
+<Layout title={category.name}>
+  <section class="section">
+    <div class="container" data-product-filter-root>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href={withBase("/")}>首頁</a>
+        <span aria-hidden="true">›</span>
+        <a href={withBase("/products/")}>產品介紹</a>
+        <span aria-hidden="true">›</span>
+        <span>{category.name}</span>
+      </nav>
+
+      <div class="section-title">
+        <p class="eyebrow">Products</p>
+        <h1>{category.name}</h1>
+        <p>搜尋此分類中的產品型號、名稱或品牌。</p>
+      </div>
+
+      <CategoryChips current={category.slug} />
+
+      <div class="product-toolbar">
+        <label class="product-search">
+          <span>搜尋產品</span>
+          <input
+            type="search"
+            name="keyword"
+            placeholder="輸入型號、產品名稱或品牌"
+            autocomplete="off"
+            data-product-search
+          />
+        </label>
+        <p class="product-count" data-product-visible-count>顯示 {products.length} / {products.length} 項產品</p>
+      </div>
+
+      <div class="product-grid">
+        {
+          products.map((product) => (
+            <ProductCard
+              href={productPath(product.id)}
+              image={product.data.image}
+              model={product.data.model}
+              title={product.data.title}
+              brand={product.data.brand}
+              slug={product.id}
+              search={productSearchText(product)}
+            />
+          ))
+        }
+      </div>
+
+      <p class="product-empty" data-product-empty hidden>找不到符合產品</p>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  for (const root of document.querySelectorAll("[data-product-filter-root]")) {
+    const input = root.querySelector<HTMLInputElement>("[data-product-search]");
+    const cards = Array.from(root.querySelectorAll<HTMLElement>("[data-product-card]"));
+    const empty = root.querySelector<HTMLElement>("[data-product-empty]");
+    const count = root.querySelector<HTMLElement>("[data-product-visible-count]");
+
+    const update = () => {
+      const keyword = input?.value.trim().toLowerCase() ?? "";
+      let visible = 0;
+
+      for (const card of cards) {
+        const searchText = card.dataset.search ?? "";
+        const isVisible = !keyword || searchText.includes(keyword);
+        card.hidden = !isVisible;
+
+        if (isVisible) {
+          visible += 1;
+        }
+      }
+
+      if (empty) {
+        empty.hidden = visible !== 0;
+      }
+
+      if (count) {
+        count.textContent = `顯示 ${visible} / ${cards.length} 項產品`;
+      }
+    };
+
+    input?.addEventListener("input", update);
+    update();
+  }
+</script>
+
+<style>
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-bottom: var(--space-3);
+    color: var(--color-muted);
+    font-size: 0.95rem;
+  }
+
+  .breadcrumb a {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .product-toolbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-2);
+    align-items: end;
+    margin-bottom: var(--space-3);
+  }
+
+  .product-search {
+    display: grid;
+    gap: 0.35rem;
+    color: var(--color-primary-dark);
+    font-weight: 700;
+  }
+
+  .product-search input {
+    width: 100%;
+    min-height: 44px;
+    padding: 0.65rem 0.85rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: #ffffff;
+    color: var(--color-text);
+    transition: border-color 120ms ease, box-shadow 120ms ease;
+  }
+
+  .product-search input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(20, 70, 123, 0.12);
+    outline: none;
+  }
+
+  .product-count {
+    margin-bottom: 0.65rem;
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  .product-empty {
+    margin: var(--space-4) 0 0;
+    padding: var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-section);
+    color: var(--color-muted);
+    text-align: center;
+  }
+
+  @media (max-width: 960px) {
+    .product-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .product-toolbar {
+      grid-template-columns: 1fr;
+    }
+
+    .product-count {
+      margin-bottom: 0;
+    }
+
+    .product-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

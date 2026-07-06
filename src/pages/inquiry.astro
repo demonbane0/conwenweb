@@ -1,0 +1,390 @@
+---
+import { COMPANY, FORMSPREE_ENDPOINT } from "../data/site";
+import Layout from "../layouts/Layout.astro";
+import { withBase } from "../utils/url";
+---
+
+<Layout title="詢價單">
+  <section
+    class="section inquiry-page"
+    id="inquiry-page"
+    data-formspree-endpoint={FORMSPREE_ENDPOINT}
+    data-company-email={COMPANY.email}
+  >
+    <div class="container">
+      <div class="section-title">
+        <p class="eyebrow">Inquiry</p>
+        <h1>詢價單</h1>
+        <p>確認產品與數量後，留下聯絡資訊送出詢價需求。</p>
+      </div>
+
+      <p class="form-message" data-inquiry-message role="status" aria-live="polite" hidden></p>
+
+      <div class="card empty-inquiry" data-inquiry-empty hidden>
+        <h2>詢價單是空的</h2>
+        <p>請先到產品介紹加入需要詢價的產品。</p>
+        <a class="btn btn-accent" href={withBase("/products/")}>瀏覽產品</a>
+      </div>
+
+      <div class="inquiry-content" data-inquiry-filled hidden>
+        <div class="card inquiry-table-card">
+          <div class="table-scroll">
+            <table class="inquiry-table">
+              <caption>
+                已加入詢價單的產品
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">型號</th>
+                  <th scope="col">名稱</th>
+                  <th scope="col">數量</th>
+                  <th scope="col">移除</th>
+                </tr>
+              </thead>
+              <tbody data-inquiry-items></tbody>
+            </table>
+          </div>
+        </div>
+
+        <form class="card inquiry-form" data-inquiry-form>
+          <h2>聯絡資訊</h2>
+          <div class="form-grid">
+            <label>
+              <span>公司名稱</span>
+              <input type="text" name="company" autocomplete="organization" />
+            </label>
+            <label>
+              <span>聯絡人 *</span>
+              <input type="text" name="contactPerson" autocomplete="name" required />
+            </label>
+            <label>
+              <span>電話 *</span>
+              <input type="tel" name="phone" autocomplete="tel" required />
+            </label>
+            <label>
+              <span>Email *</span>
+              <input type="email" name="email" autocomplete="email" required />
+            </label>
+          </div>
+          <label>
+            <span>備註</span>
+            <textarea name="notes" rows="5"></textarea>
+          </label>
+          <button class="btn btn-accent form-submit" type="submit">送出詢價</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import "../scripts/inquiry";
+
+  const root = document.querySelector<HTMLElement>("#inquiry-page");
+
+  if (root) {
+    const empty = root.querySelector<HTMLElement>("[data-inquiry-empty]");
+    const filled = root.querySelector<HTMLElement>("[data-inquiry-filled]");
+    const tbody = root.querySelector<HTMLTableSectionElement>("[data-inquiry-items]");
+    const form = root.querySelector<HTMLFormElement>("[data-inquiry-form]");
+    const message = root.querySelector<HTMLElement>("[data-inquiry-message]");
+    const endpoint = root.dataset.formspreeEndpoint?.trim() ?? "";
+    const companyEmail = root.dataset.companyEmail ?? "";
+    const api = window.ConwenInquiry;
+
+    const showMessage = (text: string, type: "success" | "error" | "notice") => {
+      if (!message) {
+        return;
+      }
+
+      message.textContent = text;
+      message.dataset.type = type;
+      message.hidden = false;
+    };
+
+    const productsText = () =>
+      (api?.getItems() ?? [])
+        .map((item) => `${item.model} x ${item.qty} ${item.title}`)
+        .join("\n");
+
+    const renderItems = () => {
+      if (!api || !empty || !filled || !tbody) {
+        return;
+      }
+
+      const items = api.getItems();
+      empty.hidden = items.length > 0;
+      filled.hidden = items.length === 0;
+      tbody.replaceChildren();
+
+      for (const item of items) {
+        const row = document.createElement("tr");
+        const model = document.createElement("td");
+        const title = document.createElement("td");
+        const qtyCell = document.createElement("td");
+        const removeCell = document.createElement("td");
+        const qty = document.createElement("input");
+        const remove = document.createElement("button");
+
+        model.textContent = item.model;
+        title.textContent = item.title;
+        qty.type = "number";
+        qty.min = "1";
+        qty.step = "1";
+        qty.value = String(item.qty);
+        qty.dataset.qtySlug = item.slug;
+        qty.setAttribute("aria-label", `${item.model} 數量`);
+
+        remove.type = "button";
+        remove.className = "btn inquiry-remove";
+        remove.textContent = "移除";
+        remove.dataset.removeSlug = item.slug;
+        remove.setAttribute("aria-label", `移除 ${item.model}`);
+
+        qtyCell.append(qty);
+        removeCell.append(remove);
+        row.append(model, title, qtyCell, removeCell);
+        tbody.append(row);
+      }
+    };
+
+    tbody?.addEventListener("change", (event) => {
+      const input = (event.target as Element).closest<HTMLInputElement>("[data-qty-slug]");
+
+      if (!input || !api) {
+        return;
+      }
+
+      api.setQty(input.dataset.qtySlug ?? "", Number.parseInt(input.value, 10));
+      renderItems();
+    });
+
+    tbody?.addEventListener("click", (event) => {
+      const button = (event.target as Element).closest<HTMLButtonElement>("[data-remove-slug]");
+
+      if (!button || !api) {
+        return;
+      }
+
+      api.remove(button.dataset.removeSlug ?? "");
+      renderItems();
+    });
+
+    form?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!api || !form.reportValidity()) {
+        return;
+      }
+
+      const items = api.getItems();
+
+      if (items.length === 0) {
+        showMessage("詢價單是空的", "error");
+        return;
+      }
+
+      const formData = new FormData(form);
+      const email = String(formData.get("email") ?? "");
+      const payload = {
+        company: String(formData.get("company") ?? ""),
+        contactPerson: String(formData.get("contactPerson") ?? ""),
+        phone: String(formData.get("phone") ?? ""),
+        email,
+        notes: String(formData.get("notes") ?? ""),
+        products: productsText(),
+        _replyto: email,
+      };
+
+      if (endpoint) {
+        try {
+          const response = await fetch(endpoint, {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          });
+
+          if (!response.ok) {
+            throw new Error(`Formspree request failed: ${response.status}`);
+          }
+
+          api.clear();
+          form.reset();
+          showMessage("詢價已送出，我們會盡快與您聯絡。", "success");
+          renderItems();
+        } catch {
+          showMessage("詢價送出失敗，請稍後再試或改用 Email 聯絡我們。", "error");
+        }
+
+        return;
+      }
+
+      const body = [
+        "詢價產品：",
+        productsText(),
+        "",
+        "聯絡資訊：",
+        `公司名稱：${payload.company}`,
+        `聯絡人：${payload.contactPerson}`,
+        `電話：${payload.phone}`,
+        `Email：${payload.email}`,
+        "",
+        "備註：",
+        payload.notes,
+      ].join("\n");
+
+      window.location.href = `mailto:${companyEmail}?subject=${encodeURIComponent("詢價單")}&body=${encodeURIComponent(
+        body,
+      )}`;
+      showMessage("已開啟您的郵件軟體，請按傳送完成詢價", "notice");
+    });
+
+    window.addEventListener("inquiry:change", renderItems);
+    renderItems();
+  }
+</script>
+
+<style>
+  .form-message {
+    margin-bottom: var(--space-3);
+    padding: var(--space-2);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-section);
+    color: var(--color-primary-dark);
+    font-weight: 700;
+  }
+
+  .form-message[data-type="success"] {
+    border-color: rgba(20, 70, 123, 0.28);
+    background: #eef6ff;
+  }
+
+  .form-message[data-type="error"] {
+    border-color: rgba(232, 89, 12, 0.32);
+    background: var(--color-soft-accent);
+  }
+
+  .empty-inquiry,
+  .inquiry-table-card,
+  .inquiry-form {
+    padding: var(--space-3);
+  }
+
+  .empty-inquiry h2 {
+    margin-bottom: var(--space-1);
+  }
+
+  .inquiry-content {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+  }
+
+  .inquiry-table {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+  }
+
+  .inquiry-table caption {
+    margin-bottom: var(--space-2);
+    color: var(--color-primary-dark);
+    font-size: 1.25rem;
+    font-weight: 800;
+    text-align: left;
+  }
+
+  .inquiry-table th,
+  .inquiry-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  .inquiry-table th {
+    color: var(--color-primary-dark);
+    font-weight: 800;
+  }
+
+  .inquiry-table input {
+    width: 6rem;
+    min-height: 40px;
+    padding: 0.45rem 0.6rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+  }
+
+  .inquiry-remove {
+    min-height: 40px;
+    padding-inline: 0.85rem;
+  }
+
+  .inquiry-form {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .inquiry-form h2 {
+    margin-bottom: 0;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+  }
+
+  .inquiry-form label {
+    display: grid;
+    gap: 0.35rem;
+    color: var(--color-primary-dark);
+    font-weight: 700;
+  }
+
+  .inquiry-form input,
+  .inquiry-form textarea {
+    width: 100%;
+    min-height: 44px;
+    padding: 0.65rem 0.85rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: #ffffff;
+    color: var(--color-text);
+    transition: border-color 120ms ease, box-shadow 120ms ease;
+  }
+
+  .inquiry-form textarea {
+    resize: vertical;
+  }
+
+  .inquiry-form input:focus,
+  .inquiry-form textarea:focus,
+  .inquiry-table input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(20, 70, 123, 0.12);
+    outline: none;
+  }
+
+  .form-submit {
+    justify-self: start;
+    min-width: 160px;
+  }
+
+  @media (max-width: 768px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .form-submit {
+      width: 100%;
+    }
+  }
+</style>

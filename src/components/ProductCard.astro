@@ -1,0 +1,123 @@
+---
+import { withBase } from "../utils/url";
+
+interface Props {
+  href: string;
+  image: string;
+  model: string;
+  title: string;
+  slug: string;
+  brand?: string;
+  search?: string;
+}
+
+const { href, image, model, title, slug, brand, search } = Astro.props;
+const imageAlt = `${model} ${title} 產品圖片`;
+const linkLabel = `查看 ${model} ${title}`;
+---
+
+<article class="card product-card" data-product-card data-search={search}>
+  <a class="product-card__overlay" href={withBase(href)} aria-label={linkLabel}></a>
+  <div class="product-card__media">
+    <img src={withBase(image)} alt={imageAlt} loading="lazy" decoding="async" />
+  </div>
+  <div class="product-card__body">
+    <p class="product-card__model">{model}</p>
+    <h2 class="product-card__title">{title}</h2>
+    {brand && <p class="product-card__brand">{brand}</p>}
+  </div>
+  <div class="product-card__actions">
+    <button
+      class="btn btn-accent product-card__button"
+      type="button"
+      data-inquiry-add
+      data-slug={slug}
+      data-model={model}
+      data-title={title}
+    >
+      加入詢價單
+    </button>
+  </div>
+</article>
+
+<style>
+  .product-card {
+    position: relative;
+    display: grid;
+    min-height: 100%;
+    grid-template-rows: auto 1fr auto;
+    overflow: hidden;
+    transition: border-color 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+  }
+
+  .product-card:hover,
+  .product-card:focus-within {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+
+  .product-card__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+  }
+
+  .product-card__overlay:focus-visible {
+    outline: 3px solid rgba(232, 89, 12, 0.35);
+    outline-offset: -3px;
+  }
+
+  .product-card__media {
+    display: flex;
+    aspect-ratio: 4 / 3;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2);
+    border-bottom: 1px solid var(--color-border);
+    background: #ffffff;
+  }
+
+  .product-card__media img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .product-card__body {
+    padding: var(--space-2) var(--space-2) 0;
+  }
+
+  .product-card__model {
+    margin-bottom: 0.25rem;
+    color: var(--color-primary-dark);
+    font-size: 1.08rem;
+    font-weight: 800;
+    line-height: 1.35;
+  }
+
+  .product-card__title {
+    margin-bottom: 0.35rem;
+    color: var(--color-text);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .product-card__brand {
+    margin-bottom: 0;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+  }
+
+  .product-card__actions {
+    position: relative;
+    z-index: 2;
+    padding: var(--space-2);
+  }
+
+  .product-card__button {
+    width: 100%;
+  }
+</style>
