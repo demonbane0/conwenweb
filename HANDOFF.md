@@ -1,7 +1,7 @@
 # HANDOFF — Session 交接文件
 
 > 每個 session 結束前更新本檔；新 session 開始先讀本檔 + CLAUDE.md。
-> 最後更新：2026-07-06 19:42（第一波完成並已 push；第二波 codex 執行中）
+> 最後更新：2026-07-06 20:26（第二波完成上線；剩收尾驗證，見「下一步」）
 
 ## 專案目標
 
@@ -13,62 +13,74 @@
 
 1. 詢價寄信：**Formspree 免費方案**（`src/data/site.ts` 的 `FORMSPREE_ENDPOINT`
    目前留空 → fallback mailto；**待業主到 formspree.io 用 conwencf@ms19.hinet.net
-   註冊並提供 endpoint**）
+   註冊並提供 endpoint**，填入後 rebuild 即切換成站內送出）
 2. 商品管理：Markdown 檔案工作流（會用文字檔的人維護）
 3. 內容遷移：舊站 10 分類全部搬移，之後業主自行刪停售品
 4. 語言：繁體中文 only
 5. 分工：Fable 5 設計+驗證；codex 實裝（失敗改派 Sonnet 5）；git/GitHub 版控
+6. 使用者流程偏好：用本檔交接；同指令權限確認 2 次以上就加 allowlist（已存長期記憶）
 
-## 目前進度
+## 目前進度（全部 commit 在 main，已 push）
 
-- [x] 舊站檢視完畢（FrontPage frameset、Big5、Flash 選單全滅、Hinet 計數器死亡）
-- [x] git init；baseline commit；舊站移入 `legacy/`；UTF-8 轉檔在 `legacy/utf8/`
-- [x] `CLAUDE.md`（含設計系統、產品 schema、10 分類 slug、base path 規範）
-- [x] `AGENTS.md`（codex 守則）
-- [x] GitHub repo：https://github.com/demonbane0/conwenweb（public，remote origin 已設，**尚未 push**）
-- [x] `.github/workflows/deploy.yml`（GitHub Pages，push master 觸發；**repo 的
-      Pages 設定需切成 "GitHub Actions" 來源** — push 後到 Settings → Pages 確認）
-- [x] **第一波 codex 完成並驗收**（commit 7fb5781，已 push）：
-      骨架 + 6 靜態頁 + 231 產品（10 分類）+ 232 產品圖 + 8 廠牌；
-      build 通過、全部圖片引用有效、零 placeholder；
-      5 個含中文檔名的產品 .md 已改 ASCII slug
-- [x] GitHub Pages 已啟用（build_type=workflow）；**分支已改名 main**（Pages 環境
-      保護規則不允許 master 部署），deploy.yml 觸發分支同步改 main，舊 master 已刪
-- [x] **第一波已上線**：https://demonbane0.github.io/conwenweb/ 回應 200
-- [ ] **第二波 codex（執行中）**：codex job `task-mr95flj2-wl5le3` —
-      /products 總覽（分類 chips+搜尋）、分類頁、產品詳細頁、ProductCard、
-      詢價車（localStorage `conwen-inquiry`、事件 `inquiry:change`、header 徽章）、
-      /inquiry 表單（Formspree 或 mailto fallback）
-- [ ] 第二波驗收：build、抽查 dist 產品頁與 inquiry 頁、base path 檢查、
-      用瀏覽器/curl 實測詢價車流程 → commit → push
-- [ ] 最終視覺驗證與收尾（更新本檔、確認線上網址）
+- [x] 舊站移入 `legacy/`（唯讀），UTF-8 轉檔在 `legacy/utf8/`（抽取來源）
+- [x] CLAUDE.md / AGENTS.md / GitHub repo（public）/ Pages（build_type=workflow）
+- [x] 分支改名 **main**（Pages 環境保護不允許 master 部署；舊 master 已刪）
+- [x] **第一波**（commit 7fb5781）：Astro 骨架 + 6 靜態頁 + 231 產品 .md（10 分類）
+      + 232 產品圖 + 8 廠牌。驗收通過：build 零錯、圖片引用零缺漏
+- [x] **第二波**（commit 8aecfdf）：/products 總覽（分類 chips + 客戶端搜尋）、
+      10 分類頁、231 產品詳細頁、詢價車（localStorage `conwen-inquiry` +
+      `inquiry:change` 事件 + header 徽章 + 跨分頁同步）、/inquiry 表單
+      （Formspree POST / mailto fallback）。驗收：build 249 頁、preview 9 條路由
+      全 200、dist 無漏套 base path
+- [x] **網站已上線**：https://demonbane0.github.io/conwenweb/
+- [x] 設計驗收修正（本機已 commit，見 git log 最新）：首頁 4 張優勢卡原本同句
+      複製 ×4 → 已改為各自文案；英文眉標（Service Strength 等）→ 改繁中
 
-## 已知注意事項
+## 下一步（新 session 從這裡接手）
 
-- `.claude/settings.local.json` 會被 harness 的「always allow」覆寫 —
-  session 結束前把通用規則（PowerShell/Bash 的 git/gh/node/npm/npx、Get-* 唯讀類）
-  重新 merge 回去（使用者政策：同指令確認兩次以上就加 allowlist）
-- news 只遷移出 1 則（pmt-eva-625）；舊 news.html 若還有可用內容可再補
+1. **［唯一未解問題］手機版漢堡選單疑似沒顯示**：
+   - headless Edge 390px 截圖看不到漢堡按鈕；但 dist CSS 確認含
+     `@media(max-width:768px){.nav-toggle-label{display:inline-flex;...}}`，
+     HTML 也有 `input#nav-toggle` + `label.nav-toggle-label`（Layout.astro:47-50）
+   - 可能只是 headless 截圖問題，**先用真瀏覽器開 DevTools 手機模擬確認**；
+     若真的沒顯示，檢查 `.header-inner` flex 佈局是否把 label 擠出視口，
+     或 `aria-hidden` 相關樣式；修好後截圖驗證
+2. 最終視覺巡檢（桌機+手機截圖：首頁/產品列表/詳細頁/詢價頁），
+   實測詢價流程（加入→徽章→調數量→mailto 開啟）
+3. push 後確認 Actions 綠燈、線上抽查
+4. 收尾：更新本檔、告知業主 Formspree 註冊步驟
 
 ## 監看 codex 的方法（重要 know-how）
 
-- codex 包裝 subagent 是**轉發即結束**設計，不會等結果；輪詢要主控自己做
-- 狀態檔：`C:\Users\herod\.claude\plugins\data\codex-openai-codex\state\conwenweb-580de97d1e01a9f0\state.json`（jobs 陣列 + `jobs\<id>.log`）
+- codex 包裝 subagent（codex:codex-rescue）是**轉發即結束**設計；輪詢由主控做
 - 查狀態：`$env:CLAUDE_PLUGIN_DATA='C:\Users\herod\.claude\plugins\data\codex-openai-codex'` 後
   `node "C:/Users/herod/.claude/plugins/cache/openai-codex/codex/1.0.4/scripts/codex-companion.mjs" status`
+  （或 `result <task-id>` 取完整回報）
+- 狀態檔：`...\state\conwenweb-580de97d1e01a9f0\state.json` + `jobs\<id>.log`
 - 或看程序：`codex-companion.mjs task-worker` 的 node 程序全部退出 = 全部完成
-- 目前掛著一個背景監看器（20 秒輪詢 task-worker 數，歸零或 ~9 分鐘逾時會通知）
+- 監看背景命令要用 `@(...)` 包 Where-Object 再 .Count（PS 5.1 空集合陷阱）
 
-## 驗收清單（第一波完成後）
+## 驗收清單（每波必做）
 
-1. `npm install && npm run build` 零錯誤
-2. 產品 .md 抽查：frontmatter schema、category slug 正確、image 檔案存在
-3. 各分類產品數 vs 舊頁面 spot check（缺漏就補派 agent）
-4. 所有內部連結/圖片經 `withBase()`（搜 `href="/` 與 `src="/` 抓漏網）
-5. 通過後 commit（一波一 commit），再派第二波
+1. `npm run build` 零錯誤（PS 執行政策擋 npm.ps1 時用 `npm.cmd`）
+2. 產品 .md：schema、category slug、image 存在（第一波已全查過）
+3. dist 抽查 + `href="/(?!conwenweb)` 掃漏套 base
+4. preview server curl 關鍵路由
+5. 一波一 commit，訊息附驗證結果
+
+## 已知注意事項
+
+- `.claude/settings.local.json` 會被 harness 的「always allow」持續覆寫 —
+  收尾時把通用規則（PowerShell/Bash 的 git/gh/node/npm/npx、Get-* 唯讀類）
+  merge 回去，**保留 harness 加的條目**（政策見長期記憶 permission-allowlist-policy）
+- news 只遷移出 1 則（pmt-eva-625）；舊 news.html 若還有可用內容可再補
+- 首頁 /products/ 一頁含全部 231 產品（243KB HTML）供客戶端搜尋 — 目前可接受，
+  未來產品變多可改建置期搜尋索引
+- git commit 時 CRLF 警告是正常現象；PowerShell 工具跑 git 會把 stderr 警告
+  誤標成錯誤（exit 255/128），以 `git log`/`git status` 實查為準
 
 ## 待業主提供
 
 - Formspree endpoint（未提供前詢價單走 mailto，不影響上線）
-- 確認三據點地址電話是否為現況（沿用舊站資料）
+- 確認三據點地址電話是否為現況（沿用舊站 2008 資料）
 - 自有網域（可選；沒有就用 https://demonbane0.github.io/conwenweb/）

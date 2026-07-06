@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from "../layouts/Layout.astro";
 import { brands } from "../data/brands";
 import { categories } from "../data/categories";
@@ -6,10 +6,22 @@ import { COMPANY } from "../data/site";
 import { withBase } from "../utils/url";
 
 const advantages = [
-  "專業代理數家知名廠牌",
-  "產品種類繁多滿足各種應用",
-  "合理價格專業服務",
-  "北中南三據點即時服務與維修保固",
+  {
+    title: "專業代理數家知名廠牌",
+    text: "長期代理歐、美、日知名測試測量儀器品牌，原廠貨源、品質有保障。",
+  },
+  {
+    title: "產品種類繁多滿足各種應用",
+    text: "十大分類、兩百餘項儀器，涵蓋電機、電子、環境、壓力、溫度與高壓維護等應用。",
+  },
+  {
+    title: "合理價格專業服務",
+    text: "專業團隊協助選型與報價，以合理的價格提供最適合的量測方案。",
+  },
+  {
+    title: "北中南三據點即時服務與維修保固",
+    text: "台北、台中、高雄皆設有服務據點，並有專屬維修部門提供保固與售後維修。",
+  },
 ];
 ---
 
@@ -38,15 +50,15 @@ const advantages = [
   <section class="section">
     <div class="container">
       <div class="section-title">
-        <p class="eyebrow">Service Strength</p>
+        <p class="eyebrow">服務優勢</p>
         <h2>專業代理與在地服務</h2>
       </div>
       <div class="grid-4">
         {
           advantages.map((item) => (
             <article class="card feature-card">
-              <h3>{item}</h3>
-              <p>以測試測量儀器代理經驗，支援選型、供應、售後與維修保固需求。</p>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
             </article>
           ))
         }
@@ -57,7 +69,7 @@ const advantages = [
   <section class="section section-muted">
     <div class="container">
       <div class="section-title">
-        <p class="eyebrow">Product Categories</p>
+        <p class="eyebrow">產品線</p>
         <h2>10 大產品分類</h2>
       </div>
       <div class="grid-3">
@@ -77,7 +89,7 @@ const advantages = [
   <section class="section">
     <div class="container">
       <div class="section-title">
-        <p class="eyebrow">Brands</p>
+        <p class="eyebrow">合作品牌</p>
         <h2>代理廠牌</h2>
       </div>
       <div class="brand-strip">
@@ -95,7 +107,7 @@ const advantages = [
   <section class="section cta-band">
     <div class="container cta-box">
       <div>
-        <p class="eyebrow">Contact</p>
+        <p class="eyebrow">聯絡耕紋</p>
         <h2>需要儀器選型或報價協助？</h2>
         <p>可透過詢價單或直接聯絡北中南據點，由專人回覆產品與服務需求。</p>
       </div>
