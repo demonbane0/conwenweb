@@ -1,0 +1,189 @@
+﻿<html>
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=big5">
+<title>目錄</title>
+<meta name="namo-theme" content="Theme\Business_Classic\Clover">
+<style><!--
+body { color:rgb(128,128,128); font-family:細明體;}
+th { color:rgb(128,128,128); font-family:細明體;}
+td { color:rgb(128,128,128); font-family:細明體;}
+h1 { color:rgb(0,128,0); font-size:12pt; font-family:細明體;}
+h2 { color:rgb(0,128,0); font-size:12pt; font-family:細明體;}
+p.namo-list { color:rgb(0,0,0); font-size:12pt; font-family:細明體;}
+p.namo-sublist { color:rgb(0,0,0); font-size:10pt; font-family:細明體;}
+a:link {}
+a:visited {}
+a:active {}
+--></style>
+<base target="_blank">
+<script language="JavaScript">
+<!--
+function namosw_init_clock()
+{
+  var type, i, top, obj, clocks;
+  clocks = new Array();
+  for (i = 0, top = 0; i < namosw_init_clock.arguments.length; i += 2) {
+    obj = eval('document.'+namosw_init_clock.arguments[i]);
+    if (obj == null) continue;
+    if ((type = namosw_init_clock.arguments[i+1]) < 1 && 11 < type) continue;
+    clocks[top++] = obj;
+    clocks[top++] = type;
+  }
+  clocks.months = new Array('1月', '2月', '3月', '4月', '5月', '6月', '7月',
+                            '8月', '9月', '10月', '11月', '12月');
+  clocks.days   = new Array('星期日', '星期一', '星期二', '星期三',
+                            '星期四', '星期五', '星期六');
+  clocks.k_days = new Array('橾', '錯', '', '熱', '跡', '旎', '饜');
+  clocks.ampm_str   = new Array('上午', '下午');
+  clocks.k_ampm_str = new Array('螃瞪', '螃');
+
+  if (top > 0) {
+    document.namosw_clocks = clocks;
+    namosw_clock();
+  }
+}
+
+function namosw_clock()
+{
+  var i, type, clocks, next_call, str, hour, ampm, now, year2, year4;
+  clocks = document.namosw_clocks;
+  if (clocks == null) return;
+  next_call = false;
+  for (i = 0; i < clocks.length; i += 2) {
+    obj   = clocks[i];
+    type  = clocks[i+1];
+    now   = new Date();
+    year2 = now.getYear();
+    year4 = year2;
+    if (year2 < 1000) year4 = 1900 + year2;
+    if (year2 >= 100) year2 = year4;
+
+    if (type == 1 || type == 2) {
+      obj.value = year4 + '年 ' + clocks.months[now.getMonth()] + ' ' + now.getDate() + '日';
+      if (type == 2) 
+        obj.value = obj.value + ' ' + clocks.days[now.getDay()];
+    } else if (type == 3 || type == 4) {
+      obj.value = year2 + '/' + (now.getMonth()+1) + '/' + now.getDate();
+    } else if (type == 5 || type == 6) {
+      obj.value = (now.getMonth()+1) + '/' + now.getDate() + '/' + year2;
+    } else if (type == 8 || type == 9 || type == 10 || type == 11) {
+      obj.value = year4 + '年' + (now.getMonth()+1) + '月' + now.getDate() + '日';
+      if (type == 9)
+        obj.value += ' ' + clocks.k_days[now.getDay()] + '星期';
+    }
+    if (type == 4 || type == 6 || type == 7 || type == 10 || type == 11) {
+      hour = now.getHours();
+      ampm = 0;
+      if (hour >= 12) {
+	if (hour > 12) hour -= 12;
+	ampm = 1;
+      }
+      if (type == 10 || type == 11) {
+	str = clocks.k_ampm_str[ampm] +' '+ hour+'點 '+ now.getMinutes() +'分';
+	if (type == 11) str += ' ' + now.getSeconds() +'秒';
+      } else {
+	str = clocks.ampm_str[ampm] + ' ' + hour +':'+ ((now.getMinutes() < 10) ? '0'+now.getMinutes():now.getMinutes()) +':'+ ((now.getSeconds() < 10) ? '0'+now.getSeconds():now.getSeconds());
+      }
+      if (type == 7) obj.value  = str;
+      else           obj.value += ' ' + str;
+    }
+    if (type == 4 || type == 6 || type == 7 || type == 10 || type == 11)
+      next_call = true;
+  }
+  if (next_call)
+    window.setTimeout("namosw_clock();", 1000);
+}
+
+// -->
+</script>
+<script language="JavaScript">
+<!--
+function na_change_img_src(name, nsdoc, rpath, preload)
+{ 
+  var img = eval((navigator.appName.indexOf('Netscape', 0) != -1) ? nsdoc+'.'+name : 'document.all.'+name);
+  if (name == '')
+    return;
+  if (img) {
+    img.altsrc = img.src;
+    img.src    = rpath;
+  } 
+}
+
+function na_restore_img_src(name, nsdoc)
+{
+  var img = eval((navigator.appName.indexOf('Netscape', 0) != -1) ? nsdoc+'.'+name : 'document.all.'+name);
+  if (name == '')
+    return;
+  if (img && img.altsrc) {
+    img.src    = img.altsrc;
+    img.altsrc = null;
+  } 
+}
+
+// -->
+</script>
+</head>
+
+<body bgcolor="white" text="gray" link="#82E606" vlink="gray" alink="olive" OnLoad="namosw_init_clock('時間.textclock1', 4)" background="01_gif.gif">
+<p align="left">
+<img border="0" src="clip_image001.gif" width="147" height="60">
+<p style="margin-top: 0; margin-bottom: 0"><font face="新細明體" color="#0000FF"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b></font></p>
+<form name="時間">
+<p style="margin-top: 0; margin-bottom: 0">
+<input type="text" name="textclock1" size="20" style="text-align: center; word-spacing: 0; line-height: 150%; text-indent: 0; font-family: Arial; font-size: 10pt; margin: 0; background-color: #FFFF00"><font size="1" face="文鼎中圓">
+</font></p>
+</form>
+<p>
+<b>&nbsp;&nbsp;&nbsp</b><Script src="http://app.myweb.hinet.net/counter/citycounter.asp?uid=conwencf&style=led&width=6"></Script></p>
+<p style="margin-top: 0; margin-bottom: 0"><b><font face="文鼎中圓" color="#006600">&nbsp;&nbsp; </font>
+<font face="新細明體" color="#0000FF">&nbsp;產品項目</font></b></p>
+<!--NAMO_NAVBAR_START A V         8 39 7 9 8 3 -->
+<div>
+<p style="margin-top: 0; margin-bottom: 0">
+<a href="product_1.html"  
+onmouseover="na_change_img_src('nav_left_AV0', 'document', 'nav/nav_39_product_1_avr.gif', true);"
+onmouseout="na_restore_img_src('nav_left_AV0', 'document');"><img src="nav/nav_39_product_1_av.gif" name="nav_left_AV0" 
+border="0" class="namo-button1" alt="電機電子測試測量" align="texttop"></a>&nbsp;<br>
+<a href="product_2.html"  
+onmouseover="na_change_img_src('nav_left_AV1', 'document', 'nav/nav_39_product_2_avr.gif', true);"
+onmouseout="na_restore_img_src('nav_left_AV1', 'document');"><img src="nav/nav_39_product_2_av.gif" name="nav_left_AV1" 
+border="0" class="namo-button1" alt="環境相關測量儀器" align="texttop"></a>&nbsp;<br>
+<a href="product_3.html"  
+onmouseover="na_change_img_src('nav_left_AV2', 'document', 'nav/nav_39_product_3_avr.gif', true);"
+onmouseout="na_restore_img_src('nav_left_AV2', 'document');"><img src="nav/nav_39_product_3_av.gif" name="nav_left_AV2" 
+border="0" class="namo-button1" alt="壓力測量與校正" align="texttop"></a>&nbsp;<br>
+<a href="product_4.html"  
+onmouseover="na_change_img_src('nav_left_AV3', 'document', 'nav/nav_39_product_4_avr.gif', true);"
+onmouseout="na_restore_img_src('nav_left_AV3', 'document');"><img src="nav/nav_39_product_4_av.gif" name="nav_left_AV3" 
+border="0" class="namo-button1" alt="溫度信號測量校正" align="texttop"></a>&nbsp;<br>
+<a href="product_5.html"  
+onmouseover="na_change_img_src('nav_left_AV4', 'document', 'nav/nav_39_product_5_avr.gif', true);"
+onmouseout="na_restore_img_src('nav_left_AV4', 'document');"><img src="nav/nav_39_product_5_av.gif" name="nav_left_AV4" 
+border="0" class="namo-button1" alt="電阻校正及記錄器" align="texttop"></a>&nbsp;<br>
+<a href="product_6.html"  
+onmouseover="na_change_img_src('nav_left_AV5', 'document', 'nav/nav_39_product_6_avr.gif', true);"
+onmouseout="na_restore_img_src('nav_left_AV5', 'document');"><img src="nav/nav_39_product_6_av.gif" name="nav_left_AV5" 
+border="0" class="namo-button1" alt="鉤式電錶類儀器" align="texttop"></a>&nbsp;<br>
+<a href="product_7.html"  
+onmouseover="na_change_img_src('nav_left_AV6', 'document', 'nav/nav_39_product_7_avr.gif', true);"
+onmouseout="na_restore_img_src('nav_left_AV6', 'document');"><img src="nav/nav_39_product_7_av.gif" name="nav_left_AV6" 
+border="0" class="namo-button1" alt="現場測試用儀器" align="texttop"></a>&nbsp;<br>
+<a href="product_8.html"  
+onmouseover="na_change_img_src('nav_left_AV7', 'document', 'nav/nav_39_product_8_avr.gif', true);"
+onmouseout="na_restore_img_src('nav_left_AV7', 'document');"><img src="nav/nav_39_product_8_av.gif" name="nav_left_AV7" 
+border="0" class="namo-button1" alt="高壓維護測試" align="texttop"></a>&nbsp;<br>
+<a href="product_9.html"  
+onmouseover="na_change_img_src('nav_left_AV8', 'document', 'nav/nav_39_product_9_avr.gif', true);"
+onmouseout="na_restore_img_src('nav_left_AV8', 'document');"><img src="nav/nav_39_product_9_av.gif" name="nav_left_AV8" 
+border="0" class="namo-button1" alt="檢電及電源品質" align="texttop"></a>&nbsp;<br>
+<a href="product_10.html"  
+onmouseover="na_change_img_src('nav_left_AV9', 'document', 'nav/nav_39_product_10_avr.gif', true);"
+onmouseout="na_restore_img_src('nav_left_AV9', 'document');"><img src="nav/nav_39_product_10_av.gif" name="nav_left_AV9" 
+border="0" class="namo-button1" alt="工業用紅外線感測" align="texttop"></a><a name="anchor_menu0">&nbsp;</a><br>
+</div>
+<!--NAMO_NAVBAR_END-->
+<p>　</p>
+</body>
+
+</html>
