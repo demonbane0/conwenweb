@@ -133,9 +133,10 @@
 
 ## 待業主提供
 
-- Formspree endpoint（未提供前詢價單走 mailto，不影響上線）。
-  步驟：到 formspree.io 用 conwencf@ms19.hinet.net 註冊 → New Form →
-  複製 `https://formspree.io/f/xxxxxxxx` 給我 → 填入 `src/data/site.ts` 即切換
+- ~~Formspree endpoint~~：✅ **已完成**（2026-07-07，`https://formspree.io/f/mqevjpbn`
+  已填入 `src/data/site.ts`，實測送出成功、測試信已寄達公司信箱）。
+  免費額度 50 封/月，用量到 formspree.io 後台看；防灌爆三層防護已內建
+  （蜜罐/失敗退回 mailto/送出鎖定）
 - **表單防濫用已內建**（2026-07-07，回應業主對寄信額度被灌爆的疑慮）：
   蜜罐欄位 `_gotcha`（機器人填了會被 Formspree 靜默丟棄、不計額度）、
   線上送出失敗**自動退回 mailto**（額度用盡也不漏詢價）、送出中鎖定按鈕防連點。

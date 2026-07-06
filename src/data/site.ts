@@ -30,4 +30,4 @@ export const COMPANY = {
   ],
 } as const;
 
-export const FORMSPREE_ENDPOINT = "";
+export const FORMSPREE_ENDPOINT = "https://formspree.io/f/mqevjpbn";
