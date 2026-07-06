@@ -48,9 +48,28 @@ const processSteps = [
   { title: "供貨交付", text: "原廠貨源供應，確認交期後安排出貨與到貨確認。" },
   { title: "保固維修", text: "自設維修部門提供保固服務與售後維修支援。" },
 ];
+
+const organizationJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: COMPANY.name,
+  alternateName: COMPANY.englishName,
+  url: Astro.site?.href,
+  logo: new URL(withBase("/images/og.png"), Astro.site).href,
+  email: COMPANY.email,
+  foundingDate: String(COMPANY.establishedYear),
+  telephone: COMPANY.branches[0].phone,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: COMPANY.branches[0].address,
+    addressCountry: "TW",
+  },
+  description: `${COMPANY.name}${COMPANY.tagline}，北中南三據點提供選型報價與維修保固服務。`,
+});
 ---
 
 <Layout title="首頁">
+  <script type="application/ld+json" set:html={organizationJsonLd} is:inline />
   <section class="hero section">
     <div class="container hero-grid">
       <div>

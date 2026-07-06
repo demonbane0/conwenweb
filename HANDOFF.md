@@ -21,10 +21,28 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
   OG 分享圖）詳見 CLAUDE.md
 - 最新消息：舊 2008 消息已移除，頁面留空狀態等新公告
 
-## 唯一剩餘待辦
+## 剩餘待辦
 
 - [ ] **約 2026-07-20 後**：確認新網域運作穩定 → **退租 Cloudways**
   （舊主機 139.162.121.129；退租前網站已完全不依賴它，僅作切換保險）
+- [ ] **業主註冊 Google Search Console**（免費、強烈建議）：
+  1. 用 Google 帳號到 search.google.com/search-console → 新增資源 →
+     選「網域」輸入 conwen.com.tw
+  2. Google 會給一組 TXT 驗證值 → 到 HiNet DNS 紀錄管理**新加一列**：
+     Ldata 空白、類型 TXT、Rdata 貼上驗證值 → 儲存 → 回 GSC 按驗證
+  3. 驗證後到「Sitemap」提交 `https://conwen.com.tw/sitemap-index.xml`
+  4. 之後可在 GSC 看：哪些關鍵字帶來曝光/點擊、收錄狀況、行動裝置問題
+- [ ]（可選）流量分析工具：業主若想看訪客數/來源，申請 GA4 取得
+  評估 ID（G-XXXXXXX）給 Claude 接上即可；不裝也不影響 SEO
+
+## SEO 現況（2026-07-07 強化後）
+
+- sitemap（`/sitemap-index.xml`，248 URL）+ robots.txt + 全站 canonical
+- 產品頁：廠牌+型號 title、逐頁 meta description、Product + BreadcrumbList
+  JSON-LD；首頁：Organization JSON-LD；全站 OG/Twitter 分享標籤 + 品牌分享圖
+- **舊站網址轉址**：2008 年的 product_1~10.html、company/customer/news/
+  contact/main.html 共 16 個舊網址做了 meta-refresh + canonical 轉址 stub
+  （public/ 下的 .html），接住搜尋引擎裡的舊連結
 
 ## 業主日常維護指南
 
