@@ -65,14 +65,27 @@ const productSearchText = (item: (typeof relatedProducts)[number]) =>
       </nav>
 
       <article class="product-detail">
-        <div class="product-detail__media">
+        <button
+          class="product-detail__media"
+          type="button"
+          data-lightbox-open
+          aria-haspopup="dialog"
+          aria-label={`放大檢視 ${product.data.model} 產品圖片`}
+        >
           <img
             src={withBase(product.data.image)}
             alt={`${product.data.model} ${product.data.title} 產品圖片`}
             loading="lazy"
             decoding="async"
           />
-        </div>
+          <span class="product-detail__zoom" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="M16.5 16.5L21 21M11 8v6M8 11h6"></path>
+            </svg>
+            點圖放大
+          </span>
+        </button>
 
         <div class="card product-detail__info">
           <p class="eyebrow">Product</p>
@@ -128,6 +141,20 @@ const productSearchText = (item: (typeof relatedProducts)[number]) =>
           </div>
         </div>
       </article>
+
+      <dialog class="lightbox" data-lightbox aria-label={`${product.data.model} ${product.data.title} 大圖檢視`}>
+        <button class="lightbox__close" type="button" data-lightbox-close aria-label="關閉大圖">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18"></path>
+          </svg>
+        </button>
+        <img
+          src={withBase(product.data.image)}
+          alt={`${product.data.model} ${product.data.title} 產品圖片大圖`}
+          decoding="async"
+        />
+        <p class="lightbox__caption">{product.data.model}｜{product.data.title}</p>
+      </dialog>
     </div>
   </section>
 
@@ -158,6 +185,33 @@ const productSearchText = (item: (typeof relatedProducts)[number]) =>
   }
 </Layout>
 
+<script>
+  const opener = document.querySelector<HTMLButtonElement>("[data-lightbox-open]");
+  const dialog = document.querySelector<HTMLDialogElement>("[data-lightbox]");
+  const closeButton = dialog?.querySelector<HTMLButtonElement>("[data-lightbox-close]");
+  const image = dialog?.querySelector<HTMLImageElement>("img");
+
+  if (opener && dialog) {
+    opener.addEventListener("click", () => {
+      // 舊產品圖解析度低，放大上限訂為原圖 2 倍，避免過度模糊
+      if (image?.naturalWidth) {
+        image.style.maxWidth = `min(100%, ${image.naturalWidth * 2}px)`;
+        image.style.maxHeight = `min(72vh, ${image.naturalHeight * 2}px)`;
+      }
+
+      dialog.showModal();
+    });
+
+    closeButton?.addEventListener("click", () => dialog.close());
+
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) {
+        dialog.close();
+      }
+    });
+  }
+</script>
+
 <style>
   .breadcrumb {
     display: flex;
@@ -181,6 +235,7 @@ const productSearchText = (item: (typeof relatedProducts)[number]) =>
   }
 
   .product-detail__media {
+    position: relative;
     display: flex;
     aspect-ratio: 4 / 3;
     align-items: center;
@@ -190,6 +245,13 @@ const productSearchText = (item: (typeof relatedProducts)[number]) =>
     border-radius: 8px;
     background: #ffffff;
     box-shadow: var(--shadow-card);
+    cursor: zoom-in;
+    transition: border-color 140ms ease, box-shadow 140ms ease;
+  }
+
+  .product-detail__media:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-card-hover);
   }
 
   .product-detail__media img {
@@ -198,6 +260,90 @@ const productSearchText = (item: (typeof relatedProducts)[number]) =>
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
+  }
+
+  .product-detail__zoom {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--color-muted);
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  .product-detail__zoom svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .product-detail__media:hover .product-detail__zoom {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  .lightbox {
+    max-width: min(92vw, 1000px);
+    padding: var(--space-3);
+    border: none;
+    border-radius: var(--radius-card);
+    background: #ffffff;
+    box-shadow: 0 24px 64px rgba(8, 31, 58, 0.4);
+  }
+
+  .lightbox::backdrop {
+    background: rgba(8, 31, 58, 0.72);
+  }
+
+  .lightbox img {
+    margin-inline: auto;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 72vh;
+    object-fit: contain;
+  }
+
+  .lightbox__caption {
+    margin: var(--space-2) 0 0;
+    color: var(--color-primary-dark);
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .lightbox__close {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    display: inline-flex;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: #ffffff;
+    color: var(--color-primary-dark);
+    cursor: pointer;
+    transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease;
+  }
+
+  .lightbox__close:hover {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+    color: #ffffff;
+  }
+
+  .lightbox__close svg {
+    width: 20px;
+    height: 20px;
   }
 
   .product-detail__info {

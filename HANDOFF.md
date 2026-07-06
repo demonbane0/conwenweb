@@ -59,6 +59,9 @@
      另修 5 張中文檔名產品圖 → slug 檔名
   5. **修一個舊 bug**：`.product-card` 的 `display:grid` 蓋掉 `hidden` 屬性，
      搜尋/篩選只更新計數、卡片沒真的隱藏 → global.css 加 `[hidden]{display:none!important}`
+  6. **產品頁燈箱**：詳細頁點產品圖開大圖（原生 `<dialog>`，Esc/點背景/按鈕可關，
+     放大上限原圖 2 倍防模糊；圖片容器右下有「點圖放大」提示）。
+     另產出 `BRAND-FILLED.md`（174 項逐項清單）供業主用 GPT-5 驗證廠牌中
 
 ## 網站已上線：https://demonbane0.github.io/conwenweb/
 
