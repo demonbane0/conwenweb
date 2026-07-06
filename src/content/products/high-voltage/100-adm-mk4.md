@@ -2,7 +2,7 @@
 title: "綜合電驛試驗器"
 model: "100 ADM MK4"
 category: "high-voltage"
-brand: "T&R Test Equipment"
+brand: "T&R"
 image: "/images/products/100-adm-mk4.jpg"
 features:
   - "電流出力 0 ~ 1 00A"

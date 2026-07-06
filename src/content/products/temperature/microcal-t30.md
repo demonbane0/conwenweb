@@ -3,6 +3,7 @@ slug: microcal-t30
 title: 乾式溫度校正爐
 model: MicroCal T30
 category: temperature
+brand: "EUROTRON"
 image: /images/products/microcal-t30.jpg
 features:
   - 溫度範圍：周溫 ~ 300℃

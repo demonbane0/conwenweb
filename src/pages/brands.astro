@@ -24,6 +24,9 @@ import { withBase } from "../utils/url";
                 <h2>{brand.name}</h2>
                 <p>{brand.description}</p>
               </div>
+              <a class="btn brand-card-link" href={withBase(`/products/?brand=${encodeURIComponent(brand.filter)}`)}>
+                查看代理產品
+              </a>
             </article>
           ))
         }
@@ -31,3 +34,9 @@ import { withBase } from "../utils/url";
     </div>
   </section>
 </Layout>
+
+<style>
+  .brand-card-link {
+    justify-self: start;
+  }
+</style>

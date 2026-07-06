@@ -32,6 +32,17 @@ const products = (await getCollection("products")).sort((a, b) => {
 
   return a.data.model.localeCompare(b.data.model, "zh-Hant-TW");
 });
+
+const brandCounts = new Map<string, number>();
+for (const product of products) {
+  const brand = product.data.brand?.trim();
+  if (brand) {
+    brandCounts.set(brand, (brandCounts.get(brand) ?? 0) + 1);
+  }
+}
+const brandOptions = [...brandCounts.entries()].sort(
+  (a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "zh-Hant-TW"),
+);
 ---
 
 <Layout title="產品介紹">
@@ -51,10 +62,17 @@ const products = (await getCollection("products")).sort((a, b) => {
           <input
             type="search"
             name="keyword"
-            placeholder="輸入型號、產品名稱或品牌"
+            placeholder="輸入型號、產品名稱或廠牌"
             autocomplete="off"
             data-product-search
           />
+        </label>
+        <label class="product-brand-filter">
+          <span>廠牌</span>
+          <select data-product-brand>
+            <option value="">全部廠牌</option>
+            {brandOptions.map(([brand, count]) => <option value={brand}>{brand}（{count}）</option>)}
+          </select>
         </label>
         <p class="product-count" data-product-visible-count>顯示 {products.length} / {products.length} 項產品</p>
       </div>
@@ -83,17 +101,21 @@ const products = (await getCollection("products")).sort((a, b) => {
 <script>
   for (const root of document.querySelectorAll("[data-product-filter-root]")) {
     const input = root.querySelector<HTMLInputElement>("[data-product-search]");
+    const brandSelect = root.querySelector<HTMLSelectElement>("[data-product-brand]");
     const cards = Array.from(root.querySelectorAll<HTMLElement>("[data-product-card]"));
     const empty = root.querySelector<HTMLElement>("[data-product-empty]");
     const count = root.querySelector<HTMLElement>("[data-product-visible-count]");
 
     const update = () => {
       const keyword = input?.value.trim().toLowerCase() ?? "";
+      const brand = brandSelect?.value ?? "";
       let visible = 0;
 
       for (const card of cards) {
         const searchText = card.dataset.search ?? "";
-        const isVisible = !keyword || searchText.includes(keyword);
+        const matchesKeyword = !keyword || searchText.includes(keyword);
+        const matchesBrand = !brand || card.dataset.brand === brand;
+        const isVisible = matchesKeyword && matchesBrand;
         card.hidden = !isVisible;
 
         if (isVisible) {
@@ -110,7 +132,29 @@ const products = (await getCollection("products")).sort((a, b) => {
       }
     };
 
+    const requestedBrand = new URLSearchParams(window.location.search).get("brand");
+
+    if (requestedBrand && brandSelect) {
+      const hasOption = Array.from(brandSelect.options).some((option) => option.value === requestedBrand);
+
+      if (hasOption) {
+        brandSelect.value = requestedBrand;
+      }
+    }
+
     input?.addEventListener("input", update);
+    brandSelect?.addEventListener("change", () => {
+      const url = new URL(window.location.href);
+
+      if (brandSelect.value) {
+        url.searchParams.set("brand", brandSelect.value);
+      } else {
+        url.searchParams.delete("brand");
+      }
+
+      window.history.replaceState(null, "", url);
+      update();
+    });
     update();
   }
 </script>
@@ -118,10 +162,33 @@ const products = (await getCollection("products")).sort((a, b) => {
 <style>
   .product-toolbar {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr) minmax(200px, auto) auto;
     gap: var(--space-2);
     align-items: end;
     margin-bottom: var(--space-3);
+  }
+
+  .product-brand-filter {
+    display: grid;
+    gap: 0.35rem;
+    color: var(--color-primary-dark);
+    font-weight: 700;
+  }
+
+  .product-brand-filter select {
+    min-height: 44px;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: #ffffff;
+    color: var(--color-text);
+    transition: border-color 120ms ease, box-shadow 120ms ease;
+  }
+
+  .product-brand-filter select:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(20, 70, 123, 0.12);
+    outline: none;
   }
 
   .product-search {

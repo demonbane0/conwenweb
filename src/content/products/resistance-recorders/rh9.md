@@ -3,6 +3,7 @@ slug: rh9
 title: 十進位高阻箱
 model: RH9系列
 category: resistance-recorders
+brand: "CROPICO"
 image: /images/products/rh9.jpg
 features:
   - 高精度十進位電阻箱 (0.1%)

@@ -2,6 +2,7 @@
 title: "掌上型高阻計"
 model: "Handy ISO"
 category: "field-testing"
+brand: "LEM"
 image: "/images/products/handy-iso.jpg"
 features:
   - "測試電壓 100/250/500 V"

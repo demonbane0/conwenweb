@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import LogoMark from "../components/LogoMark.astro";
 import { COMPANY } from "../data/site";
 import { withBase } from "../utils/url";
 
@@ -41,8 +42,11 @@ const navItems = [
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand-lockup" href={withBase("/")} aria-label={`${COMPANY.name}首頁`}>
-          <span>{COMPANY.name}</span>
-          <small>專業代理電機電子測試測量儀器</small>
+          <LogoMark id="logo-header" />
+          <span class="brand-lockup-text">
+            <span>{COMPANY.name}</span>
+            <small>專業代理電機電子測試測量儀器</small>
+          </span>
         </a>
         <input class="nav-toggle" type="checkbox" id="nav-toggle" aria-label="開關導覽選單" />
         <label class="nav-toggle-label" for="nav-toggle" aria-hidden="true">
@@ -65,7 +69,10 @@ const navItems = [
     <footer class="site-footer">
       <div class="container footer-inner">
         <div>
-          <h2 class="footer-title">{COMPANY.name}</h2>
+          <div class="footer-brand-row">
+            <LogoMark id="logo-footer" />
+            <h2 class="footer-title">{COMPANY.name}</h2>
+          </div>
           <p class="footer-copy">{COMPANY.tagline}</p>
           <p class="footer-copy">
             <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>

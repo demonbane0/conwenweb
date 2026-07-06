@@ -1,9 +1,13 @@
 ---
-title: ?瘞???Ｘ葫??
+title: "四用氣體偵測器"
 model: Micro Clip
 category: environmental
+brand: "BW Technologies"
 image: /images/products/micro-clip.jpg
 features:
-- "??菜葫?舐??扳除擃\x80飢瘞?\x80? 銝\x80瘞批?蝣喋\x80‵?鬥蝑? ?? ?批遣 95db霅血?脣???? ?? ??LCD憭批?憿舐內撟??? 銝\x80?桐??? ?? ??敹恍\x80? 5 sec"
+  - "可偵測可燃性氣體、氧氣、一氧化碳、硫化氫等"
+  - "內建 95 dB 警報聲及震動功能"
+  - "背光 LCD 大型顯示幕讀值一目了然"
+  - "反應快速 ≤ 5 sec"
 order: 120
 ---

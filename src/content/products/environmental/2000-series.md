@@ -1,9 +1,12 @@
 ---
-title: ?詨?撘???
+title: "數字式轉速計"
 model: 2000系列
 category: environmental
-image: /images/products/2000系列.jpg
+image: /images/products/2000-series.jpg
 features:
-- "?? ??閫詨?典? ?? 頧\x80葫???? 嚗? 1 ~ 99,999 rpm ?? ?漲皜祇?蝭?嚗? 0.1 ~ 1,999 m/min ?? 頝皜祇?蝭?嚗? 0.02 ~ 99,999 m"
+  - "光電或接觸兩用型"
+  - "轉速測量範圍 1 ~ 99,999 rpm"
+  - "速度測量範圍 0.1 ~ 1,999 m/min"
+  - "距離測量範圍 0.02 ~ 99,999 m"
 order: 150
 ---

@@ -3,6 +3,7 @@ slug: ms
 title: 紅外線測溫儀
 model: MS+
 category: temperature
+brand: "IRtec"
 image: /images/products/ms.jpg
 features:
   - 外形靈巧光學性能佳

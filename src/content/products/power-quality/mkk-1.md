@@ -2,6 +2,7 @@
 title: "檢溫檢電器"
 model: "MKK-1"
 category: "power-quality"
+brand: "Hasegawa 長谷川"
 image: "/images/products/mkk-1.jpg"
 features:
   - "具溫度感知部可檢測溫度"

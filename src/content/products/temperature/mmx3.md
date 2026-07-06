@@ -3,6 +3,7 @@ slug: mmx3
 title: 多功能電錶校正器
 model: MMX3
 category: temperature
+brand: "EUROTRON"
 image: /images/products/mmx3.jpg
 features:
   - 頻率及脈波時間測量

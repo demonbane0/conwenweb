@@ -3,6 +3,7 @@ slug: pdw
 title: 攜帶式重錘液壓校正器
 model: PDW
 category: pressure
+brand: "GE Druck"
 image: /images/products/pdw.jpg
 features:
   - 壓力產生範圍：1 ~ 700kgf/cm2 (具單雙活塞可依需求選定範圍)

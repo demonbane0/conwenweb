@@ -2,6 +2,7 @@
 title: "數字式絕緣高阻計"
 model: "Isotest 2010"
 category: "field-testing"
+brand: "LEM"
 image: "/images/products/isotest-2010.jpg"
 features:
   - "測試電壓 DC 50/100/250/500/1000V"

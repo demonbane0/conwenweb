@@ -3,6 +3,7 @@ slug: epm
 title: 外部壓力模組
 model: EPM
 category: pressure
+brand: "GE Druck"
 image: /images/products/epm.jpg
 features:
   - 壓力範圍：0 ~ 1000Bar (可依需求選定範圍)

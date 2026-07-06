@@ -16,7 +16,7 @@ const imageAlt = `${model} ${title} 產品圖片`;
 const linkLabel = `查看 ${model} ${title}`;
 ---
 
-<article class="card product-card" data-product-card data-search={search}>
+<article class="card product-card" data-product-card data-search={search} data-brand={brand ?? ""}>
   <a class="product-card__overlay" href={withBase(href)} aria-label={linkLabel}></a>
   <div class="product-card__media">
     <img src={withBase(image)} alt={imageAlt} loading="lazy" decoding="async" />
@@ -24,7 +24,7 @@ const linkLabel = `查看 ${model} ${title}`;
   <div class="product-card__body">
     <p class="product-card__model">{model}</p>
     <h2 class="product-card__title">{title}</h2>
-    {brand && <p class="product-card__brand">{brand}</p>}
+    {brand && <p class="product-card__brand"><span>{brand}</span></p>}
   </div>
   <div class="product-card__actions">
     <button
@@ -95,6 +95,7 @@ const linkLabel = `查看 ${model} ${title}`;
     color: var(--color-primary-dark);
     font-size: 1.08rem;
     font-weight: 800;
+    font-variant-numeric: tabular-nums;
     line-height: 1.35;
   }
 
@@ -107,8 +108,17 @@ const linkLabel = `查看 ${model} ${title}`;
 
   .product-card__brand {
     margin-bottom: 0;
+  }
+
+  .product-card__brand span {
+    display: inline-block;
+    padding: 0.05rem 0.55rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-section);
     color: var(--color-muted);
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    font-weight: 500;
   }
 
   .product-card__actions {

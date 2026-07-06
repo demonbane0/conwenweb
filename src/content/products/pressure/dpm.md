@@ -3,6 +3,7 @@ slug: dpm
 title: 數位式壓力模組
 model: DPM
 category: pressure
+brand: "GE Druck"
 image: /images/products/dpm.jpg
 features:
   - 壓力範圍：0 ~ 1000Bar (可依需求選定範圍)

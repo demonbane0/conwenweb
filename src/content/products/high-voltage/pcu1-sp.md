@@ -2,6 +2,7 @@
 title: "大電流電驛試驗器"
 model: "PCU1-SP"
 category: "high-voltage"
+brand: "T&R"
 image: "/images/products/pcu1-sp.jpg"
 features:
   - "最大電流出力 0 ~ 5000A"

@@ -2,6 +2,7 @@
 title: "接地電阻計"
 model: "Geotest 2016"
 category: "field-testing"
+brand: "LEM"
 image: "/images/products/geotest-2016.jpg"
 features:
   - "接地電阻可設定 2 或 3 線式測量方法"

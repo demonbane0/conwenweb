@@ -1,9 +1,14 @@
 ---
-title: "?瑕?皜祈??\x80"
+title: "雷射測距儀"
 model: DISTO Lite 5
 category: environmental
+brand: "Leica"
 image: /images/products/disto-lite-5.jpg
 features:
-- ?? 皜祇?蝭?嚗? 0.2 ~ 200 M ?? 皞Ⅱ摨? ±3 mm ??蝛????嫣噶 ?蝵格偌瘜∪頛??葫 ??偌撟唾??? ?撠?暺?蝷箏皜?皜祇?雿蔭
+  - "測量範圍 0.2 ~ 200 m"
+  - "準確度 ±3 mm"
+  - "體積小操作方便"
+  - "內置水泡可輕易量測垂直及水平距離"
+  - "雷射光點指示可清楚測量位置"
 order: 170
 ---

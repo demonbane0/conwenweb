@@ -3,6 +3,7 @@ slug: microcal-20-dpc
 title: 溫度壓力信號校正器
 model: MicroCal 20 DPC
 category: temperature
+brand: "EUROTRON"
 image: /images/products/microcal-20-dpc.jpg
 features:
   - 可同時做模擬輸出及測量輸入功能

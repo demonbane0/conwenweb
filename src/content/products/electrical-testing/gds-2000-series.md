@@ -2,7 +2,8 @@
 title: 數位儲存式示波器
 model: GDS-2000系列
 category: electrical-testing
-image: /images/products/gds-2000系列.jpg
+brand: "GW Instek 固緯"
+image: /images/products/gds-2000-series.jpg
 features:
 - 60/100/200 MHz
 - 2 / 4 ch可選

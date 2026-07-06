@@ -2,6 +2,7 @@
 title: "AC/DC 數字式鉤錶"
 model: "Multi 230"
 category: "clamp-meters"
+brand: "Multi 萬用"
 image: "/images/products/multi-230.jpg"
 features:
   - "最大測量口徑 Φ23可測電流達 20/200A"

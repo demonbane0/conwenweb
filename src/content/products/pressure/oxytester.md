@@ -3,6 +3,7 @@ slug: oxytester
 title: 油水分離器
 model: Oxytester
 category: pressure
+brand: "GE Druck"
 image: /images/products/oxytester.jpg
 features:
   - 使用壓力範圍：0 ~ 550Bar

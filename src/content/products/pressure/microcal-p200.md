@@ -3,6 +3,7 @@ slug: microcal-p200
 title: 壓力校正器
 model: MicroCal P200
 category: pressure
+brand: "EUROTRON"
 image: /images/products/microcal-p200.jpg
 features:
   - 壓力範圍：0 ~ 1000Bar (依需求選定範圍)

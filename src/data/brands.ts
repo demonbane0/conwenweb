@@ -1,6 +1,7 @@
 export const brands = [
   {
     name: "T&R",
+    filter: "T&R",
     origin: "英國",
     image: "/images/brands/t-r.jpg",
     description:
@@ -8,6 +9,7 @@ export const brands = [
   },
   {
     name: "GE Druck",
+    filter: "GE Druck",
     origin: "英國",
     image: "/images/brands/ge-druck.jpg",
     description:
@@ -15,6 +17,7 @@ export const brands = [
   },
   {
     name: "CROPICO",
+    filter: "CROPICO",
     origin: "英國",
     image: "/images/brands/cropico.gif",
     description:
@@ -22,6 +25,7 @@ export const brands = [
   },
   {
     name: "EUROTRON",
+    filter: "EUROTRON",
     origin: "義大利",
     image: "/images/brands/eurotron.jpg",
     description:
@@ -29,12 +33,14 @@ export const brands = [
   },
   {
     name: "RHEIN TACHO",
+    filter: "RHEIN TACHO",
     origin: "德國",
     image: "/images/brands/rhein-tacho.jpg",
     description: "數字式接觸 / 非接觸兩用光電轉速計、閃頻儀。",
   },
   {
     name: "日本共立儀器",
+    filter: "Kyoritsu 共立",
     origin: "日本",
     image: "/images/brands/kyoritsu.jpg",
     description:
@@ -42,12 +48,14 @@ export const brands = [
   },
   {
     name: "日本長谷川電機",
+    filter: "Hasegawa 長谷川",
     origin: "日本",
     image: "/images/brands/hasegawa.jpg",
     description: "各式高低壓檢電器、活線作業高壓近接警報器等。",
   },
   {
     name: "KAISE CORPORATION",
+    filter: "Kaise",
     origin: "日本",
     image: "/images/brands/kaise.jpg",
     description: "數字式三用電錶、指針型三用電錶、名片型三用電錶、數字式高阻計、指針式高阻計、洩漏電流鉤錶等。",

@@ -3,6 +3,7 @@ slug: hmr-100g
 title: 高壓絕緣電阻校正器
 model: HMR-100G
 category: resistance-recorders
+brand: "CROPICO"
 image: /images/products/hmr-100g.jpg
 features:
   - 標準阻抗範圍：0/10M/100M/1G/10G/100GΩ

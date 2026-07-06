@@ -1,7 +1,7 @@
 # HANDOFF — Session 交接文件
 
 > 每個 session 結束前更新本檔；新 session 開始先讀本檔 + CLAUDE.md。
-> 最後更新：2026-07-06 20:55（收尾驗證全部完成，網站上線且為最新版；剩業主待辦）
+> 最後更新：2026-07-06 21:30（第三波：設計/文案改版 + 廠牌篩選 + 資料修復）
 
 ## 專案目標
 
@@ -42,14 +42,34 @@
     （"Deployment failed, try again later"），`gh run rerun` 後成功；
     線上 4 條路由 200、首頁已是新文案
 
+- [x] **第三波（2026-07-06 晚，業主三項需求）**：
+  1. **設計改版**：global.css 全面升級（LogoMark 標誌、header 漸層條、hero 深藍
+     漸層+格線紋理+脈波線+統計面板、優勢卡 SVG 圖示、分類卡含產品數、服務流程
+     四步、深色 footer 橙頂線）；CTA 橙改 `#c2410c`（AA 對比合格），CLAUDE.md
+     設計系統章節已同步更新
+  2. **文案升級**：首頁 hero/優勢卡/CTA 重寫、about 頁擴寫（用舊站真實資料：
+     民國 77 年、資本額 1,600 萬、維修部門、8 代理廠牌 → 事實卡 + 服務項目清單）
+  3. **廠牌功能**：231 項產品以型號系列推斷回填 174 項 brand（**清單與待確認項
+     見 `BRAND-REVIEW.md`，待業主過目**，57 項未填）；/products 加廠牌下拉篩選
+     （支援 `?brand=` URL 參數）；首頁廠牌 logo 與代理廠牌頁「查看代理產品」
+     都連到對應篩選
+  4. **【重要資料修復】environmental 分類 21 項產品中文全是亂碼且已上線**
+     （第一波轉檔事故：`legacy/product_2.html` 原檔其實是 UTF-8，被當 Big5
+     轉檔造成 `legacy/utf8/product_2.html` 損壞）→ 已從原檔重新抽取全部重建；
+     另修 5 張中文檔名產品圖 → slug 檔名
+  5. **修一個舊 bug**：`.product-card` 的 `display:grid` 蓋掉 `hidden` 屬性，
+     搜尋/篩選只更新計數、卡片沒真的隱藏 → global.css 加 `[hidden]{display:none!important}`
+
 ## 網站已上線：https://demonbane0.github.io/conwenweb/
 
 ## 下一步（皆非阻塞，等業主）
 
-1. 業主提供 Formspree endpoint → 填入 `src/data/site.ts` → commit push 即切換
-2. 業主確認三據點地址電話（沿用舊站 2008 資料）
-3. （可選）自有網域
-4. （可選）補舊 news.html 其他消息（目前只遷 1 則 pmt-eva-625）
+1. **業主過目 `BRAND-REVIEW.md`**：確認自動填入的廠牌、補 57 項未填
+2. 業主提供 Formspree endpoint → 填入 `src/data/site.ts` → commit push 即切換
+3. 業主確認三據點地址電話（沿用舊站 2008 資料）；about 頁的資本額
+   NT$1,600 萬與登記資料也請一併確認是否為現況
+4. （可選）自有網域
+5. （可選）補舊 news.html 其他消息（目前只遷 1 則 pmt-eva-625）
 
 ## 測試 know-how（本 session 新增）
 
@@ -78,6 +98,10 @@
 5. 一波一 commit，訊息附驗證結果
 
 ## 已知注意事項
+
+- **`legacy/utf8/product_2.html` 是壞檔**（Big5→UTF-8 二次轉換損壞；legacy/ 唯讀
+  故未修）。要再抽 environmental 資料時，直接以 UTF-8 讀 `legacy/product_2.html`
+  原檔（該原檔本來就是 UTF-8，與其他 Big5 原檔不同）
 
 - `.claude/settings.local.json` 會被 harness 的「always allow」持續覆寫 —
   通用規則 merge 時**保留 harness 加的條目**（政策見長期記憶）

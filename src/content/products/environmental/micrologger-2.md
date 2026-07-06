@@ -1,9 +1,11 @@
 ---
-title: 鞈?????
+title: "資料蒐集器"
 model: Micrologger 2
 category: environmental
 image: /images/products/micrologger-2.jpg
 features:
-- "?? ?\x80?鞈???嚗葫?撓?? ?嚗? mV?? 12蝔桃?餃 ?? ?湔憿舐內皜祇??潦\x80?憭批\x80潦\x80? ?\x80撠\x80潦\x80像?\x80澆?撌桀\x80? ?? 鞈??瑕?1000暺?唾撓 PC ????"
+  - "雙通道資料蒐集，測量輸入 mV 及 12 種熱電偶"
+  - "直接顯示測量值、最大值、最小值、平均值及差值"
+  - "資料擷取 1000 點可傳輸 PC 分析"
 order: 190
 ---

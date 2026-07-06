@@ -2,7 +2,7 @@
 title: "三相電壓電驛測試器"
 model: "ART 3V"
 category: "high-voltage"
-brand: "T&R Test Equipment"
+brand: "T&R"
 image: "/images/products/art-3v.jpg"
 features:
   - "單相電源三相電壓輸出"

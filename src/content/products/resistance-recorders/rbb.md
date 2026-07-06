@@ -3,6 +3,7 @@ slug: rbb
 title: 十進位電阻箱
 model: RBB系列
 category: resistance-recorders
+brand: "CROPICO"
 image: /images/products/rbb.jpg
 features:
   - 高精度十進位電阻箱 (0.05%)

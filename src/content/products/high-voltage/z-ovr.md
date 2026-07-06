@@ -2,7 +2,7 @@
 title: "電纜阻抗測試系統"
 model: "Z-OVR"
 category: "high-voltage"
-brand: "T&R Test Equipment"
+brand: "T&R"
 image: "/images/products/z-ovr.png"
 features:
   - "用於測量架空線路和地下電纜的阻抗"

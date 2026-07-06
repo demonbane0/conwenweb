@@ -2,6 +2,7 @@
 title: "高壓活線近接警報器"
 model: "HX-6"
 category: "power-quality"
+brand: "Hasegawa 長谷川"
 image: "/images/products/hx-6.jpg"
 features:
   - "高壓近接警報器"

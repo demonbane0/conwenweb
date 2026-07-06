@@ -2,6 +2,7 @@
 title: "電力分析儀"
 model: "VEGA 76"
 category: "power-quality"
+brand: "HT Italia"
 image: "/images/products/vega-76.jpg"
 features:
   - "適用單 / 三相系統測量"

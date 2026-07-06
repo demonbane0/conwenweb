@@ -3,6 +3,7 @@ slug: servogor-102
 title: 筆式記錄器
 model: SERVOGOR 102
 category: resistance-recorders
+brand: "SERVOGOR"
 image: /images/products/servogor-102.jpg
 features:
   - 單筆或雙筆選擇

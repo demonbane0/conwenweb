@@ -3,6 +3,7 @@ slug: microcal-t350
 title: 乾式溫度校正爐
 model: MicroCal T350
 category: temperature
+brand: "EUROTRON"
 image: /images/products/microcal-t350.jpg
 features:
   - 溫度範圍：周溫 ~ 350℃

@@ -2,6 +2,7 @@
 title: "高壓活線近接警報器"
 model: "HXW-1"
 category: "power-quality"
+brand: "Hasegawa 長谷川"
 image: "/images/products/hxw-1.jpg"
 features:
   - "高壓近接警報器"

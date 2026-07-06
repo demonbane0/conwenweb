@@ -3,6 +3,7 @@ slug: mts
 title: 多範圍標準電阻器
 model: MTS
 category: resistance-recorders
+brand: "CROPICO"
 image: /images/products/mts.jpg
 features:
   - 四端點標準電阻

@@ -1,9 +1,13 @@
 ---
-title: 銋暹?摨西?
+title: "乾濕度計"
 model: ASAHI
 category: environmental
+brand: "ASAHI"
 image: /images/products/asahi.jpg
 features:
-- "?? 皜砍?蝭?嚗? -10 ~ 50?? ?? ABS 璅寥?釭?祇? ?? ??霈\x80?捆?? ?移摨? (0 ~ 30?? ±1???嗡?蝭? ±2??"
+  - "測定範圍 -10 ~ 50℃"
+  - "ABS 樹脂材質本體"
+  - "操作讀取容易"
+  - "精度（0 ~ 30℃）±1℃、其他範圍 ±2℃"
 order: 180
 ---

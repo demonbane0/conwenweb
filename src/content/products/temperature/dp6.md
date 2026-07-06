@@ -3,6 +3,7 @@ slug: dp6
 title: 熱電偶溫度校正器
 model: DP6
 category: temperature
+brand: "EUROTRON"
 image: /images/products/dp6.jpg
 features:
   - 可做熱電偶溫度測量與模擬輸入

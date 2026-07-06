@@ -3,6 +3,7 @@ slug: pc6-pro
 title: 數字式壓力校正器
 model: PC6 PRO
 category: pressure
+brand: "EUROTRON"
 image: /images/products/pc6-pro.jpg
 features:
   - 壓力範圍：0 ~ 1000Bar (可依需求選定範圍)

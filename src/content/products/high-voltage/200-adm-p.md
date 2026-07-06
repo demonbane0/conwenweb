@@ -2,7 +2,7 @@
 title: "綜合電驛試驗器"
 model: "200 ADM-P"
 category: "high-voltage"
-brand: "T&R Test Equipment"
+brand: "T&R"
 image: "/images/products/200-adm-p.jpg"
 features:
   - "電流出力 0 ~ 200A"

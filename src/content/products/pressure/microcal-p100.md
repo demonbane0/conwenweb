@@ -3,6 +3,7 @@ slug: microcal-p100
 title: 壓力校正器
 model: MicroCal P100
 category: pressure
+brand: "EUROTRON"
 image: /images/products/microcal-p100.jpg
 features:
   - 壓力範圍：0 ~ 20Bar

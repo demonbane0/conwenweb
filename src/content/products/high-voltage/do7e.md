@@ -2,6 +2,7 @@
 title: "低電阻計"
 model: "DO7e"
 category: "high-voltage"
+brand: "CROPICO"
 image: "/images/products/do7e.jpg"
 features:
   - "測量範圍： 0 ~ 6m Ω / …..600 Ω"

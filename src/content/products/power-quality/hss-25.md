@@ -2,6 +2,7 @@
 title: "高低壓檢電器"
 model: "HSS-25"
 category: "power-quality"
+brand: "Hasegawa 長谷川"
 image: "/images/products/hss-25.jpg"
 features:
   - "低壓檢測範圍：AC 80 ~ 600V"

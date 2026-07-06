@@ -3,6 +3,7 @@ slug: dtg-2k
 title: 數字式壓力計
 model: DTG-2K
 category: pressure
+brand: "GE Druck"
 image: /images/products/dtg-2k.jpg
 features:
   - 壓力範圍：0 ~ 1000Bar (可依需求選定範圍)

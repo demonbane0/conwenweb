@@ -3,6 +3,7 @@ slug: irtec-microray-xtreme
 title: 紅外線測溫計
 model: IRtec MicroRay Xtreme
 category: temperature
+brand: "IRtec"
 image: /images/products/irtec-microray-xtreme.jpg
 features:
   - 測溫範圍：-30℃ ~ +1000℃

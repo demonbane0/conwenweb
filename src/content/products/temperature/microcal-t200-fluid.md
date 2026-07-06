@@ -3,6 +3,7 @@ slug: microcal-t200-fluid
 title: 液槽式溫度校正爐
 model: MicroCal T200 Fluid
 category: temperature
+brand: "EUROTRON"
 image: /images/products/microcal-t200-fluid.jpg
 features:
   - 溫度範圍：周溫 ~ 200℃

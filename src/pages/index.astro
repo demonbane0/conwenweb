@@ -1,27 +1,52 @@
-﻿---
+---
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import { brands } from "../data/brands";
 import { categories } from "../data/categories";
 import { COMPANY } from "../data/site";
 import { withBase } from "../utils/url";
 
+const products = await getCollection("products");
+const categoryCounts = new Map<string, number>();
+for (const product of products) {
+  categoryCounts.set(product.data.category, (categoryCounts.get(product.data.category) ?? 0) + 1);
+}
+
+const stats = [
+  { value: "1988", label: "創立於民國 77 年" },
+  { value: "10", label: "大產品分類" },
+  { value: "230+", label: "項代理與經銷儀器" },
+  { value: "3", label: "北中南服務據點" },
+];
+
 const advantages = [
   {
-    title: "專業代理數家知名廠牌",
-    text: "長期代理歐、美、日知名測試測量儀器品牌，原廠貨源、品質有保障。",
+    title: "原廠授權，貨源可靠",
+    text: "長期代理英、德、義、日等國知名儀器廠牌，原廠貨源與技術資料完整，品質與供貨穩定有保障。",
+    icon: "shield",
   },
   {
-    title: "產品種類繁多滿足各種應用",
-    text: "十大分類、兩百餘項儀器，涵蓋電機、電子、環境、壓力、溫度與高壓維護等應用。",
+    title: "十大分類，選型齊全",
+    text: "兩百餘項儀器涵蓋電機電子、環境、壓力、溫度、電阻校正與高壓維護等領域，一站滿足量測需求。",
+    icon: "grid",
   },
   {
-    title: "合理價格專業服務",
-    text: "專業團隊協助選型與報價，以合理的價格提供最適合的量測方案。",
+    title: "專業選型，合理報價",
+    text: "資深團隊依應用場景協助選擇合適機種與規格，快速回覆詢價，以合理價格提供最適方案。",
+    icon: "quote",
   },
   {
-    title: "北中南三據點即時服務與維修保固",
-    text: "台北、台中、高雄皆設有服務據點，並有專屬維修部門提供保固與售後維修。",
+    title: "在地服務，維修保固",
+    text: "新北、台中、高雄三據點即時支援，自設儀器維修部門，提供保固與售後維修完整服務。",
+    icon: "wrench",
   },
+];
+
+const processSteps = [
+  { title: "提出需求", text: "透過詢價單、電話或 Email 告訴我們量測需求與規格。" },
+  { title: "選型報價", text: "專人依應用場景建議機種，快速回覆正式報價。" },
+  { title: "供貨交付", text: "原廠貨源供應，確認交期後安排出貨與到貨確認。" },
+  { title: "保固維修", text: "自設維修部門提供保固服務與售後維修支援。" },
 ];
 ---
 
@@ -29,20 +54,36 @@ const advantages = [
   <section class="hero section">
     <div class="container hero-grid">
       <div>
-        <p class="eyebrow">Conwen Trading Co., Ltd.</p>
-        <h1>{COMPANY.name}</h1>
-        <p>專業代理進口電機電子測試測量儀器</p>
+        <p class="eyebrow">Conwen Trading Co., Ltd.・Since 1988</p>
+        <h1>精準量測，值得信賴的儀器專業夥伴</h1>
+        <svg class="hero-pulse" viewBox="0 0 132 14" fill="none" aria-hidden="true">
+          <path
+            d="M1 11h22l6-9 8 11 5-8h20l5-7 7 10h57"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+        <p class="hero-lede">
+          {COMPANY.name}專業代理歐、美、日電機電子測試測量儀器，涵蓋電力、電子、環境、壓力、溫度等十大領域；
+          北中南三據點提供選型諮詢、合理報價與維修保固的完整服務。
+        </p>
         <div class="hero-actions">
           <a class="btn btn-accent" href={withBase("/products/")}>瀏覽產品</a>
-          <a class="btn" href={withBase("/inquiry/")}>立即詢價</a>
+          <a class="btn btn-ghost-light" href={withBase("/inquiry/")}>立即詢價</a>
         </div>
       </div>
       <aside class="hero-panel" aria-label="公司服務摘要">
-        <div class="hero-stat">
-          <strong>1988</strong>
-          <span>成立於民國 77 年</span>
+        <div class="hero-stats">
+          {
+            stats.map((stat) => (
+              <div class="hero-stat">
+                <strong>{stat.value}</strong>
+                <span>{stat.label}</span>
+              </div>
+            ))
+          }
         </div>
-        <p>代理進口與國產測試測量儀器，服務電機、電子、維護、校正與工業現場應用。</p>
       </aside>
     </div>
   </section>
@@ -51,12 +92,40 @@ const advantages = [
     <div class="container">
       <div class="section-title">
         <p class="eyebrow">服務優勢</p>
-        <h2>專業代理與在地服務</h2>
+        <h2>為什麼選擇耕紋</h2>
+        <p>三十餘年儀器代理經驗，從選型、供貨到售後維修，提供業界完整的量測儀器服務。</p>
       </div>
       <div class="grid-4">
         {
           advantages.map((item) => (
             <article class="card feature-card">
+              <div class="feature-icon" aria-hidden="true">
+                {item.icon === "shield" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z" />
+                    <path d="M9 12l2 2 4-4" />
+                  </svg>
+                )}
+                {item.icon === "grid" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="4" y="4" width="7" height="7" rx="1.5" />
+                    <rect x="13" y="4" width="7" height="7" rx="1.5" />
+                    <rect x="4" y="13" width="7" height="7" rx="1.5" />
+                    <rect x="13" y="13" width="7" height="7" rx="1.5" />
+                  </svg>
+                )}
+                {item.icon === "quote" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 12a8 8 0 1 0-3.1 6.3L21 20l-1.3-3.8A8 8 0 0 0 20 12z" />
+                    <path d="M8.5 10.5h7M8.5 14h4.5" />
+                  </svg>
+                )}
+                {item.icon === "wrench" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14.5 6.5a4 4 0 0 0-5.6 4.9L4 16.3V20h3.7l4.9-4.9a4 4 0 0 0 4.9-5.6L14.6 12l-2.6-2.6 2.5-2.9z" />
+                  </svg>
+                )}
+              </div>
               <h3>{item.title}</h3>
               <p>{item.text}</p>
             </article>
@@ -70,15 +139,21 @@ const advantages = [
     <div class="container">
       <div class="section-title">
         <p class="eyebrow">產品線</p>
-        <h2>10 大產品分類</h2>
+        <h2>十大產品分類</h2>
+        <p>依應用領域分類，點選分類瀏覽產品，或到產品介紹頁以型號、名稱、廠牌搜尋。</p>
       </div>
       <div class="grid-3">
         {
           categories.map((category) => (
             <a class="card category-card" href={withBase(`/products/${category.slug}/`)}>
-              <span class="category-order">{String(category.order).padStart(2, "0")}</span>
-              <h3>{category.name}</h3>
-              <p>查看此分類產品</p>
+              <div>
+                <div class="category-card-head">
+                  <span class="category-order">{String(category.order).padStart(2, "0")}</span>
+                  <span class="category-count">{categoryCounts.get(category.slug) ?? 0} 項產品</span>
+                </div>
+                <h3>{category.name}</h3>
+              </div>
+              <span class="category-card-cta">瀏覽此分類 →</span>
             </a>
           ))
         }
@@ -91,13 +166,37 @@ const advantages = [
       <div class="section-title">
         <p class="eyebrow">合作品牌</p>
         <h2>代理廠牌</h2>
+        <p>點選廠牌標誌可直接瀏覽該廠牌產品，更多廠牌介紹請見代理廠牌頁。</p>
       </div>
       <div class="brand-strip">
         {
           brands.map((brand) => (
-            <a class="brand-logo-box" href={withBase("/brands/")}>
+            <a
+              class="brand-logo-box"
+              href={withBase(`/products/?brand=${encodeURIComponent(brand.filter)}`)}
+              aria-label={`瀏覽 ${brand.name} 產品`}
+            >
               <img src={withBase(brand.image)} alt={`${brand.name} 標誌`} loading="lazy" />
             </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container">
+      <div class="section-title">
+        <p class="eyebrow">服務流程</p>
+        <h2>從詢價到售後，一貫服務</h2>
+      </div>
+      <div class="process-grid">
+        {
+          processSteps.map((step) => (
+            <div class="process-step">
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </div>
           ))
         }
       </div>
@@ -109,11 +208,11 @@ const advantages = [
       <div>
         <p class="eyebrow">聯絡耕紋</p>
         <h2>需要儀器選型或報價協助？</h2>
-        <p>可透過詢價單或直接聯絡北中南據點，由專人回覆產品與服務需求。</p>
+        <p>把型號加入詢價單一次送出，或直接聯絡北中南據點，由專人回覆您的量測需求。</p>
       </div>
       <div class="cta-actions">
         <a class="btn btn-accent" href={withBase("/inquiry/")}>立即詢價</a>
-        <a class="btn" href={withBase("/contact/")}>聯絡我們</a>
+        <a class="btn btn-ghost-light" href={withBase("/contact/")}>聯絡我們</a>
       </div>
     </div>
   </section>

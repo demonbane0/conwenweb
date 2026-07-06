@@ -8,27 +8,64 @@ const photos = [
   { src: "/images/company/sany0207.jpg", alt: "耕紋貿易公司環境照片二" },
   { src: "/images/company/sany0210.jpg", alt: "耕紋貿易公司環境照片三" },
 ];
+
+const facts = [
+  { value: "1988", label: "成立於民國 77 年" },
+  { value: "NT$1,600 萬", label: "登記資本額" },
+  { value: "8", label: "長期代理廠牌" },
+  { value: "3", label: "北中南服務據點" },
+];
+
+const services = [
+  "進口與國產電機電子測試測量儀器代理銷售",
+  "依應用場景提供選型諮詢與合理報價",
+  "原廠貨源供應與交期回覆",
+  "自設維修部門，提供保固與售後維修服務",
+];
 ---
 
 <Layout title="公司簡介">
   <section class="section">
     <div class="container about-grid">
       <div class="about-copy">
-        <p class="eyebrow">About Conwen</p>
-        <h1>{COMPANY.name}</h1>
+        <p class="eyebrow">關於耕紋</p>
+        <h1>深耕量測領域三十餘年</h1>
         <p>
-          耕紋貿易股份有限公司成立於民國 {COMPANY.establishedMinguoYear} 年（{COMPANY.establishedYear}
-          年），專業代理銷售進口及國產電機電子測試測量儀器。
+          {COMPANY.name}成立於民國 {COMPANY.establishedMinguoYear} 年（{COMPANY.establishedYear}
+          年），專業代理銷售進口及國產電機電子測試測量儀器，長期與英、德、義、日等國原廠合作，
+          供應涵蓋十大分類、兩百餘項的測試測量設備。
         </p>
         <p>
-          總公司位於新北市泰山區，並在台中與高雄設立分公司，方便就近為相關業界提供產品諮詢、供應與售後服務。
+          總公司位於新北市泰山區，並於台中、高雄設立分公司；北中南三據點就近服務相關業界，
+          提供產品諮詢、選型建議、報價供貨與到貨支援。
         </p>
         <p>
-          本公司設有儀器維修部門，專門提供產品售後服務。凡客戶購買本公司產品，皆可獲得保固及維修保障。
+          本公司自設儀器維修部門，專責產品售後服務。凡購買本公司產品，皆可獲得保固及維修保障，
+          讓儀器長期維持可靠的量測品質。
         </p>
+
+        <div class="about-facts">
+          {
+            facts.map((fact) => (
+              <div class="about-fact">
+                <strong>{fact.value}</strong>
+                <span>{fact.label}</span>
+              </div>
+            ))
+          }
+        </div>
+
+        <h2>服務項目</h2>
+        <ul class="service-list">
+          {services.map((service) => <li>{service}</li>)}
+        </ul>
+
         <div class="card about-highlight">
           <h2>北中南服務據點</h2>
-          <p>新北總公司、台中分公司、高雄分公司共同支援即時服務、維修保固與客戶需求回覆。</p>
+          <p>
+            新北總公司、台中分公司、高雄分公司共同支援即時服務、維修保固與客戶需求回覆，
+            聯絡方式請見<a href={withBase("/contact/")}>聯絡我們</a>。
+          </p>
         </div>
       </div>
       <div class="media-grid">
@@ -43,3 +80,16 @@ const photos = [
     </div>
   </section>
 </Layout>
+
+<style>
+  .about-highlight a {
+    color: var(--color-primary);
+    font-weight: 700;
+    text-decoration: underline;
+  }
+
+  .about-copy h2 {
+    margin-bottom: var(--space-2);
+    font-size: 1.35rem;
+  }
+</style>

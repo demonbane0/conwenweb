@@ -2,6 +2,7 @@
 title: 直流高壓計
 model: HVP-40M/40DM
 category: electrical-testing
+brand: "Pintek"
 image: /images/products/hvp-40m-40dm.jpg
 features:
 - 測量範圍 DC 40KV

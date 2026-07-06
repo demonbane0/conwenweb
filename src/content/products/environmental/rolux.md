@@ -1,9 +1,12 @@
 ---
-title: "?皜祇\x80?"
+title: "閃頻測速儀"
 model: Rolux
 category: environmental
 image: /images/products/rolux.jpg
 features:
-- "?? 頧\x80葫???? 嚗? 30 ~ 12500 FPM ?? 皞Ⅱ摨? ±0.01% rdg ?? 5雿 LCD憿舐內 ???駁瘙??餅?雿靘?"
+  - "轉速測量範圍 30 ~ 12,500 FPM"
+  - "準確度 ±0.01% rdg"
+  - "5 位數 LCD 顯示"
+  - "充電電池供電操作方便"
 order: 160
 ---

@@ -3,6 +3,7 @@ slug: htp1
 title: 液壓壓力產生器
 model: HTP1
 category: pressure
+brand: "GE Druck"
 image: /images/products/htp1.jpg
 features:
   - 壓力產生範圍：0 ~ 700 /1000Bar

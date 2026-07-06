@@ -3,6 +3,7 @@ slug: microcal-20t
 title: 雙通道高精度溫度測量計
 model: MicroCal 20T
 category: temperature
+brand: "EUROTRON"
 image: /images/products/microcal-20t.jpg
 features:
   - 可同時2ch測量輸入
