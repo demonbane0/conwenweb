@@ -2,6 +2,7 @@
 title: "保護手套"
 model: "GLOVE"
 category: "power-quality"
+brand: "YOTSUGI"
 image: "/images/products/glove.jpg"
 features:
   - "建議配合橡膠絕緣手套使用"

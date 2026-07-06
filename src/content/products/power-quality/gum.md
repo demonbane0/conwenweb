@@ -2,6 +2,7 @@
 title: "絕緣安全帽"
 model: "GUM"
 category: "power-quality"
+brand: "YOTSUGI"
 image: "/images/products/gum.jpg"
 features:
   - "橡膠材質"

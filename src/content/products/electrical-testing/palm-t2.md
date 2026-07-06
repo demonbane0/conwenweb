@@ -2,7 +2,7 @@
 title: 掌上型電力計
 model: PALM T2
 category: electrical-testing
-brand: "elcotronic"
+brand: "Elcotronic"
 image: /images/products/palm-t2.jpg
 features:
 - 電壓測量範圍：0 ~280Vac

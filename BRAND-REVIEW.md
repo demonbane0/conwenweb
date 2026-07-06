@@ -17,10 +17,13 @@
 >    HT Italia（2020E、5080）、ISUZU（TH-27R）、Time Electronics（1071）、
 >    CROPICO（'3000'）
 >
-> 現況 **220/231 已填**。剩 11 項照片無商標可辨：25H、HCTT、PORTATEST A-2、
-> 8400、2000系列（轉速類，疑 RHEIN TACHO）、GAT-I/II、GLOVE、GUM、
-> SJBOOT、SJGLOVE（絕緣防護具，需看實品標籤）。
-> 最新逐項清單見 `BRAND-FILLED.md`。
+> 4. **業主人工確認**（查核檔 §4.1）再補 9 項：2000系列→RHEIN TACHO、
+>    8400→Lucas、25H→STB、GAT-I/II・GLOVE・GUM・SJBOOT・SJGLOVE→YOTSUGI；
+>    PALM T2 顯示名定為 Elcotronic
+>
+> 現況 **229/231 已填**。僅剩 2 項：**HCTT**（手搖式匝比測試器）、
+> **PORTATEST A-2**（全自動油耐壓測試器）——照片無商標、網路證據不足，
+> 需舊型錄或實品確認。最新逐項清單見 `BRAND-FILLED.md`。
 
 ## 一、已自動填入（信心高，抽查即可）— 174 項
 

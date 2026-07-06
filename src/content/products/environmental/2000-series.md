@@ -2,6 +2,7 @@
 title: "數字式轉速計"
 model: 2000系列
 category: environmental
+brand: "RHEIN TACHO"
 image: /images/products/2000-series.jpg
 features:
   - "光電或接觸兩用型"

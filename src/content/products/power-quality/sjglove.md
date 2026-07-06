@@ -2,6 +2,7 @@
 title: "橡膠絕緣手套"
 model: "SJGLOVE"
 category: "power-quality"
+brand: "YOTSUGI"
 image: "/images/products/sjglove.jpg"
 features:
   - "橡膠材質"

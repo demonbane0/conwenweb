@@ -2,6 +2,7 @@
 title: "絕緣毯"
 model: "GAT-I"
 category: "power-quality"
+brand: "YOTSUGI"
 image: "/images/products/gat-i.jpg"
 features:
   - "塑膠材質"

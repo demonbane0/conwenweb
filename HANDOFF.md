@@ -67,11 +67,12 @@
   8. **產品頁 SEO**：`<title>` 與 meta description 改為「廠牌 型號 品名」格式、
      每頁加 JSON-LD Product 結構化資料（brand/model/image 絕對網址）、
      眉標顯示廠牌。無廠牌產品自動降級不出現 undefined
-  9. **廠牌三輪查核完成 → 220/231**：BRAND-VALIDATION-RESULT.md 修正 4 項
-     （PC6→GE Druck、ASAHI→SATO、SERVOGOR→NGI）；再以舊站產品照辨識商標
-     補 18 項（Aplab/Pintek/elcotronic/ONO SOKKI/LINE SEIKI/Nippon Static/
-     SFE/PAN-GLOBE/DENSOKU/SOUKOU/Motech/HT Italia/ISUZU/Time Electronics…）。
-     剩 11 項照片無商標（防護具類+25H/HCTT/PORTATEST/8400/2000系列）
+  9. **廠牌四輪查核完成 → 229/231**：GPT-5 查核回填 30 + 修 3；174 項驗證
+     修 4（PC6→GE Druck、ASAHI→SATO、SERVOGOR→NGI）；產品照辨識商標補 18
+     （Aplab/Pintek/Elcotronic/ONO SOKKI/LINE SEIKI/Nippon Static/SFE/
+     PAN-GLOBE/DENSOKU/SOUKOU/Motech/HT Italia/ISUZU/Time Electronics…）；
+     業主人工確認補 9（RHEIN TACHO/Lucas/STB/YOTSUGI×5）。
+     **僅剩 HCTT、PORTATEST A-2 兩項**需舊型錄確認
   10. **產品卡型號前顯示廠牌**（一覽/分類/相關產品）：廠牌淡色+型號粗體
       同一行，原廠牌小徽章移除
 

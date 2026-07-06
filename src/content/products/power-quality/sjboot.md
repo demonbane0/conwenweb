@@ -2,6 +2,7 @@
 title: "橡膠絕緣長統鞋"
 model: "SJBOOT"
 category: "power-quality"
+brand: "YOTSUGI"
 image: "/images/products/sjboot.jpg"
 features:
   - "橡膠材質"
