@@ -70,6 +70,10 @@ import { withBase } from "../utils/url";
             <span>備註</span>
             <textarea name="notes" rows="5"></textarea>
           </label>
+          <label class="gotcha-field" aria-hidden="true">
+            <span>請勿填寫此欄位</span>
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+          </label>
           <button class="btn btn-accent form-submit" type="submit">送出詢價</button>
         </form>
       </div>
@@ -194,9 +198,38 @@ import { withBase } from "../utils/url";
         notes: String(formData.get("notes") ?? ""),
         products: productsText(),
         _replyto: email,
+        _gotcha: String(formData.get("_gotcha") ?? ""),
+      };
+
+      const sendViaMailto = (notice: string) => {
+        const body = [
+          "詢價產品：",
+          productsText(),
+          "",
+          "聯絡資訊：",
+          `公司名稱：${payload.company}`,
+          `聯絡人：${payload.contactPerson}`,
+          `電話：${payload.phone}`,
+          `Email：${payload.email}`,
+          "",
+          "備註：",
+          payload.notes,
+        ].join("\n");
+
+        window.location.href = `mailto:${companyEmail}?subject=${encodeURIComponent("詢價單")}&body=${encodeURIComponent(
+          body,
+        )}`;
+        showMessage(notice, "notice");
       };
 
       if (endpoint) {
+        const submitButton = form.querySelector<HTMLButtonElement>(".form-submit");
+
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.textContent = "送出中…";
+        }
+
         try {
           const response = await fetch(endpoint, {
             method: "POST",
@@ -216,30 +249,19 @@ import { withBase } from "../utils/url";
           showMessage("詢價已送出，我們會盡快與您聯絡。", "success");
           renderItems();
         } catch {
-          showMessage("詢價送出失敗，請稍後再試或改用 Email 聯絡我們。", "error");
+          // 線上送出失敗（額度用盡、服務中斷等）→ 自動退回 mailto，詢價不漏接
+          sendViaMailto("線上送出暫時無法使用，已改為開啟您的郵件軟體，請按傳送完成詢價");
+        } finally {
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = "送出詢價";
+          }
         }
 
         return;
       }
 
-      const body = [
-        "詢價產品：",
-        productsText(),
-        "",
-        "聯絡資訊：",
-        `公司名稱：${payload.company}`,
-        `聯絡人：${payload.contactPerson}`,
-        `電話：${payload.phone}`,
-        `Email：${payload.email}`,
-        "",
-        "備註：",
-        payload.notes,
-      ].join("\n");
-
-      window.location.href = `mailto:${companyEmail}?subject=${encodeURIComponent("詢價單")}&body=${encodeURIComponent(
-        body,
-      )}`;
-      showMessage("已開啟您的郵件軟體，請按傳送完成詢價", "notice");
+      sendViaMailto("已開啟您的郵件軟體，請按傳送完成詢價");
     });
 
     window.addEventListener("inquiry:change", renderItems);
@@ -376,6 +398,20 @@ import { withBase } from "../utils/url";
   .form-submit {
     justify-self: start;
     min-width: 160px;
+  }
+
+  .form-submit:disabled {
+    cursor: wait;
+    opacity: 0.65;
+  }
+
+  /* 蜜罐欄位：真人看不到、機器人會填，Formspree 會靜默丟棄 */
+  .gotcha-field {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
   }
 
   @media (max-width: 768px) {

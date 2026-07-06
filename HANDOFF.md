@@ -133,6 +133,11 @@
 - Formspree endpoint（未提供前詢價單走 mailto，不影響上線）。
   步驟：到 formspree.io 用 conwencf@ms19.hinet.net 註冊 → New Form →
   複製 `https://formspree.io/f/xxxxxxxx` 給我 → 填入 `src/data/site.ts` 即切換
+- **表單防濫用已內建**（2026-07-07，回應業主對寄信額度被灌爆的疑慮）：
+  蜜罐欄位 `_gotcha`（機器人填了會被 Formspree 靜默丟棄、不計額度）、
+  線上送出失敗**自動退回 mailto**（額度用盡也不漏詢價）、送出中鎖定按鈕防連點。
+  結論：不需自建後端做 rate limit，也不影響 GitHub Pages 的主機決策；
+  未來若真要 WAF 可把 DNS 搬 Cloudflare（免費）擋在 Pages 前面
 - ~~三據點地址電話~~、~~資本額~~：**業主已確認無誤**（2026-07-07）
 
 ## 自有網域切換計畫（conwen.com.tw，等 DNS）
