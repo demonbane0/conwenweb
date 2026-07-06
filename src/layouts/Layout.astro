@@ -22,6 +22,10 @@ const navItems = [
   { label: "最新消息", href: "/news/" },
   { label: "聯絡我們", href: "/contact/" },
 ];
+
+const currentPath = Astro.url.pathname;
+const isCurrent = (href: string) => currentPath.startsWith(withBase(href));
+const ogImage = new URL(withBase("/images/og.png"), Astro.site).href;
 ---
 
 <!doctype html>
@@ -30,6 +34,15 @@ const navItems = [
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#0d2f54" />
+    <meta property="og:site_name" content={COMPANY.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={new URL(currentPath, Astro.site).href} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="zh_TW" />
+    <meta name="twitter:card" content="summary_large_image" />
     <title>{pageTitle}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -53,7 +66,13 @@ const navItems = [
           <span></span>
         </label>
         <nav class="site-nav" aria-label="主要導覽">
-          {navItems.map((item) => <a href={withBase(item.href)}>{item.label}</a>)}
+          {
+            navItems.map((item) => (
+              <a href={withBase(item.href)} aria-current={isCurrent(item.href) ? "page" : undefined}>
+                {item.label}
+              </a>
+            ))
+          }
           <a class="btn btn-accent inquiry-link" href={withBase("/inquiry/")}>
             詢價單
             <span id="inquiry-count" class="inquiry-count" hidden></span>

@@ -112,7 +112,7 @@ const jsonLd = JSON.stringify({
           <dl class="product-meta">
             <div>
               <dt>型號</dt>
-              <dd>{product.data.model}</dd>
+              <dd class="product-meta__model">{product.data.model}</dd>
             </div>
             {
               product.data.brand && (
@@ -397,6 +397,12 @@ const jsonLd = JSON.stringify({
     margin: 0;
     color: var(--color-primary-dark);
     font-weight: 800;
+  }
+
+  .product-meta__model {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
   }
 
   .feature-list {

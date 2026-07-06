@@ -104,8 +104,11 @@ push 後自動部署。** 所有設計決策不得破壞這個工作流程。
   數字用 `tabular-nums`（統計、型號、序號）
 - **佈局**：max-width 1140px 置中；卡片圓角 10px、雙層淡陰影；間距 8px 的倍數
 - **識別元素**：`LogoMark.astro`（圓角方塊 + 白色波形 + 橙點）用於 header/footer；
-  header 頂部 3px 藍橙漸層條；eyebrow 前置短橫線；hero/CTA 用深藍漸層 + 細格線紋理
-  （SVG data URI）；hero 標題下有橙色脈波分隔線
+  header 頂部 3px 藍橙漸層條；eyebrow 前置**刻度尺記號**（CSS gradient 齒紋）；
+  hero/CTA 用深藍漸層 + 細格線紋理（SVG data URI）；hero 標題下有橙色脈波分隔線；
+  **型號與統計數字用等寬字** `--font-mono`（儀器讀數感）；導覽列目前頁
+  `aria-current="page"`（淺藍底 + 橙底線）；社群分享圖 `public/images/og.png`
+  （og:image，改公司名/標語時需重產）
 - **Header**：sticky，白底細底線；左 LogoMark + 「耕紋貿易」+ 副標；右導覽
   （產品介紹、代理廠牌、公司簡介、最新消息、聯絡我們）+ 詢價單按鈕（橙色、含數量）
 - **手機**：≤768px 漢堡選單；產品格 1 欄、平板 2 欄、桌機 3 欄
