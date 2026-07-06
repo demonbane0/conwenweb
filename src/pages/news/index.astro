@@ -1,0 +1,48 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+const entries = (await getCollection("news")).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+
+const newsItems = await Promise.all(
+  entries.map(async (entry) => {
+    const { Content } = await render(entry);
+    return { entry, Content };
+  }),
+);
+
+const formatDate = (date: Date) => date.toISOString().slice(0, 10);
+---
+
+<Layout title="最新消息">
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <p class="eyebrow">News</p>
+        <h1>最新消息</h1>
+        <p>舊站消息內容保留於此，後續可由客戶自行更新。</p>
+      </div>
+      <div class="news-list">
+        {
+          newsItems.length > 0 ? (
+            newsItems.map(({ entry, Content }) => (
+              <article class="card news-card">
+                <p class="news-meta">{formatDate(entry.data.date)}</p>
+                <h2>{entry.data.title}</h2>
+                <div class="news-content">
+                  <Content />
+                </div>
+              </article>
+            ))
+          ) : (
+            <article class="card news-card">
+              <p>目前沒有最新消息。</p>
+            </article>
+          )
+        }
+      </div>
+    </div>
+  </section>
+</Layout>

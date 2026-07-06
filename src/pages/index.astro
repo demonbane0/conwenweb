@@ -1,0 +1,108 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { brands } from "../data/brands";
+import { categories } from "../data/categories";
+import { COMPANY } from "../data/site";
+import { withBase } from "../utils/url";
+
+const advantages = [
+  "專業代理數家知名廠牌",
+  "產品種類繁多滿足各種應用",
+  "合理價格專業服務",
+  "北中南三據點即時服務與維修保固",
+];
+---
+
+<Layout title="首頁">
+  <section class="hero section">
+    <div class="container hero-grid">
+      <div>
+        <p class="eyebrow">Conwen Trading Co., Ltd.</p>
+        <h1>{COMPANY.name}</h1>
+        <p>專業代理進口電機電子測試測量儀器</p>
+        <div class="hero-actions">
+          <a class="btn btn-accent" href={withBase("/products/")}>瀏覽產品</a>
+          <a class="btn" href={withBase("/inquiry/")}>立即詢價</a>
+        </div>
+      </div>
+      <aside class="hero-panel" aria-label="公司服務摘要">
+        <div class="hero-stat">
+          <strong>1988</strong>
+          <span>成立於民國 77 年</span>
+        </div>
+        <p>代理進口與國產測試測量儀器，服務電機、電子、維護、校正與工業現場應用。</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <p class="eyebrow">Service Strength</p>
+        <h2>專業代理與在地服務</h2>
+      </div>
+      <div class="grid-4">
+        {
+          advantages.map((item) => (
+            <article class="card feature-card">
+              <h3>{item}</h3>
+              <p>以測試測量儀器代理經驗，支援選型、供應、售後與維修保固需求。</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container">
+      <div class="section-title">
+        <p class="eyebrow">Product Categories</p>
+        <h2>10 大產品分類</h2>
+      </div>
+      <div class="grid-3">
+        {
+          categories.map((category) => (
+            <a class="card category-card" href={withBase(`/products/${category.slug}/`)}>
+              <span class="category-order">{String(category.order).padStart(2, "0")}</span>
+              <h3>{category.name}</h3>
+              <p>查看此分類產品</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <p class="eyebrow">Brands</p>
+        <h2>代理廠牌</h2>
+      </div>
+      <div class="brand-strip">
+        {
+          brands.map((brand) => (
+            <a class="brand-logo-box" href={withBase("/brands/")}>
+              <img src={withBase(brand.image)} alt={`${brand.name} 標誌`} loading="lazy" />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-band">
+    <div class="container cta-box">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h2>需要儀器選型或報價協助？</h2>
+        <p>可透過詢價單或直接聯絡北中南據點，由專人回覆產品與服務需求。</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn btn-accent" href={withBase("/inquiry/")}>立即詢價</a>
+        <a class="btn" href={withBase("/contact/")}>聯絡我們</a>
+      </div>
+    </div>
+  </section>
+</Layout>

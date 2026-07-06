@@ -1,0 +1,91 @@
+---
+import "../styles/global.css";
+import { COMPANY } from "../data/site";
+import { withBase } from "../utils/url";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = COMPANY.name,
+  description = "耕紋貿易股份有限公司專業代理進口與國產電機電子測試測量儀器，提供北中南服務據點與售後維修。",
+} = Astro.props;
+
+const pageTitle = title === COMPANY.name ? title : `${title}｜${COMPANY.name}`;
+const navItems = [
+  { label: "產品介紹", href: "/products/" },
+  { label: "代理廠牌", href: "/brands/" },
+  { label: "公司簡介", href: "/about/" },
+  { label: "最新消息", href: "/news/" },
+  { label: "聯絡我們", href: "/contact/" },
+];
+---
+
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{pageTitle}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand-lockup" href={withBase("/")} aria-label={`${COMPANY.name}首頁`}>
+          <span>{COMPANY.name}</span>
+          <small>專業代理電機電子測試測量儀器</small>
+        </a>
+        <input class="nav-toggle" type="checkbox" id="nav-toggle" aria-label="開關導覽選單" />
+        <label class="nav-toggle-label" for="nav-toggle" aria-hidden="true">
+          <span></span>
+        </label>
+        <nav class="site-nav" aria-label="主要導覽">
+          {navItems.map((item) => <a href={withBase(item.href)}>{item.label}</a>)}
+          <a class="btn btn-accent inquiry-link" href={withBase("/inquiry/")}>
+            詢價單
+            <span id="inquiry-count" class="inquiry-count" hidden></span>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>
+          <h2 class="footer-title">{COMPANY.name}</h2>
+          <p class="footer-copy">{COMPANY.tagline}</p>
+          <p class="footer-copy">
+            <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>
+          </p>
+          <p class="footer-copy">© 2026 {COMPANY.name}</p>
+        </div>
+        <div class="footer-offices">
+          {
+            COMPANY.branches.map((branch) => (
+              <section class="footer-office">
+                <h3>{branch.name}</h3>
+                <p>{branch.address}</p>
+                <p>
+                  <a href={`tel:${branch.phone.replace(/[^\d+]/g, "")}`}>{branch.phone}</a>
+                </p>
+              </section>
+            ))
+          }
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

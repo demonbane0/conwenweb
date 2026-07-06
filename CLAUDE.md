@@ -120,6 +120,12 @@ push 後自動部署。** 所有設計決策不得破壞這個工作流程。
 3. 內部連結與圖片路徑有效（無 404 資源）
 4. 產品 .md 必須通過 schema（build 會擋）
 
+## Session 交接
+
+- **每個 session 開始先讀 `HANDOFF.md`**（目前進度、業主決策、待辦、監看方法）
+- 完成階段性工作或 session 結束前**必須更新 `HANDOFF.md`** 並隨工作一起 commit
+- HANDOFF.md 記「狀態與決策」，CLAUDE.md 記「不變的規範」，不要混放
+
 ## Git 規範
 
 - 訊息用英文祈使句，正文可中文；不 amend、不 force push

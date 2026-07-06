@@ -1,0 +1,33 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { brands } from "../data/brands";
+import { withBase } from "../utils/url";
+---
+
+<Layout title="代理廠牌">
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <p class="eyebrow">Brands</p>
+        <h1>代理廠牌</h1>
+        <p>整理自舊站代理廠牌頁，保留各廠牌來源地與主要產品類型。</p>
+      </div>
+      <div class="grid-3">
+        {
+          brands.map((brand) => (
+            <article class="card brand-card">
+              <div class="brand-card-media">
+                <img src={withBase(brand.image)} alt={`${brand.name} 標誌`} loading="lazy" />
+              </div>
+              <div>
+                <p class="eyebrow">{brand.origin}</p>
+                <h2>{brand.name}</h2>
+                <p>{brand.description}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>

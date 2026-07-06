@@ -1,0 +1,45 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { COMPANY } from "../data/site";
+import { withBase } from "../utils/url";
+
+const photos = [
+  { src: "/images/company/sany0205.jpg", alt: "耕紋貿易公司環境照片一" },
+  { src: "/images/company/sany0207.jpg", alt: "耕紋貿易公司環境照片二" },
+  { src: "/images/company/sany0210.jpg", alt: "耕紋貿易公司環境照片三" },
+];
+---
+
+<Layout title="公司簡介">
+  <section class="section">
+    <div class="container about-grid">
+      <div class="about-copy">
+        <p class="eyebrow">About Conwen</p>
+        <h1>{COMPANY.name}</h1>
+        <p>
+          耕紋貿易股份有限公司成立於民國 {COMPANY.establishedMinguoYear} 年（{COMPANY.establishedYear}
+          年），專業代理銷售進口及國產電機電子測試測量儀器。
+        </p>
+        <p>
+          總公司位於新北市泰山區，並在台中與高雄設立分公司，方便就近為相關業界提供產品諮詢、供應與售後服務。
+        </p>
+        <p>
+          本公司設有儀器維修部門，專門提供產品售後服務。凡客戶購買本公司產品，皆可獲得保固及維修保障。
+        </p>
+        <div class="card about-highlight">
+          <h2>北中南服務據點</h2>
+          <p>新北總公司、台中分公司、高雄分公司共同支援即時服務、維修保固與客戶需求回覆。</p>
+        </div>
+      </div>
+      <div class="media-grid">
+        {
+          photos.map((photo) => (
+            <figure class="company-photo">
+              <img src={withBase(photo.src)} alt={photo.alt} loading="lazy" />
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,14 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { withBase } from "../utils/url";
+---
+
+<Layout title="頁面不存在">
+  <section class="section not-found">
+    <div class="container">
+      <h1>找不到頁面</h1>
+      <p>此頁面可能已移除或網址有誤。</p>
+      <a class="btn btn-accent" href={withBase("/")}>返回首頁</a>
+    </div>
+  </section>
+</Layout>

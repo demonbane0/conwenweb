@@ -1,0 +1,53 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { COMPANY } from "../data/site";
+
+const offices = COMPANY.branches.map((branch) => ({
+  ...branch,
+  telHref: `tel:${branch.phone.replace(/[^\d+]/g, "")}`,
+  mapSrc: `https://www.google.com/maps?q=${encodeURIComponent(branch.address)}&output=embed`,
+}));
+---
+
+<Layout title="聯絡我們">
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <p class="eyebrow">Contact</p>
+        <h1>聯絡我們</h1>
+        <p>歡迎透過各服務據點電話或 Email 聯絡耕紋貿易。</p>
+      </div>
+      <div class="contact-grid">
+        {
+          offices.map((office) => (
+            <article class="card office-card">
+              <div>
+                <h2>{office.name}</h2>
+                <div class="contact-lines">
+                  <p>地址：{office.address}</p>
+                  <p>
+                    電話：<a href={office.telHref}>{office.phone}</a>
+                  </p>
+                  <p>傳真：{office.fax}</p>
+                </div>
+              </div>
+              <iframe
+                title={`${office.name}地圖`}
+                src={office.mapSrc}
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              >
+              </iframe>
+            </article>
+          ))
+        }
+      </div>
+      <section class="section-title" style="margin-top: 3rem;">
+        <h2>Email</h2>
+        <p>
+          <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>
+        </p>
+      </section>
+    </div>
+  </section>
+</Layout>
