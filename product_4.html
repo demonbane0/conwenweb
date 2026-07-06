@@ -1,0 +1,1133 @@
+
+<html>
+
+<head>
+<title>溫度信號測量校正</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+
+<meta name="namo-theme" content="Theme\Business_Classic\Clover">
+<style>
+<!--
+body { font-family:細明體; color:rgb(128,128,128); }
+h1 { font-family:細明體; font-size:12pt; color:rgb(0,128,0); }
+h2 { font-family:細明體; font-size:12pt; color:rgb(0,128,0); }
+p.namo-list { font-family:細明體; font-size:12pt; color:rgb(0,0,0); }
+p.namo-sublist { font-family:細明體; font-size:10pt; color:rgb(0,0,0); }
+th { font-family:細明體; color:rgb(128,128,128); }
+td { font-family:細明體; color:rgb(128,128,128); }
+a { text-decoration:none; }
+-->
+</style>
+<meta http-equiv="content-type" content="text/html; charset=big5">
+<script language="JavaScript">
+<!--
+function na_change_img_src(name, nsdoc, rpath, preload)
+{ 
+  var img = eval((navigator.appName.indexOf('Netscape', 0) != -1) ? nsdoc+'.'+name : 'document.all.'+name);
+  if (name == '')
+    return;
+  if (img) {
+    img.altsrc = img.src;
+    img.src    = rpath;
+  } 
+}
+
+function na_restore_img_src(name, nsdoc)
+{
+  var img = eval((navigator.appName.indexOf('Netscape', 0) != -1) ? nsdoc+'.'+name : 'document.all.'+name);
+  if (name == '')
+    return;
+  if (img && img.altsrc) {
+    img.src    = img.altsrc;
+    img.altsrc = null;
+  } 
+}
+
+// -->
+</script>
+</head>
+
+<body background="bg197_gif.gif" bgcolor="white" text="gray" link="black" vlink="gray" alink="olive">
+<table cellpadding="0" cellspacing="0" width="982">
+    <tr>
+        <td width="982" colspan="2" height="70"><!--NAMO_NAVBAR_START B H C       0 31 7 9 8 3 -->
+<div align="center">
+<img src="nav/nav_31_product_4_bhb.gif" name="nav_product_4_BH0" 
+border="0" class="namo-banner" alt="溫度信號測量校正" align="texttop"></div>
+<!--NAMO_NAVBAR_END--></td>
+    </tr>
+    <tr>
+        <td width="982" colspan="2" height="60"><!--NAMO_NAVBAR_START A H C h     2 32 7 9 8 41 -->
+<div align="center">
+</div>
+<!--NAMO_NAVBAR_END-->
+            <hr width="750"></td>
+    </tr>
+    <tr>
+        <td width="200" valign="top" rowspan="2" height="3499"><!--NAMO_NAVBAR_START S F         -1 23 7 9 8 3 -->
+<div>
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0" width="200" height="70" align="texttop">
+<param name="movie" value="nav/nav_23_product_1_sv.swf">
+<param name="play" value="true">
+<param name="loop" value="true">
+<param name="quality" value="high">
+<param name="Menu" value="false">
+<param name="WMode" value="Transparent">
+<embed src="nav/nav_23_product_1_sv.swf" play="true" loop="true" quality="high"pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" width="200"height="70"></embed>
+</object>
+&nbsp;<br>
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0" width="200" height="70" align="texttop">
+<param name="movie" value="nav/nav_23_product_2_sv.swf">
+<param name="play" value="true">
+<param name="loop" value="true">
+<param name="quality" value="high">
+<param name="Menu" value="false">
+<param name="WMode" value="Transparent">
+<embed src="nav/nav_23_product_2_sv.swf" play="true" loop="true" quality="high"pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" width="200"height="70"></embed>
+</object>
+&nbsp;<br>
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0" width="200" height="70" align="texttop">
+<param name="movie" value="nav/nav_23_product_3_sv.swf">
+<param name="play" value="true">
+<param name="loop" value="true">
+<param name="quality" value="high">
+<param name="Menu" value="false">
+<param name="WMode" value="Transparent">
+<embed src="nav/nav_23_product_3_sv.swf" play="true" loop="true" quality="high"pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" width="200"height="70"></embed>
+</object>
+&nbsp;<br>
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0" width="200" height="70" align="texttop">
+<param name="movie" value="nav/nav_23_product_4_svh.swf">
+<param name="play" value="true">
+<param name="loop" value="true">
+<param name="quality" value="high">
+<param name="Menu" value="false">
+<param name="WMode" value="Transparent">
+<embed src="nav/nav_23_product_4_svh.swf" play="true" loop="true" quality="high"pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" width="200"height="70"></embed>
+</object>
+&nbsp;<br>
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0" width="200" height="70" align="texttop">
+<param name="movie" value="nav/nav_23_product_5_sv.swf">
+<param name="play" value="true">
+<param name="loop" value="true">
+<param name="quality" value="high">
+<param name="Menu" value="false">
+<param name="WMode" value="Transparent">
+<embed src="nav/nav_23_product_5_sv.swf" play="true" loop="true" quality="high"pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" width="200"height="70"></embed>
+</object>
+&nbsp;<br>
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0" width="200" height="70" align="texttop">
+<param name="movie" value="nav/nav_23_product_6_sv.swf">
+<param name="play" value="true">
+<param name="loop" value="true">
+<param name="quality" value="high">
+<param name="Menu" value="false">
+<param name="WMode" value="Transparent">
+<embed src="nav/nav_23_product_6_sv.swf" play="true" loop="true" quality="high"pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" width="200"height="70"></embed>
+</object>
+&nbsp;<br>
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0" width="200" height="70" align="texttop">
+<param name="movie" value="nav/nav_23_product_7_sv.swf">
+<param name="play" value="true">
+<param name="loop" value="true">
+<param name="quality" value="high">
+<param name="Menu" value="false">
+<param name="WMode" value="Transparent">
+<embed src="nav/nav_23_product_7_sv.swf" play="true" loop="true" quality="high"pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" width="200"height="70"></embed>
+</object>
+&nbsp;<br>
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0" width="200" height="70" align="texttop">
+<param name="movie" value="nav/nav_23_product_8_sv.swf">
+<param name="play" value="true">
+<param name="loop" value="true">
+<param name="quality" value="high">
+<param name="Menu" value="false">
+<param name="WMode" value="Transparent">
+<embed src="nav/nav_23_product_8_sv.swf" play="true" loop="true" quality="high"pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" width="200"height="70"></embed>
+</object>
+&nbsp;<br>
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0" width="200" height="70" align="texttop">
+<param name="movie" value="nav/nav_23_product_9_sv.swf">
+<param name="play" value="true">
+<param name="loop" value="true">
+<param name="quality" value="high">
+<param name="Menu" value="false">
+<param name="WMode" value="Transparent">
+<embed src="nav/nav_23_product_9_sv.swf" play="true" loop="true" quality="high"pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" width="200"height="70"></embed>
+</object>
+&nbsp;<br>
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0" width="200" height="70" align="texttop">
+<param name="movie" value="nav/nav_23_product_10_sv.swf">
+<param name="play" value="true">
+<param name="loop" value="true">
+<param name="quality" value="high">
+<param name="Menu" value="false">
+<param name="WMode" value="Transparent">
+<embed src="nav/nav_23_product_10_sv.swf" play="true" loop="true" quality="high"pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" width="200"height="70"></embed>
+</object>
+<a name="anchor_menu0">&nbsp;</a><br>
+</div>
+<!--NAMO_NAVBAR_END--></td>
+        <td width="782" height="25"><font color="#00CC33"><!--NAMO_NAVBAR_START U h         -1 32 2 9 8 3 -->
+<div>
+<a href="product_3.html"  onmouseover="" onmouseout="">上一頁</a>><a href="product.html"  onmouseover="" onmouseout="">向上</a>><a href="product_5.html"  onmouseover="" onmouseout="">下一頁</a></div>
+<!--NAMO_NAVBAR_END--></font></td>
+    </tr>
+    <tr>
+        <td width="782">
+            <p align="center">　</p>
+            <table align="center" cellspacing="0" width="755" style="border-collapse:collapse;" border="0" cellpadding="0" height="6525" namo_layoutbox="10,1,1,10,1,1">
+                <tr>
+                    <td width="755" valign="middle" colspan="2" height="50" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p class="namo-list" align="center"><font size="2" color="#006600"><b><img src="images/nth_theme_business_classic_clover_bullet_l.gif" border="0" class="namo-bullet1" align="absmiddle"> 
+                        </b></font><b><span style='font-family:新細明體; font-size:20pt; color:black; mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman";'><font color="#006600" face="標楷體">溫 
+                        度 信 號 測 量 與 校 正 儀 器</font></span></b></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="323" valign="middle" height="351" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p class="namo-sublist"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="images/nth_theme_business_classic_clover_bullet_s.gif" border="0" class="namo-bullet2"></b></span></font><span style='font-family:新細明體; font-size:14pt; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";mso-bidi-font-family:"Times New Roman";mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;mso-bidi-language:AR-SA;
+mso-no-proof:yes'><font color="#006600" face="新細明體"><b>溫度信號校正器 </b></font></span><span lang=EN-US style="font-family:'Times New Roman'; font-size:14pt; 
+mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+新細明體;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;
+mso-bidi-language:AR-SA;mso-no-proof:yes"><font color="#006600" face="新細明體"><b>UniCal </b></font></span><span style='font-family:新細明體; font-size:14pt; mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman";
+mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;
+mso-bidi-language:AR-SA;mso-no-proof:yes'><font color="#006600" face="新細明體"><b>系列</b></font></span></p>
+                        <p class="namo-sublist" align="center"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="UniCal .jpg" width="146" height="250" border="0"><br>　</b></span></font></p>
+                    </td>
+                    <td width="432" valign="middle" height="351" style="border-width:1; border-color:black; border-style:solid;" align="center" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";'><font color="#006600">信號模擬及測量功能</font></span></p>
+                        <p class="MsoNormalTable" style="margin-left:1.4pt; border-style:none; border-collapse:collapse; width:210pt;"><font color="#006600"><img src="4F1.jpg" width="376" height="300" border="0"></font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="323" valign="middle" height="310" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p><font color="#006600"><span style="font-size:12pt;">&nbsp;</span></font><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="images/nth_theme_business_classic_clover_bullet_s.gif" border="0" class="namo-bullet2"></b></span></font><span style='font-family:新細明體; font-size:14pt; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";mso-bidi-font-family:"Times New Roman";mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;mso-bidi-language:AR-SA'><font color="#006600" face="新細明體"><b>熱電偶溫度校正器 
+                        </b></font></span><span
+lang=EN-US style="font-family:'Times New Roman'; font-size:14pt; mso-bidi-font-size:12.0pt;
+mso-fareast-font-family:新細明體;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-TW;mso-bidi-language:AR-SA"><font color="#006600" face="新細明體"><b>DP6</b></font></span></p>
+                        <p class="namo-sublist" align="center"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="DP6.jpg" width="300" height="228" border="0"></b></span></font></p>
+                        <p><font color="#006600">&nbsp;</font></p>
+                    </td>
+                    <td width="432" valign="middle" height="310" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p><span style="font-family:新細明體; font-size:12pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman"'><font color="#006600">可做熱電偶溫度測量與模擬輸入</font></span></p>
+<p class=MsoNormal style='line-height:10.0pt;mso-line-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">模擬 
+                        </font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">B,E,J,K,L,N,R,S,T,U 
+                        </font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">等型式</font></span></p>
+
+<p class=MsoNormal style='line-height:10.0pt;mso-line-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆可以顯示 
+                        ℃</font></span><span
+style="font-size:12pt;"><font color="#006600">, </font><sup><font color="#006600">o</font></sup><font color="#006600">F, K, mV</font></span></p>
+
+<p class=MsoNormal style='line-height:10.0pt;mso-line-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆解析度 
+                        </font></span><span
+style="font-size:12pt;"><font color="#006600">0.1</font></span><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">℃</font></span><span
+style="font-size:12pt;"><font color="#006600">
+&amp; 1</font></span><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">μ</font></span><span
+style="font-size:12pt;"><font color="#006600">V</font></span></p>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td width="323" valign="middle" height="566" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p class="namo-sublist"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="images/nth_theme_business_classic_clover_bullet_s.gif" border="0" class="namo-bullet2"></b></span></font><span style='font-family:新細明體; font-size:14pt; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";mso-bidi-font-family:"Times New Roman";mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;mso-bidi-language:AR-SA;
+mso-no-proof:yes'><font color="#006600" face="新細明體"><b>溫度信號校正器 </b></font></span><span lang=EN-US style="font-family:'Times New Roman'; font-size:14pt; 
+mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+新細明體;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;
+mso-bidi-language:AR-SA;mso-no-proof:yes"><font color="#006600" face="新細明體"><b>MicroCal 1/10+</b></font></span></p>
+                        <p class="namo-sublist" align="center"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="MicroCal 10+.jpg" width="266" height="500" border="0"><br>　</b></span></font></p>
+                    </td>
+                    <td width="432" valign="middle" height="566" style="border-width:1; border-color:black; border-style:solid;" align="center" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";'><font color="#006600">信號模擬及測量功能</font></span></p>
+                        <p><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";'><font color="#006600"><img src="4F2.jpg" width="410" height="270" border="0"></font></span></p>
+                        <p class="MsoNormalTable" style="margin-left:1.4pt; border-style:none; border-collapse:collapse; width:210pt;"><font color="#006600">&nbsp;</font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="323" valign="middle" height="588" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p class="namo-sublist"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="images/nth_theme_business_classic_clover_bullet_s.gif" border="0" class="namo-bullet2"></b></span></font><span style='font-family:新細明體; font-size:14pt; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";mso-bidi-font-family:"Times New Roman";mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;mso-bidi-language:AR-SA;
+mso-no-proof:yes'><font color="#006600" face="新細明體"><b>溫度壓力信號校正器 </b></font></span><span lang=EN-US style="font-family:'Times New Roman'; font-size:14pt; 
+mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+新細明體;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;
+mso-bidi-language:AR-SA;mso-no-proof:yes"><font color="#006600" face="新細明體"><b>MicroCal 20 DPC</b></font></span></p>
+                        <p class="namo-sublist" align="center"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="MicroCal 20 DPC.jpg" width="274" height="500" border="0"><br>　</b></span></font></p>
+                    </td>
+                    <td width="432" valign="middle" height="588" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p><font color="#006600"><span style="font-size:12pt;">&nbsp;</span></font></p>
+                        <p><span style="font-family:新細明體; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">可同時做模擬輸出及測量輸入功能</font></span></p>
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+line-height:10.0pt;mso-line-height-rule:exactly'><span style="font-family:新細明體; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;"><font color="#006600">◆校正結果資料可儲存主機</font></span></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+line-height:10.0pt;mso-line-height-rule:exactly'><span style="font-family:新細明體; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">亦可同時做雙通道測量輸入功能</font></span></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+line-height:10.0pt;mso-line-height-rule:exactly'><span style="font-family:新細明體; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">精度：</font></span><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">溫度 
+                        </font></span><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-hansi-font-family:"Times New Roman";'><font color="#006600">&plusmn;</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">0.01%
+rdg / </font></span><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">壓力</font></span><span
+style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600"> </font></span><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-hansi-font-family:"Times New Roman";'><font color="#006600">&plusmn;</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">0.025% F.S.</font></span></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+line-height:10.0pt;mso-line-height-rule:exactly'><span style='font-family:新細明體; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman";'><font color="#006600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;電壓 
+                        </font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-hansi-font-family:
+"Times New Roman";'><font color="#006600">&plusmn;</font></span><span lang=EN-US style="font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;"><font color="#006600">0.01% rdg / </font></span><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman";'><font color="#006600">電流</font></span><span
+style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600"> </font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-hansi-font-family:
+"Times New Roman";'><font color="#006600">&plusmn;</font></span><span lang=EN-US style="font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;"><font color="#006600">0.006% rdg</font></span></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+line-height:10.0pt;mso-line-height-rule:exactly'><span style="font-family:新細明體; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">可內建雙壓力模組</font></span></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+line-height:10.0pt;mso-line-height-rule:exactly'><span style="font-family:新細明體; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">可增購外部壓力模組</font></span></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+line-height:10.0pt;mso-line-height-rule:exactly'><span style="font-family:新細明體; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">可指定 
+                        </font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">Hart </font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">通訊協定</font></span></p>
+
+<p class=MsoNormal style='line-height:10.0pt;mso-line-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">電流信號 
+                        </font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">In/Out 
+                        </font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">可達</font></span><span lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:
+ 12.0pt;"><font color="#006600">50m</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">A</font></span></p>
+
+                        <p class="MsoNormal" style="line-height:10pt;"><font color="#006600"><span style="font-size:12pt;">&nbsp;</span></font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="323" valign="middle" height="488" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p class="namo-sublist"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="images/nth_theme_business_classic_clover_bullet_s.gif" border="0" class="namo-bullet2"></b></span></font><span style='font-family:新細明體; font-size:14pt; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";mso-bidi-font-family:"Times New Roman";mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;mso-bidi-language:AR-SA;
+mso-no-proof:yes'><font color="#006600" face="新細明體"><b>溫度信號校正器 </b></font></span><span lang=EN-US style="font-family:'Times New Roman'; font-size:14pt; 
+mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+新細明體;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;
+mso-bidi-language:AR-SA;mso-no-proof:yes"><font color="#006600" face="新細明體"><b>MicroCal 200+/2000+</b></font></span></p>
+                        <p class="namo-sublist" align="center"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="MicroCal 200+2000+.jpg" width="292" height="400" border="0"><br>　</b></span></font></p>
+                    </td>
+                    <td width="432" valign="middle" height="488" style="border-width:1; border-color:black; border-style:solid;" align="center" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";'><font color="#006600">可同時做模擬輸出及測量輸入功能</font></span></p>
+                        <p><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";'><font color="#006600"><img src="4F3.jpg" width="412" height="330" border="0"></font></span></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="323" valign="middle" height="557" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p><font color="#006600"><span style="font-size:12pt;">&nbsp;</span></font><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="images/nth_theme_business_classic_clover_bullet_s.gif" border="0" class="namo-bullet2"></b></span></font><span style='font-family:新細明體; font-size:14pt; color:black; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";mso-bidi-font-family:"Times New Roman";
+mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;
+mso-bidi-language:AR-SA'><font color="#006600" face="新細明體"><b>雙通道高精度溫度測量計 
+                        </b></font></span></p>
+                        <p><span style='font-family:新細明體; font-size:14pt; color:black; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";mso-bidi-font-family:"Times New Roman";
+mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;
+mso-bidi-language:AR-SA'><font color="#006600" face="新細明體"><b>&nbsp;&nbsp;&nbsp;&nbsp;</b></font></span><span lang=EN-US style="font-family:'Times New Roman'; font-size:14pt; color:black; mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+新細明體;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-TW;mso-bidi-language:AR-SA;mso-no-proof:yes"><font color="#006600" face="新細明體"><b>MicroCal 20T</b></font></span></p>
+                        <p class="namo-sublist" align="center"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="MicroCal 20T.JPG" width="215" height="450" border="0"><br>　</b></span></font></p>
+                    </td>
+                    <td width="432" valign="middle" height="557" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p><span style="font-family:新細明體; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">可同時</font></span><span lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:
+ 12.0pt;"><font color="#006600">2 c</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">h</font></span><span style='font-family:新細明體; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman";'><font color="#006600">測量輸入</font></span></p>
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+line-height:10.0pt;mso-line-height-rule:exactly'><span style="font-family:新細明體; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">高精度</font></span><span
+style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600"> </font></span><span
+style="font-size:12pt;"><font color="#006600">0.01%
+rdg</font></span><span style="font-size:12pt; mso-spacerun:yes"><font color="#006600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </font></span></p>
+
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+line-height:10.0pt;mso-line-height-rule:exactly'><span style="font-family:新細明體; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">功能： 
+                        </font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">Tc’s</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">、</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">Rtd</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">、</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">Cu10/100</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">、</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">Ni100/120</font></span></p>
+
+                        <p class="MsoNormal" style="text-align:justify; line-height:10pt;"><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";'><font color="#006600">、</font></span><span lang=EN-US style="font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;"><font color="#006600">mV/V</font></span><span style='font-family:新細明體; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman";'><font color="#006600">、</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">mA</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">、</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-hansi-font-family:
+"Times New Roman";'><font color="#006600">Ω</font></span></p>
+<span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;
+mso-bidi-font-family:"Times New Roman";mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;mso-bidi-language:AR-SA'><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";mso-bidi-font-family:
+"Times New Roman";mso-font-kerning:1.0pt;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-TW;mso-bidi-language:AR-SA'><font color="#006600">電流信號</font></span><span
+lang=EN-US style="font-family:'Times New Roman'; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;
+mso-fareast-font-family:新細明體;mso-font-kerning:1.0pt;mso-ansi-language:
+EN-US;mso-fareast-language:ZH-TW;mso-bidi-language:AR-SA"><font color="#006600">IN</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";mso-bidi-font-family:
+"Times New Roman";mso-font-kerning:1.0pt;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-TW;mso-bidi-language:AR-SA'><font color="#006600">可達</font></span><span lang=EN-US style="font-family:'Times New Roman'; font-size:12pt; color:red; mso-bidi-font-size:
+ 12.0pt;mso-fareast-font-family:新細明體;
+ mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;
+ mso-bidi-language:AR-SA"><font color="#006600">50m</font></span><span
+lang=EN-US style="font-family:'Times New Roman'; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;
+mso-fareast-font-family:新細明體;mso-font-kerning:1.0pt;mso-ansi-language:
+EN-US;mso-fareast-language:ZH-TW;mso-bidi-language:AR-SA"><font color="#006600">A</font></span>                    </td>
+                </tr>
+                <tr>
+                    <td width="323" valign="middle" height="294" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p class="namo-sublist"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="images/nth_theme_business_classic_clover_bullet_s.gif" border="0" class="namo-bullet2"></b></span></font><span style='font-family:新細明體; font-size:14pt; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";mso-bidi-font-family:"Times New Roman";mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;mso-bidi-language:AR-SA;
+mso-no-proof:yes'><font color="#006600" face="新細明體"><b>紅外線測溫計 </b></font></span><span lang=EN-US style="font-family:'Times New Roman'; font-size:14pt; 
+mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+新細明體;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;
+mso-bidi-language:AR-SA;mso-no-proof:yes"><font color="#006600" face="新細明體"><b>IRtec Series</b></font></span></p>
+                        <p class="namo-sublist" align="center"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="IRtec Series.jpg" width="187" height="250" border="0"></b></span></font></p>
+                    </td>
+                    <td width="432" valign="middle" height="294" style="border-width:1; border-color:black; border-style:solid;" align="center" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-bidi-font-family:"Times New Roman";mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;mso-bidi-language:
+AR-SA;mso-no-proof:yes'><font color="#006600">◆</font></span><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";mso-bidi-font-family:"Times New Roman";mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;mso-bidi-language:
+AR-SA;mso-no-proof:yes'><font color="#006600">雙雷射光點指示</font></span><span lang=EN-US style="font-family:'Times New Roman'; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+新細明體;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-TW;mso-bidi-language:AR-SA;mso-no-proof:yes"><font color="#006600">(</font></span><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman";mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-TW;mso-bidi-language:AR-SA;mso-no-proof:yes'><font color="#006600">交叉或平行</font></span><span lang=EN-US
+style="font-family:'Times New Roman'; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;
+mso-fareast-font-family:新細明體;mso-font-kerning:1.0pt;mso-ansi-language:
+EN-US;mso-fareast-language:ZH-TW;mso-bidi-language:AR-SA;mso-no-proof:yes"><font color="#006600">)</font></span></p>
+
+
+                        <p><span lang=EN-US
+style="font-family:'Times New Roman'; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;
+mso-fareast-font-family:新細明體;mso-font-kerning:1.0pt;mso-ansi-language:
+EN-US;mso-fareast-language:ZH-TW;mso-bidi-language:AR-SA;mso-no-proof:yes"><font color="#006600"><img src="4F4.jpg" width="428" height="125" border="0"></font></span></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="323" valign="middle" height="362" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p class="namo-sublist"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="images/nth_theme_business_classic_clover_bullet_s.gif" border="0" class="namo-bullet2"></b></span></font><span style='font-family:新細明體; font-size:14pt; color:black; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";mso-bidi-font-family:"Times New Roman";
+mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;
+mso-bidi-language:AR-SA'><font color="#006600" face="新細明體"><b>紅外線熱像儀 </b></font></span><span lang=EN-US style="font-family:'Times New Roman'; font-size:14pt; color:black; 
+mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+新細明體;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-TW;mso-bidi-language:AR-SA"><font color="#006600" face="新細明體"><b>IRI 4000</b></font></span></p>
+                        <p class="namo-sublist" align="center"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="IRI 4000-I.jpg" width="154" height="230" border="0"><img src="IRI 4000-II.JPG" width="138" height="230" border="0"></b></span></font></p>
+                    </td>
+                    <td width="432" valign="middle" height="362" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p><font color="#006600"><span style="font-size:12pt;">&nbsp;</span></font></p>
+                        <p><span style="font-family:新細明體; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;"><font color="#006600">◆測</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">溫範圍：</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">-10 ~ 250</font></span><span lang=EN-US style="font-size:12pt;"><font color="#006600">℃</font></span></p>
+                        <p><span style="font-family:新細明體; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">手動變焦式紅外線感測攝像鏡頭</font></span></p>
+                        <p><span style="font-family:新細明體; font-size:12pt; color:red; 
+  mso-bidi-font-size:12.0pt;"><font color="#006600">◆檢知元件 </font></span><span
+style="font-size:12pt;"><font color="#006600">160
+  x 120 </font></span><span style="font-family:新細明體; font-size:12pt; color:red; 
+  mso-bidi-font-size:12.0pt;"><font color="#006600">自冷式感測探頭</font></span></p>
+  <p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+  line-height:10.0pt;mso-line-height-rule:exactly;mso-element:frame;mso-element-frame-hspace:
+  9.0pt;mso-element-wrap:around;mso-element-anchor-vertical:page;mso-element-anchor-horizontal:
+  margin;mso-element-top:27.0pt;mso-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆視角範圍 
+                        </font></span><span
+style="font-size:12pt;"><font color="#006600">20</font><sup><font color="#006600">O</font></sup><font color="#006600"> x 15</font><sup><font color="#006600">O</font></sup></span></p>
+  <p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+  line-height:10.0pt;mso-line-height-rule:exactly;mso-element:frame;mso-element-frame-hspace:
+  9.0pt;mso-element-wrap:around;mso-element-anchor-vertical:page;mso-element-anchor-horizontal:
+  margin;mso-element-top:27.0pt;mso-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+  "Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">準確度</font></span><span
+style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600"> </font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-hansi-font-family:
+  "Times New Roman";'><font color="#006600">&plusmn;</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">2</font></span><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+   "Times New Roman";'><font color="#006600">℃</font></span></p>
+<p class=MsoNormal style='line-height:10.0pt;mso-line-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆全螢幕 
+                        </font></span><span
+style="font-size:12pt;"><font color="#006600">19200 </font></span><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">個測溫點</font></span></p>
+
+<p class=MsoNormal style='line-height:10.0pt;mso-line-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆內建</font></span><span
+style="font-size:12pt;"><font color="#006600">3.5</font></span><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">吋超大亮彩 
+                        </font></span><span
+style="font-size:12pt;"><font color="#006600">LCD </font></span><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">螢幕</font></span></p>
+
+<p class=MsoNormal style='line-height:10.0pt;mso-line-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆全中文化的人機操作介面</font></span></p>
+
+<p class=MsoNormal style='line-height:10.0pt;mso-line-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆內建記憶卡可儲存 
+                        </font></span><span
+style="font-size:12pt;"><font color="#006600">1000</font></span><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">張 
+                        熱像圖或轉換</font></span><span
+style="font-size:12pt;"><font color="#006600">JPEG</font></span><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">格式</font></span></p>
+
+                        <p class="MsoNormal" style="line-height:10pt;"><font color="#006600"><span style="font-size:12pt;">&nbsp;</span></font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="323" valign="middle" height="324" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p class="namo-sublist"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="images/nth_theme_business_classic_clover_bullet_s.gif" border="0" class="namo-bullet2"></b></span></font><span style='font-family:新細明體; font-size:14pt; color:black; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";mso-bidi-font-family:"Times New Roman";
+mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;
+mso-bidi-language:AR-SA'><font color="#006600" face="新細明體"><b>紅外線測溫儀 </b></font></span><span lang=EN-US style="font-family:'Times New Roman'; font-size:14pt; color:black; 
+mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+新細明體;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-TW;mso-bidi-language:AR-SA"><font color="#006600" face="新細明體"><b>MS+</b></font></span></p>
+                        <p class="namo-sublist" align="center"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="MS+.jpg" width="300" height="280" border="0"></b></span></font></p>
+                    </td>
+                    <td width="432" valign="middle" height="324" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p class="namo-sublist"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="images/nth_theme_business_classic_clover_bullet_s.gif" border="0" class="namo-bullet2"></b></span></font><span style='font-family:新細明體; font-size:14pt; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";mso-bidi-font-family:"Times New Roman";mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;mso-bidi-language:AR-SA;
+mso-no-proof:yes'><font color="#006600" face="新細明體"><b>紅外線測溫計 </b></font></span><span lang=EN-US style="font-family:'Times New Roman'; font-size:14pt; 
+mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+新細明體;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;
+mso-bidi-language:AR-SA;mso-no-proof:yes"><font color="#006600" face="新細明體"><b>IRtec </b></font></span><span
+lang=EN-US style="font-family:'Times New Roman'; font-size:14pt; mso-bidi-font-size:12.0pt;
+mso-fareast-font-family:新細明體;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-TW;mso-bidi-language:AR-SA"><font color="#006600" face="新細明體"><b>MicroRay Xtreme</b></font></span></p>
+                        <p class="namo-sublist" align="center"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="IRtec MicroRay Xtreme.jpg" width="208" height="280" border="0"></b></span></font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="323" valign="middle" height="286" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p><span
+style="font-family:全真中黑體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-hansi-font-family:
+Arial;mso-bidi-font-family:Arial;"><font color="#006600">◆</font></span><span style="font-family:全真中黑體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:Arial;
+mso-hansi-font-family:Arial;mso-bidi-font-family:Arial;"><font color="#006600">外形靈巧光學性能佳</font></span></p>
+<p class=MsoNormal style='line-height:10.0pt;mso-line-height-rule:exactly'><span
+style="font-family:全真中黑體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-hansi-font-family:
+Arial;mso-bidi-font-family:Arial;"><font color="#006600">◆溫度測量範圍：</font></span><span
+lang=EN-US style="font-family:全真中黑體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;
+mso-hansi-font-family:Arial;mso-bidi-font-family:Arial;"><font color="#006600">MS 
+                        &nbsp;</font></span><span
+lang=EN-US style="font-size:12pt; mso-spacerun:yes"><font color="#006600">-</font></span><span
+lang=EN-US style="font-family:全真中黑體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;
+mso-hansi-font-family:Arial;mso-bidi-font-family:Arial;"><font color="#006600">32 ~ 420</font></span><span lang=EN-US style="font-size:12pt;"><font color="#006600">℃</font></span></p>
+
+<p class=MsoNormal style='line-height:10.0pt;mso-line-height-rule:exactly'><span
+lang=EN-US style="font-size:12pt; mso-spacerun:yes"><font color="#006600">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span
+lang=EN-US style="font-family:全真中黑體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;
+mso-hansi-font-family:Arial;mso-bidi-font-family:Arial;"><font color="#006600">MS+</font></span><span
+lang=EN-US style="font-size:12pt; mso-spacerun:yes"><font color="#006600">&nbsp;-</font></span><span
+lang=EN-US style="font-family:全真中黑體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;
+mso-hansi-font-family:Arial;mso-bidi-font-family:Arial;"><font color="#006600">32 ~ 530</font></span><span lang=EN-US style="font-size:12pt;"><font color="#006600">℃</font></span></p>
+
+<p class=MsoNormal style='line-height:10.0pt;mso-line-height-rule:exactly'><span
+style="font-family:全真中黑體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-hansi-font-family:
+Arial;mso-bidi-font-family:Arial;"><font color="#006600">◆精度：</font></span><span lang=EN-US
+style="font-family:Arial; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+全真中黑體;"><font color="#006600">&plusmn;1% </font></span><span style="font-family:全真中黑體; font-size:12pt; color:red; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:Arial;mso-hansi-font-family:
+Arial;mso-bidi-font-family:Arial;"><font color="#006600">或 </font></span><span lang=EN-US
+style="font-family:Arial; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+全真中黑體;"><font color="#006600">&plusmn;1</font></span><span lang=EN-US style="font-size:12pt;"><font color="#006600">℃</font></span></p>
+
+<p class=MsoNormal style='line-height:10.0pt;mso-line-height-rule:exactly'><span
+style="font-family:全真中黑體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-hansi-font-family:
+Arial;mso-bidi-font-family:Arial;"><font color="#006600">◆</font></span><span lang=EN-US
+style="font-family:Arial; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+全真中黑體;"><font color="#006600">D</font></span><span style="font-family:全真中黑體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:Arial;mso-hansi-font-family:Arial;
+mso-bidi-font-family:Arial;"><font color="#006600">：</font></span><span lang=EN-US
+style="font-family:Arial; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+全真中黑體;"><font color="#006600">S </font></span><span style="font-family:全真中黑體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:Arial;mso-hansi-font-family:Arial;
+mso-bidi-font-family:Arial;"><font color="#006600">比</font></span><span lang=EN-US
+style="font-family:Arial; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+全真中黑體;"><font color="#006600"> 20</font></span><span style="font-family:全真中黑體; font-size:12pt; color:red; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:Arial;mso-hansi-font-family:
+Arial;mso-bidi-font-family:Arial;"><font color="#006600">：</font></span><span lang=EN-US
+style="font-family:Arial; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+全真中黑體;"><font color="#006600">1</font></span></p>
+
+                    </td>
+                    <td width="432" valign="middle" height="286" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p><font color="#006600"><span style="font-size:12pt;">&nbsp;</span></font></p>
+                        <p><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+  "Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">測溫範圍：</font></span><span lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:
+   12.0pt;"><font color="#006600">-30</font></span><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:
+   12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+   "Times New Roman";'><font color="#006600">℃</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600"> ~ +1000</font></span><span lang=EN-US style="font-size:12pt;"><font color="#006600">℃</font></span></p>
+  <p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+  line-height:10.0pt;mso-line-height-rule:exactly;mso-element:frame;mso-element-frame-hspace:
+  9.0pt;mso-element-wrap:around;mso-element-anchor-vertical:page;mso-element-anchor-horizontal:
+  margin;mso-element-top:27.0pt;mso-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+  "Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">距離測點直徑比 
+                        </font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">D</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+  "Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">：</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">S / 50</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+  "Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">：</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">1</font></span></p>
+  <p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+  line-height:10.0pt;mso-line-height-rule:exactly;mso-element:frame;mso-element-frame-hspace:
+  9.0pt;mso-element-wrap:around;mso-element-anchor-vertical:page;mso-element-anchor-horizontal:
+  margin;mso-element-top:27.0pt;mso-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+  "Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">精度：</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-hansi-font-family:
+  "Times New Roman";'><font color="#006600">&plusmn;</font></span><span lang=EN-US style="font-size:12pt; color:red; 
+  mso-bidi-font-size:12.0pt;"><font color="#006600">1% rdg or </font></span><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-hansi-font-family:"Times New Roman";'><font color="#006600">&plusmn;</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">1</font></span><span
+   style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;
+   mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">℃</font></span></p>
+<p class=MsoNormal style='line-height:10.0pt;mso-line-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">放射率可調：</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">0.20 ~
+1.00</font></span></p>
+
+<p class=MsoNormal style='line-height:10.0pt;mso-line-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">雷射測溫點指示</font></span></p>
+
+<p class=MsoNormal style='margin-left:8.0pt;text-indent:-8.0pt;mso-char-indent-count:
+-1.0;line-height:10.0pt;mso-line-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">具最大、最小、溫差與</font></span><span style='font-family:新細明體; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman";'><font color="#006600">平均值測量</font></span></p>
+
+<p class=MsoNormal style='line-height:10.0pt;mso-line-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">自動關機省電功能</font></span></p>
+
+<p class=MsoNormal style='line-height:10.0pt;mso-line-height-rule:exactly'><font color="#006600"><span style="font-size:12pt;">&nbsp;</span></font></p>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td width="323" valign="middle" height="244" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p class="namo-sublist"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="images/nth_theme_business_classic_clover_bullet_s.gif" border="0" class="namo-bullet2"></b></span></font><span style='font-family:新細明體; font-size:14pt; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";mso-bidi-font-family:"Times New Roman";mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;mso-bidi-language:AR-SA'><font color="#006600" face="新細明體"><b>精密數字溫度計 
+                        </b></font></span><span
+lang=EN-US style="font-family:'Times New Roman'; font-size:14pt; mso-bidi-font-size:12.0pt;
+mso-fareast-font-family:新細明體;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-TW;mso-bidi-language:AR-SA"><font color="#006600" face="新細明體"><b>3000</b></font></span></p>
+                        <p class="namo-sublist" align="center"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="3000.jpg" width="288" height="200" border="0"></b></span></font></p>
+                    </td>
+                    <td width="432" valign="middle" height="244" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p class="namo-sublist"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="images/nth_theme_business_classic_clover_bullet_s.gif" border="0" class="namo-bullet2"></b></span></font><span style='font-family:新細明體; font-size:14pt; color:black; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";mso-bidi-font-family:"Times New Roman";
+mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;
+mso-bidi-language:AR-SA'><font color="#006600" face="新細明體"><b>紅外線測溫計 </b></font></span><span lang=EN-US style="font-family:'Times New Roman'; font-size:14pt; color:black; 
+mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+新細明體;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-TW;mso-bidi-language:AR-SA"><font color="#006600" face="新細明體"><b>5510</b></font></span></p>
+                        <p class="namo-sublist" align="center"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="5510.jpg" width="156" height="200" border="0"></b></span></font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="323" valign="middle" height="222" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">可測量</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">10</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">種熱電偶</font></span><span style='font-family:新細明體; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman";'><font color="#006600">與 </font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">Pt100 
+                        </font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">溫度</font></span></p>
+<p class=MsoNormal style='line-height:9.0pt;mso-line-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">資料蒐集達</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">4000
+data</font></span></p>
+
+<p class=MsoNormal style='line-height:9.0pt;mso-line-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆具統計分析功能適合品管</font></span></p>
+
+<p class=MsoNormal style='line-height:9.0pt;mso-line-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆準確度 
+                        </font></span><span
+style="font-size:12pt;"><font color="#006600">0.1</font></span><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">℃</font></span><span
+style="font-size:12pt;"><font color="#006600">(T/C)
+&amp;</font></span><span lang=EN-US style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">0.01</font></span><span style="font-family:新細明體; font-size:12pt; color:red; 
+ mso-bidi-font-size:12.0pt;"><font color="#006600">℃</font></span><span lang=EN-US style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">(Pt100)</font></span></p>
+
+<p class=MsoNormal style='line-height:9.0pt;mso-line-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆超高解析度</font></span><span
+style="font-size:12pt;"><font color="#006600">0.001</font></span><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">℃</font></span></p>
+
+                    </td>
+                    <td width="432" valign="middle" height="222" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p><font color="#006600"><span style="font-size:12pt;">&nbsp;</span></font></p>
+                        <p><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">測溫範圍：</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">-40 ~ 300</font></span><span lang=EN-US style="font-size:12pt;"><font color="#006600">℃</font></span></p>
+<p class=MsoNormal style='line-height:10.0pt;mso-line-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">反應時間 
+                        </font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">1</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">秒鐘</font></span></p>
+
+<p class=MsoNormal style='line-height:10.0pt;mso-line-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">測溫重現性 
+                        </font></span><span lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:
+ 12.0pt;"><font color="#006600">1</font></span><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:
+ 12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+ "Times New Roman";'><font color="#006600">℃</font></span><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman";'><font color="#006600">以內</font></span></p>
+
+<p class=MsoNormal style='line-height:10.0pt;mso-line-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">防水防震功能設計</font></span></p>
+
+<p class=MsoNormal style='line-height:10.0pt;mso-line-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">自動關機省電功能</font></span></p>
+
+                        <p class="MsoNormal" style="line-height:10pt;"><font color="#006600"><span style="font-size:12pt;">&nbsp;</span></font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="323" valign="middle" height="585" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p class="namo-sublist"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="images/nth_theme_business_classic_clover_bullet_s.gif" border="0" class="namo-bullet2"></b></span></font><span style='font-family:新細明體; font-size:14pt; color:black; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";mso-bidi-font-family:"Times New Roman";
+mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;
+mso-bidi-language:AR-SA'><font color="#006600" face="新細明體"><b>液槽式溫度校正爐 </b></font></span></p>
+                        <p class="namo-sublist"><span style='font-family:新細明體; font-size:14pt; color:black; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";mso-bidi-font-family:"Times New Roman";
+mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;
+mso-bidi-language:AR-SA'><font color="#006600" face="新細明體"><b>&nbsp;&nbsp;</b></font></span><span lang=EN-US style="font-family:'Times New Roman'; font-size:14pt; color:black; 
+mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+新細明體;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-TW;mso-bidi-language:AR-SA"><font color="#006600" face="新細明體"><b>MicroCal T200 Fluid</b></font></span></p>
+                        <p class="namo-sublist" align="center"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="MicroCal T200 Fluid.JPG" width="256" height="500" border="0"></b></span></font></p>
+                    </td>
+                    <td width="432" valign="middle" height="585" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p class="namo-sublist"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="images/nth_theme_business_classic_clover_bullet_s.gif" border="0" class="namo-bullet2"></b></span></font><span style='font-family:新細明體; font-size:14pt; color:black; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";mso-bidi-font-family:"Times New Roman";
+mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;
+mso-bidi-language:AR-SA'><font color="#006600" face="新細明體"><b>乾式溫度校正爐 </b></font></span></p>
+                        <p class="namo-sublist"><span style='font-family:新細明體; font-size:14pt; color:black; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";mso-bidi-font-family:"Times New Roman";
+mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;
+mso-bidi-language:AR-SA'><font color="#006600" face="新細明體"><b>&nbsp;&nbsp;</b></font></span><span lang=EN-US style="font-family:'Times New Roman'; font-size:14pt; color:black; 
+mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+新細明體;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-TW;mso-bidi-language:AR-SA"><font color="#006600" face="新細明體"><b>MicroCal T100/T500/T1100</b></font></span></p>
+                        <p class="namo-sublist" align="center"><span lang=EN-US style="font-family:'Times New Roman'; font-size:14pt; color:black; 
+mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+新細明體;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-TW;mso-bidi-language:AR-SA"><font color="#006600" face="新細明體"><b><img src="MicroCal T100 T500 T1100.jpg" width="234" height="500" border="0"></b></font></span></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="323" valign="middle" height="321" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p><span style="font-family:新細明體; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">溫度範圍：周溫</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600"> ~ 200</font></span><span lang=EN-US style="font-size:12pt;"><font color="#006600">℃</font></span></p>
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+line-height:10.0pt;mso-line-height-rule:exactly'><span style="font-family:新細明體; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">穩定度</font></span><span
+style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600"> </font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-hansi-font-family:
+"Times New Roman";'><font color="#006600">&plusmn;</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">0.03</font></span><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+ "Times New Roman";'><font color="#006600">℃</font></span></p>
+
+                        <p class="MsoNormal" style="text-align:justify; line-height:10pt;"><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+  "Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">準確度</font></span><span
+style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600"> </font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-hansi-font-family:
+  "Times New Roman";'><font color="#006600">&plusmn;</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">0.15</font></span><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+   "Times New Roman";'><font color="#006600">℃</font></span></p>
+                        <p class="MsoNormal" style="text-align:justify; line-height:10pt;"><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆具溫度開關測試功能</font></span></p>
+  <p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+  line-height:10.0pt;mso-line-height-rule:exactly;mso-element:frame;mso-element-frame-hspace:
+  9.0pt;mso-element-wrap:around;mso-element-anchor-vertical:page;mso-element-anchor-horizontal:
+  margin;mso-element-top:27.0pt;mso-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆可選用</font></span><span
+style="font-size:12pt;"><font color="#006600">TC</font></span><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">及</font></span><span
+style="font-size:12pt;"><font color="#006600">Pt100</font></span><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">輸入</font></span></p>
+<p class=MsoNormal style='line-height:10.0pt;mso-line-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆液槽溫度產生</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">適合現場使用</font></span></p>
+
+                    </td>
+                    <td width="432" valign="middle" height="321" style="border-width:1; border-color:black; border-style:solid;" align="center" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p class="MsoNormalTable" style="margin-left:10.4pt; border-style:none; border-collapse:collapse;"><font color="#006600">&nbsp;</font></p>
+
+
+                        <p class="MsoNormalTable" style="margin-left:10.4pt; border-style:none; border-collapse:collapse;"><font color="#006600"><img src="4F5.jpg" width="410" height="240" border="0"></font></p>
+                        <p class="MsoNormalTable" style="margin-left:10.4pt; border-style:none; border-collapse:collapse;"><font color="#006600">&nbsp;</font></p>
+                        <p><font color="#006600">&nbsp;</font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="323" valign="middle" height="244" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p class="namo-sublist"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="images/nth_theme_business_classic_clover_bullet_s.gif" border="0" class="namo-bullet2"></b></span></font><span style='font-family:新細明體; font-size:14pt; color:black; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";mso-bidi-font-family:"Times New Roman";
+mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;
+mso-bidi-language:AR-SA'><font color="#006600" face="新細明體"><b>乾式</b></font></span><span style='font-family:新細明體; font-size:14pt; 
+mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";
+mso-hansi-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman";
+mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;
+mso-bidi-language:AR-SA;mso-no-proof:yes'><font color="#006600" face="新細明體"><b>溫度校正爐</b></font></span><span lang=EN-US
+style="font-family:'Times New Roman'; font-size:14pt; mso-bidi-font-size:12.0pt;
+mso-fareast-font-family:新細明體;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-TW;mso-bidi-language:AR-SA;mso-no-proof:yes"><font color="#006600" face="新細明體"><b> MicroCal
+T350</b></font></span> 
+                        </p>
+                        <p class="namo-sublist" align="center"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="MicroCal T350.jpg" width="286" height="200" border="0"></b></span></font></p>
+                    </td>
+                    <td width="432" valign="middle" height="244" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p class="namo-sublist"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="images/nth_theme_business_classic_clover_bullet_s.gif" border="0" class="namo-bullet2"></b></span></font><span style='font-family:新細明體; font-size:14pt; color:black; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";mso-bidi-font-family:"Times New Roman";
+mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;
+mso-bidi-language:AR-SA'><font color="#006600" face="新細明體"><b>乾式</b></font></span><span style='font-family:新細明體; font-size:14pt; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";mso-bidi-font-family:"Times New Roman";mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;mso-bidi-language:AR-SA;
+mso-no-proof:yes'><font color="#006600" face="新細明體"><b>溫度校正爐</b></font></span><span lang=EN-US style="font-family:'Times New Roman'; font-size:14pt; 
+mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+新細明體;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;
+mso-bidi-language:AR-SA;mso-no-proof:yes"><font color="#006600" face="新細明體"><b> MicroCal T30</b></font></span></p>
+                        <p class="namo-sublist" align="center"><font color="#006600" face="新細明體"><span style="font-size:14pt;"><b><img src="MicroCal T30.jpg" width="222" height="200" border="0"></b></span></font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="323" valign="middle" height="189" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p><span style="font-family:新細明體; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">溫度範圍：周溫</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600"> ~ 350</font></span><span lang=EN-US style="font-size:12pt;"><font color="#006600">℃</font></span></p>
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+line-height:10.0pt;mso-line-height-rule:exactly'><span style="font-family:新細明體; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">穩定度</font></span><span
+style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600"> </font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-hansi-font-family:
+"Times New Roman";'><font color="#006600">&plusmn;</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">0.1</font></span><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+ "Times New Roman";'><font color="#006600">℃</font></span></p>
+
+                        <p class="MsoNormal" style="text-align:justify; line-height:10pt;"><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+  "Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">準確度</font></span><span
+style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600"> </font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-hansi-font-family:
+  "Times New Roman";'><font color="#006600">&plusmn;</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">0.4</font></span><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+   "Times New Roman";'><font color="#006600">℃</font></span></p>
+                        <p class="MsoNormal" style="line-height:10pt;"><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">適合現場使用</font></span></p>
+                    </td>
+                    <td width="432" valign="middle" height="189" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p><font color="#006600"><span style="font-size:12pt;">&nbsp;</span></font></p>
+                        <p><span style="font-family:新細明體; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">溫度範圍：周溫</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600"> ~ 300</font></span><span lang=EN-US style="font-size:12pt;"><font color="#006600">℃</font></span></p>
+<p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+line-height:10.0pt;mso-line-height-rule:exactly'><span style="font-family:新細明體; font-size:12pt; color:red; 
+mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">穩定度</font></span><span
+style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600"> </font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-hansi-font-family:
+"Times New Roman";'><font color="#006600">&plusmn;</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">0.5</font></span><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+ "Times New Roman";'><font color="#006600">℃</font></span></p>
+
+                        <p class="MsoNormal" style="text-align:justify; line-height:10pt;"><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+  "Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">準確度</font></span><span
+style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600"> </font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-hansi-font-family:
+  "Times New Roman";'><font color="#006600">&plusmn;</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">0.5</font></span><span style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+   "Times New Roman";'><font color="#006600">℃ </font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">(33 ~ 199</font></span><span lang=EN-US style="font-size:12pt;"><font color="#006600">℃</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">)</font></span></p>
+<p class=MsoNormal style='line-height:10.0pt;mso-line-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">適合現場使用</font></span></p>
+
+                        <p class="MsoNormal" style="line-height:10pt;"><font color="#006600"><span style="font-size:12pt;">&nbsp;</span></font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="323" valign="middle" height="544" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+                        <p class="namo-sublist"><font color="#006600"><span style="font-size:14pt;"><b><img src="images/nth_theme_business_classic_clover_bullet_s.gif" border="0" class="namo-bullet2"></b></span></font><span style='font-family:新細明體; font-size:14pt; mso-bidi-font-size:
+12.0pt;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
+"Times New Roman";mso-bidi-font-family:"Times New Roman";mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;mso-bidi-language:AR-SA;
+mso-no-proof:yes'><font color="#006600" face="新細明體"><b>多功能電錶校正器 </b></font></span><span lang=EN-US style="font-family:'Times New Roman'; font-size:14pt; 
+mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+新細明體;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;
+mso-bidi-language:AR-SA;mso-no-proof:yes"><font color="#006600" face="新細明體"><b>MMX3</b></font></span></p>
+                        <p class="namo-sublist" align="center"><span lang=EN-US style="font-family:'Times New Roman'; font-size:12pt; 
+mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+新細明體;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-TW;
+mso-bidi-language:AR-SA;mso-no-proof:yes"><font color="#006600"><img src="MMX3.jpg" width="297" height="500" border="0"></font></span></p>
+                    </td>
+                    <td width="432" valign="middle" height="544" style="border-width:1; border-color:black; border-style:solid;" namo_textbox="0,0,0,0,0,0,0,0,0,0">
+<p class=MsoNormal style='line-height:10.0pt;mso-line-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+"Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">頻率及脈波時間測量</font></span></p>
+
+  <p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+  line-height:10.0pt;mso-line-height-rule:exactly;mso-element:frame;mso-element-frame-hspace:
+  9.0pt;mso-element-wrap:around;mso-element-anchor-vertical:page;mso-element-anchor-horizontal:
+  margin;mso-element-top:27.0pt;mso-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+  "Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">模擬輸出</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">mA</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+  "Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">、</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">mV</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+  "Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">、</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">V</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+  "Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">、</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">Hz</font></span></p>
+  <p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+  line-height:10.0pt;mso-line-height-rule:exactly;mso-element:frame;mso-element-frame-hspace:
+  9.0pt;mso-element-wrap:around;mso-element-anchor-vertical:page;mso-element-anchor-horizontal:
+  margin;mso-element-top:27.0pt;mso-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+  "Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">測量輸入</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">mA</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+  "Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">、</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">mV</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+  "Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">、</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">V</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+  "Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">、</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">Hz</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+  "Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">、</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">Tc</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+  "Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">、</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-hansi-font-family:
+  "Times New Roman";'><font color="#006600">Ω</font></span></p>
+  <p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+  line-height:10.0pt;mso-line-height-rule:exactly;mso-element:frame;mso-element-frame-hspace:
+  9.0pt;mso-element-wrap:around;mso-element-anchor-vertical:page;mso-element-anchor-horizontal:
+  margin;mso-element-top:27.0pt;mso-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+  "Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">精度</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-hansi-font-family:
+  "Times New Roman";'><font color="#006600">&plusmn;</font></span><span lang=EN-US style="font-size:12pt; color:red; 
+  mso-bidi-font-size:12.0pt;"><font color="#006600">0.03%rdg</font></span></p>
+  <p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+  line-height:10.0pt;mso-line-height-rule:exactly;mso-element:frame;mso-element-frame-hspace:
+  9.0pt;mso-element-wrap:around;mso-element-anchor-vertical:page;mso-element-anchor-horizontal:
+  margin;mso-element-top:27.0pt;mso-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+  "Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">測量</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">AC
+  V&amp;A, DC V&amp;A </font></span></p>
+  <p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+  line-height:10.0pt;mso-line-height-rule:exactly;mso-element:frame;mso-element-frame-hspace:
+  9.0pt;mso-element-wrap:around;mso-element-anchor-vertical:page;mso-element-anchor-horizontal:
+  margin;mso-element-top:27.0pt;mso-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+  "Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">測量</font></span><span
+lang=EN-US style="font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">True
+  RMS (AC +DC) V&amp;A</font></span></p>
+  <p class=MsoNormal style='text-align:justify;text-justify:inter-ideograph;
+  line-height:10.0pt;mso-line-height-rule:exactly;mso-element:frame;mso-element-frame-hspace:
+  9.0pt;mso-element-wrap:around;mso-element-anchor-vertical:page;mso-element-anchor-horizontal:
+  margin;mso-element-top:27.0pt;mso-height-rule:exactly'><span
+style="font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;"><font color="#006600">◆</font></span><span
+  style='font-family:新細明體; font-size:12pt; color:red; mso-bidi-font-size:12.0pt;mso-ascii-font-family:
+  "Times New Roman";mso-hansi-font-family:"Times New Roman";'><font color="#006600">方波及脈波時間模擬</font></span></p>
+                    </td>
+                </tr>
+            </table>
+            <p align="center"><img src="images/nth_theme_business_classic_clover_hr.gif" border="0" class="namo-hr"></p>
+            <!--NAMO_NAVBAR_START U h C       -1 32 7 9 8 3 -->
+<div align="center">
+[<a href="product_3.html"  onmouseover="" onmouseout="">上一頁</a>][<a href="product.html"  onmouseover="" onmouseout="">向上</a>][<a href="product_5.html"  onmouseover="" onmouseout="">下一頁</a>]</div>
+<!--NAMO_NAVBAR_END-->
+            <hr>
+            <p align="center"><font size="2">著作權(c) 2008 耕紋貿易股份有限公司。保留所有權利。<br></font><a href="mailto: conwencf@ms19.hinet.net"><font size="2"> conwencf@ms19.hinet.net</font></a></p>
+        </td>
+    </tr>
+</table>
+<p>　</p>
+</body>
+
+</html>

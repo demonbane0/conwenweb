@@ -1,0 +1,496 @@
+
+<html>
+
+<head>
+<meta http-equiv="Page-Enter" content="revealTrans(Duration=3,Transition=23)">
+<meta http-equiv="content-type" content="text/html; charset=big5">
+<title></title>
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="namo-theme" content="Theme\Business_Classic\Clover">
+<style>
+<!--css info(editable)-->
+body { color:rgb(128,128,128); font-family:細明體;}
+th { color:rgb(128,128,128); font-family:細明體;}
+td { color:rgb(128,128,128); font-family:細明體;}
+h1 { color:rgb(0,128,0); font-size:12pt; font-family:細明體;}
+h2 { color:rgb(0,128,0); font-size:12pt; font-family:細明體;}
+p.namo-list { color:rgb(0,0,0); font-size:12pt; font-family:細明體;}
+p.namo-sublist { color:rgb(0,0,0); font-size:10pt; font-family:細明體;}
+a:link {}
+a:visited {}
+a:active {}
+<style>
+A:visited{TEXT-DECORATION: none}
+A:active{TEXT-DECORATION: none}
+A:hover { COLOR: #52b5fb; TEXT-DECORATION: none }
+A:link{text-decoration: none;}
+.t{LINE-HEIGHT: 1.4}
+</style>
+<!--end css info-->
+<!--
+body { color:rgb(245,245,245); font-family:細明體;}
+th { color:rgb(245,245,245); font-family:細明體;}
+td { color:rgb(245,245,245); font-family:細明體;}
+h1 { color:rgb(224,216,182); font-size:12pt; font-family:細明體;}
+h2 { color:rgb(233,219,203); font-size:12pt; font-family:細明體;}
+p.namo-list { color:rgb(243,240,211); font-size:12pt; font-family:細明體;}
+p.namo-sublist { color:rgb(234,217,176); font-size:10pt; font-family:細明體;}
+-->
+</style>
+<!--css info(editable)-->
+<style>
+A:visited{TEXT-DECORATION: none}
+A:active{TEXT-DECORATION: none}
+A:hover { COLOR: #52b5fb; TEXT-DECORATION: none }
+A:link{text-decoration: none;}
+.t{LINE-HEIGHT: 1.4}
+</style>
+<!--end css info-->
+
+<base target="_parent">
+<script language="JavaScript">
+<!--
+function namosw_scrollstatus()
+{
+  var str = '';
+  if (namosw_scrollstatus.arguments.length > 0) {
+    var i;
+    for (str = '', i = 0; i < 100; i++)
+      str += ' ';
+    for (i = 0; i < namosw_scrollstatus.arguments.length; i++)
+      str += namosw_scrollstatus.arguments[i] + ' ';
+    document.namosw_scrollstatus = str;
+  } else {
+    var src_str = document.namosw_scrollstatus;
+    str  = src_str.substring(1, src_str.length);
+    str += src_str.substring(0, 1);
+    document.namosw_scrollstatus = str;
+  }
+  window.status = str;
+  setTimeout('namosw_scrollstatus()', 100);
+}
+
+function namosw_fade_background(r1, g1, b1, r2, g2, b2, maxstep) 
+{
+  var i, r, g, b;
+  for (i = 0; i <= maxstep; i++) {
+    r = Math.floor((r1*(maxstep-i) + r2*i)/maxstep);
+    g = Math.floor((g1*(maxstep-i) + g2*i)/maxstep);
+    b = Math.floor((b1*(maxstep-i) + b2*i)/maxstep);
+    namosw_fade_setbgcolor(r, g, b)
+  }
+}
+
+function namosw_fade_setbgcolor() 
+{
+  var hexchars = '0123456789abcdef';
+  var i;
+  var color_str = '#';
+  var args = namosw_fade_setbgcolor.arguments;
+  if (args.length != 3)
+    return;
+  for (i = 0; i < 3; i++) {
+    color_str += hexchars.charAt(Math.floor(args[i]/16));
+    color_str += hexchars.charAt(args[i]%16);
+  }
+  document.bgColor = color_str;
+}
+
+function namosw_init_marquee(layername1, layername2, dir, scrollamount, scrolldelay, behavior, loop, cliplen, length, height) 
+{
+  var layer1, layer2;
+
+  if (layername1 == '' || layername2 == '')
+    return;
+  if (document.all) {
+    layer1 = document.all[layername1];
+    if (!layer1) return;
+    layer2 = document.all[layername2];
+
+    if (dir == 'l' || dir == 'r') {
+      layer1.style.clip = 'rect(auto ' + cliplen + ' auto 0)';
+      layer1.style.pixelWidth = cliplen;
+      if (behavior == 's' || behavior == 'l')
+        layer2.style.pixelLeft = (dir == 'l') ? cliplen : -length;
+      else
+        layer2.style.pixelLeft = (dir == 'l') ? Math.max(0, -length+cliplen) : Math.min(0, -length+cliplen);
+    } else if (dir == 't' || dir == 'b') {
+      layer1.style.clip = 'rect(0 auto ' + cliplen + ' auto)';
+      layer1.style.pixelHeight = cliplen;
+      if (behavior == 's' || behavior == 'l')
+        layer2.style.pixelTop = (dir == 't') ? cliplen : -length;
+      else
+        layer2.style.pixelTop = (dir == 't') ? Math.max(0, -length+cliplen) : Math.min(0, -length+cliplen);
+    }
+  } else {
+    layer1 = document.layers[layername1];
+    if (!layer1) return;
+    layer2 = document.layers[layername1].document.layers[layername2];
+
+    if (dir == 'l' || dir == 'r') {    
+      layer1.clip.width  = cliplen;
+      layer1.clip.height = height;
+      if (behavior == 's' || behavior == 'l')
+        layer2.left = (dir == 'l') ? cliplen : -length;
+      else
+        layer2.left = (dir == 'l') ? Math.max(0, -length+cliplen) : Math.min(0, -length+cliplen);
+    } else if (dir == 't' || dir == 'b') {
+      layer1.clip.height = cliplen;
+      if (behavior == 's' || behavior == 'l')
+        layer2.top = (dir == 't') ? cliplen : -length;
+      else
+        layer2.top = (dir == 't') ? Math.max(0, -length+cliplen) : Math.min(0, -length+cliplen);
+    }
+  }
+
+  layer1.m_layer    = layer2;
+  layer1.m_dir      = dir;
+  layer1.m_amount   = scrollamount;
+  layer1.m_delay    = scrolldelay;
+  layer1.m_behavior = behavior;
+  layer1.m_loop     = loop;
+  layer1.m_cliplen  = cliplen;
+  layer1.m_length   = length;
+
+  if (layer1.m_behavior == 'l') {
+    if (layer1.m_loop == -1)
+      layer1.m_loop = 1;
+  }
+
+  layer1.m_interval = setInterval("namosw_marquee_scroll('" + layername1 + "');", scrolldelay);
+}
+
+function namosw_marquee_scroll(layername) 
+{
+// local function
+// ------------------------
+function get_left(l)
+{
+  return (navigator.appName.indexOf('Netscape', 0) != -1) ? l.left : l.style.pixelLeft;
+}
+
+function set_left(l, value)
+{
+  if (navigator.appName.indexOf('Netscape', 0) != -1) 
+    l.left = value;
+  else
+    l.style.pixelLeft = value;
+}
+
+function get_top(l)
+{
+  return (navigator.appName.indexOf('Netscape', 0) != -1) ? l.top : l.style.pixelTop;
+}
+
+function set_top(l, value)
+{
+  if (navigator.appName.indexOf('Netscape', 0) != -1) 
+    l.top = value;
+  else
+    l.style.pixelTop = value;
+}
+// ------------------------
+
+  var layer;
+  var layer2;
+  if (document.all) {
+    layer = document.all[layername];
+  } else {
+    layer = document.layers[layername];
+  }
+  layer2 = layer.m_layer;
+
+  if (layer.m_behavior == 's') {			// scroll
+    if (layer.m_dir == 'l') {
+      if (get_left(layer2) >= -layer.m_length) {
+        set_left(layer2, get_left(layer2)-layer.m_amount);
+      } else {
+        if (layer.m_loop > 0) layer.m_loop--;
+        set_left(layer2, layer.m_cliplen);
+      }
+    } else if (layer.m_dir == 'r') {
+      if (get_left(layer2) < layer.m_cliplen) {
+        set_left(layer2, get_left(layer2) + layer.m_amount);
+      } else {
+        if (layer.m_loop > 0) layer.m_loop--;
+        set_left(layer2, -layer.m_length);
+      }
+    } else if (layer.m_dir == 't') {
+      if (get_top(layer2) >= -layer.m_length) {
+        set_top(layer2, get_top(layer2) - layer.m_amount);
+      } else {
+        if (layer.m_loop > 0) layer.m_loop--;
+        set_top(layer2, layer.m_cliplen);
+      }
+    } else if (layer.m_dir == 'b') {
+      if (get_top(layer2) < layer.m_cliplen) {
+        set_top(layer2, get_top(layer2) + layer.m_amount);
+      } else {
+        if (layer.m_loop > 0) layer.m_loop--;
+        set_top(layer2, -layer.m_length);
+      }
+    }
+    if (layer.m_loop == 0)
+      clearInterval(layer.m_interval);
+  } else if (layer.m_behavior == 'a') {			// alternate
+    if (layer.m_dir == 'l') {
+      if (get_left(layer2) > Math.min(0, -layer.m_length+layer.m_cliplen)) {
+        set_left(layer2, get_left(layer2)-layer.m_amount);
+      } else {
+        if (layer.m_loop > 0) layer.m_loop--;
+        layer.m_dir = 'r';
+      }
+    } else if (layer.m_dir == 'r') {
+      if (get_left(layer2) < Math.max(0, -layer.m_length+layer.m_cliplen)) {
+        set_left(layer2, get_left(layer2)+layer.m_amount);
+      } else {
+        if (layer.m_loop > 0) layer.m_loop--;
+	layer.m_dir = 'l';
+      }
+    } else if (layer.m_dir == 't') {
+      if (get_top(layer2) > Math.min(0, -layer.m_length+layer.m_cliplen)) {
+        set_top(layer2, get_top(layer2) - layer.m_amount);
+      } else {
+        if (layer.m_loop > 0) layer.m_loop--;
+        layer.m_dir = 'b';
+      }
+    } else if (layer.m_dir == 'b') {
+      if (get_top(layer2) < Math.max(0, -layer.m_length+layer.m_cliplen)) {
+        set_top(layer2, get_top(layer2)+layer.m_amount);
+      } else {
+        if (layer.m_loop > 0) layer.m_loop--;
+	layer.m_dir = 't';
+      }
+    }
+  } else if (layer.m_behavior == 'l') {			// slide
+    if (layer.m_dir == 'l') {
+      if (get_left(layer2) > 0) {
+        set_left(layer2, Math.max(0, get_left(layer2)-layer.m_amount));
+      } else {
+        if (layer.m_loop > 0) layer.m_loop--;
+	set_left(layer2, layer.m_cliplen);
+      }
+    } else if (layer.m_dir == 'r') {
+      if (get_left(layer2)+layer.m_length < layer.m_cliplen) {
+        set_left(layer2, Math.min(get_left(layer2)+layer.m_amount, layer.m_cliplen-layer.m_length));
+      } else {
+        if (layer.m_loop > 0) layer.m_loop--;
+        set_left(layer2, -layer.m_length);
+      }
+    } else if (layer.m_dir == 't') {
+      if (get_top(layer2) > 0) {
+        set_top(layer2, Math.max(0, get_top(layer2) - layer.m_amount));
+      } else {
+        if (layer.m_loop > 0) layer.m_loop--;
+        set_top(layer2, layer.m_cliplen);
+      }
+    } else if (layer.m_dir == 'b') {
+      if (get_top(layer2)+layer.m_length < layer.m_cliplen) {
+        set_top(layer2, Math.min(get_top(layer2)+layer.m_amount, layer.m_cliplen-layer.m_length));
+      } else {
+        if (layer.m_loop > 0) layer.m_loop--;
+        set_top(layer2, -layer.m_length);
+      }
+    }
+    if (layer.m_loop == 0)
+      clearInterval(layer.m_interval);
+  }
+}
+
+function namosw_rotate_banner_go() 
+{
+  var targetstr = document._rotatetargets[document._rotate_no];
+  if (targetstr == 'blank') {
+    window.open(document._rotatelinks[document._rotate_no], 'win1');
+  } else {
+    var frameobj;
+    if (targetstr == '') targetstr = 'self';
+    if ((frameobj = eval(targetstr)) != null)
+      frameobj.location = document._rotatelinks[document._rotate_no];
+  }
+}
+
+function namosw_rotate_banner()
+{
+  if (!document._rotateimages) {
+    document._rotateimages  = new Array();
+    document._rotatelinks   = new Array();
+    document._rotatetargets = new Array();
+
+    document._rotate_name = 'image1';
+    document._rotate_interval = 3000;
+    document._rotate_itemnum = 9;
+    document._rotateimages[document._rotateimages.length] = "6310.jpg";
+    document._rotatelinks[document._rotatelinks.length] = "http://conwencf.myweb.hinet.net/product_9.html";
+    document._rotatetargets[document._rotatetargets.length] = "blank";
+    document._rotateimages[document._rotateimages.length] = "4200.JPG";
+    document._rotatelinks[document._rotatelinks.length] = "http://conwencf.myweb.hinet.net/product_7.html";
+    document._rotatetargets[document._rotatetargets.length] = "blank";
+    document._rotateimages[document._rotateimages.length] = "DO8000_1.jpg";
+    document._rotatelinks[document._rotatelinks.length] = "http://conwencf.myweb.hinet.net/product_8.html";
+    document._rotatetargets[document._rotatetargets.length] = "blank";
+    document._rotateimages[document._rotateimages.length] = "2000.JPG";
+    document._rotatelinks[document._rotatelinks.length] = "http://conwencf.myweb.hinet.net/product_3.html";
+    document._rotatetargets[document._rotatetargets.length] = "blank";
+    document._rotateimages[document._rotateimages.length] = "2300R.jpg";
+    document._rotatelinks[document._rotatelinks.length] = "http://conwencf.myweb.hinet.net/product_6.html";
+    document._rotatetargets[document._rotatetargets.length] = "blank";
+    document._rotateimages[document._rotateimages.length] = "EVA2.gif";
+    document._rotatelinks[document._rotatelinks.length] = "http://conwencf.myweb.hinet.net/news.html";
+    document._rotatetargets[document._rotatetargets.length] = "blank";
+    document._rotateimages[document._rotateimages.length] = "GLOVE.JPG";
+    document._rotatelinks[document._rotatelinks.length] = "http://conwencf.myweb.hinet.net/product_9.html";
+    document._rotatetargets[document._rotatetargets.length] = "blank";
+    document._rotateimages[document._rotateimages.length] = "MicroCal 20 DPC.jpg";
+    document._rotatelinks[document._rotatelinks.length] = "http://conwencf.myweb.hinet.net/product_4.html";
+    document._rotatetargets[document._rotatetargets.length] = "blank";
+    document._rotateimages[document._rotateimages.length] = "IRtec Series.jpg";
+    document._rotatelinks[document._rotatelinks.length] = "http://conwencf.myweb.hinet.net/product_4.html";
+    document._rotatetargets[document._rotatetargets.length] = "blank";
+    setInterval("namosw_rotate_banner()", document._rotate_interval);
+    document._rotate_no = -1;
+  }
+
+  document._rotate_no++;
+  if (document._rotate_no == document._rotateimages.length)
+    document._rotate_no = 0;
+
+  document.images[document._rotate_name].src = document._rotateimages[document._rotate_no];
+}
+
+// -->
+</script>
+<script language="JavaScript">
+<!--
+function na_change_img_src(name, nsdoc, rpath, preload)
+{ 
+  var img = eval((navigator.appName.indexOf('Netscape', 0) != -1) ? nsdoc+'.'+name : 'document.all.'+name);
+  if (name == '')
+    return;
+  if (img) {
+    img.altsrc = img.src;
+    img.src    = rpath;
+  } 
+}
+
+function na_preload_img()
+{ 
+  var img_list = na_preload_img.arguments;
+  if (document.preloadlist == null) 
+    document.preloadlist = new Array();
+  var top = document.preloadlist.length;
+  for (var i=0; i < img_list.length; i++) {
+    document.preloadlist[top+i] = new Image;
+    document.preloadlist[top+i].src = img_list[i+1];
+  } 
+}
+
+function na_restore_img_src(name, nsdoc)
+{
+  var img = eval((navigator.appName.indexOf('Netscape', 0) != -1) ? nsdoc+'.'+name : 'document.all.'+name);
+  if (name == '')
+    return;
+  if (img && img.altsrc) {
+    img.src    = img.altsrc;
+    img.altsrc = null;
+  } 
+}
+
+// -->
+</script>
+</head>
+<body  background="01_gif.gif" bgcolor="#FFFFFF" text="gray" link="#82E606" vlink="#808080" alink="#808000" OnLoad=" namosw_rotate_banner(); namosw_scrollstatus('☆耕紋貿易股份有限公司★', '＊專業代理電機電子測試儀器＊', '隨時歡迎您的蒞臨～！'); namosw_fade_background(0, 0, 0, 255, 255, 255, 1); namosw_init_marquee('跑馬燈', 'marqueechildlayer0', 'l', 7, 100, 's', -1, 580, 989, 26);na_preload_img(false, 'nav/nav_32_company_ahr.gif', 'nav/nav_32_product_ahr.gif', 'nav/nav_32_news_ahr.gif', 'nav/nav_32_customer_ahr.gif', 'nav/nav_32_contact_ahr.gif');">
+<table cellpadding="0" cellspacing="0" width="810">
+    <tr>
+        <td width="810" height="150">
+            <p align="center"><b><font color="#009900"><img src="welcome.gif" width="478" height="73" border="0"></font></b>            
+            <p align="center"><font face="文鼎中黑"><b>
+			<a href="javascript:window.external.AddFavorite('http://網址','耕紋貿易')">
+			<font color="#FF0000">【加入我的最愛】</font></a></b></font></p>
+            <p align="center">　</p>
+</td>
+    </tr>
+    <tr>
+        <td width="810" height="40"><!--NAMO_NAVBAR_START A H C h     2 32 7 9 8 41 -->
+            <p><!--NAMO_NAVBAR_END--><!--NAMO_NAVBAR_START A H C       175 32 7 9 8 3 -->
+<div align="center">
+<a href="company.html"  
+onmouseover="na_change_img_src('nav_main_AH0', 'document', 'nav/nav_32_company_ahr.gif', true);"
+onmouseout="na_restore_img_src('nav_main_AH0', 'document');"><img src="nav/nav_32_company_ah.gif" name="nav_main_AH0" 
+border="0" class="namo-button2" alt="公司簡介" align="texttop"></a><a href="product.html"  
+onmouseover="na_change_img_src('nav_main_AH1', 'document', 'nav/nav_32_product_ahr.gif', true);"
+onmouseout="na_restore_img_src('nav_main_AH1', 'document');"><img src="nav/nav_32_product_ah.gif" name="nav_main_AH1" 
+border="0" class="namo-button2" alt="產品內容" align="texttop"></a><a href="news.html"  
+onmouseover="na_change_img_src('nav_main_AH2', 'document', 'nav/nav_32_news_ahr.gif', true);"
+onmouseout="na_restore_img_src('nav_main_AH2', 'document');"><img src="nav/nav_32_news_ah.gif" name="nav_main_AH2" 
+border="0" class="namo-button2" alt="最新消息" align="texttop"></a><a href="customer.html"  
+onmouseover="na_change_img_src('nav_main_AH3', 'document', 'nav/nav_32_customer_ahr.gif', true);"
+onmouseout="na_restore_img_src('nav_main_AH3', 'document');"><img src="nav/nav_32_customer_ah.gif" name="nav_main_AH3" 
+border="0" class="namo-button2" alt="代理廠牌" align="texttop"></a><a href="contact.html"  
+onmouseover="na_change_img_src('nav_main_AH4', 'document', 'nav/nav_32_contact_ahr.gif', true);"
+onmouseout="na_restore_img_src('nav_main_AH4', 'document');"><img src="nav/nav_32_contact_ah.gif" name="nav_main_AH4" 
+border="0" class="namo-button2" alt="連絡我們" align="texttop"></a></div>
+<!--NAMO_NAVBAR_END-->
+            <p align="center">　</p>
+
+            <hr width="820" align="right" color="#663300"></td>
+    </tr>
+    <tr>
+        <td width="810" height="769">
+            <form name="時間">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<a href="javascript:namosw_rotate_banner_go()" target="_self"><img src="6310.jpg" width="248" height="228" border="0" name="image1"></a></p>
+			<p>　</p>
+            </form>
+            <div id="跑馬燈" style="background-color:rgb(102,153,0); background-image:url('images/nth_theme_home_and_kids_ivy_hr.gif'); width:989px; height:26px; position:absolute; left:121px; top:294px; z-index:1; layer-background-color:rgb(102,153,0); ">
+                <div id="marqueechildlayer0" style="position:absolute; left:0; top:0; width:989; height:26;" namo_marquee>
+                    <p><font color="white" face="文鼎中圓"><span style="font-size:20pt;">如有需要型錄或是詢價，歡迎您來電或E-MAIL查詢～！我們很樂意為您服務！</span></font></p>
+                </div>
+                </div><p align="center"><b><font color="#82E606">《</font><a href="newfile.html">網站導覽</a><font color="#82E606">》</font></b></p>
+            <table align="center" cellpadding="0" cellspacing="0" width="700">
+                <tr>
+                    <td width="700">
+<p class="namo-sublist"><font color="#0000FF"><span style="font-size:18pt;"><b>&nbsp;</b></span></font><span style="font-size:18pt;"><font face="標楷體" color="#0000FF"><b> <img src="images/nth_theme_business_classic_clover_bullet_s.gif" border="0" class="namo-bullet2"> 
+                        </b></font></span><font face="標楷體" color="#0000FF">
+						<span style="font-size:18pt;"><b>專業代理數家知名廠牌。</b></span></font></p>
+                        <p class="namo-sublist"><span style="font-size:18pt;">
+						<font face="標楷體" color="#0000FF"><b>&nbsp; <img src="images/nth_theme_business_classic_clover_bullet_s.gif" border="0" class="namo-bullet2"> 
+                        </b></font></span><font face="標楷體" color="#0000FF"><span style="font-size:18pt;"><b>代理產品種類繁多，提供各種應用需求。</b></span></font></p>
+                        <p class="namo-sublist"><span style="font-size:18pt;">
+						<font face="標楷體" color="#0000FF"><b>&nbsp; <img src="images/nth_theme_business_classic_clover_bullet_s.gif" border="0" class="namo-bullet2"> 
+                        </b></font></span><font face="標楷體" color="#0000FF"><span style="font-size:18pt;"><b>合理的價格，專業的服務。</b></span></font></p>
+                        <p class="namo-sublist"><span style="font-size:18pt;">
+						<font face="標楷體" color="#0000FF"><b>&nbsp; <img src="images/nth_theme_business_classic_clover_bullet_s.gif" border="0" class="namo-bullet2"> 
+                        </b></font></span><font face="標楷體" color="#0000FF"><span style="font-size:18pt;"><b>北</b></span><span style="font-size:14pt;"><b>、</b></span><span style="font-size:18pt;"><b>中</b></span><span style="font-size:14pt;"><b>、</b></span><span style="font-size:18pt;"><b>南皆設有服務據點</b></span><span style="font-size:16pt;"><b>，</b></span><span style="font-size:18pt;"><b>能為您作即時的服務</b></span><span style="font-size:16pt;"><b>。</b></span></font></p>
+<P style="line-height:1; margin-top:-15px;"><span style="font-size:18pt;">
+<font color="#0000FF"><b>&nbsp;</b></font></span></P>                    </td>
+                </tr>
+            </table>
+            <p align="center"><img src="images/nth_theme_business_classic_clover_hr.gif" border="0" class="namo-hr"></p>
+<font face="文鼎中圓"><!--NAMO_NAVBAR_START A H C       175 32 7 9 8 3 --></font>
+<div align="center">
+<font face="文鼎中圓"><a href="company.html"  
+onmouseover="na_change_img_src('nav_main_AH0', 'document', 'nav/nav_32_company_ahr.gif', true);"
+onmouseout="na_restore_img_src('nav_main_AH0', 'document');"><img src="nav/nav_32_company_ah.gif" name="nav_main_AH0" 
+border="0" class="namo-button2" alt="公司簡介" align="texttop"></a><a href="product.html"  
+onmouseover="na_change_img_src('nav_main_AH1', 'document', 'nav/nav_32_product_ahr.gif', true);"
+onmouseout="na_restore_img_src('nav_main_AH1', 'document');"><img src="nav/nav_32_product_ah.gif" name="nav_main_AH1" 
+border="0" class="namo-button2" alt="產品內容" align="texttop"></a><a href="news.html"  
+onmouseover="na_change_img_src('nav_main_AH2', 'document', 'nav/nav_32_news_ahr.gif', true);"
+onmouseout="na_restore_img_src('nav_main_AH2', 'document');"><img src="nav/nav_32_news_ah.gif" name="nav_main_AH2" 
+border="0" class="namo-button2" alt="最新消息" align="texttop"></a><a href="customer.html"  
+onmouseover="na_change_img_src('nav_main_AH3', 'document', 'nav/nav_32_customer_ahr.gif', true);"
+onmouseout="na_restore_img_src('nav_main_AH3', 'document');"><img src="nav/nav_32_customer_ah.gif" name="nav_main_AH3" 
+border="0" class="namo-button2" alt="代理廠牌" align="texttop"></a><a href="contact.html"  
+onmouseover="na_change_img_src('nav_main_AH4', 'document', 'nav/nav_32_contact_ahr.gif', true);"
+onmouseout="na_restore_img_src('nav_main_AH4', 'document');"><img src="nav/nav_32_contact_ah.gif" name="nav_main_AH4" 
+border="0" class="namo-button2" alt="連絡我們" align="texttop"></a></font></div>
+<font face="文鼎中圓"><!--NAMO_NAVBAR_END--></font>
+            <hr width="750">            <p align="center"><font size="2">著作權(c) 2008 耕紋貿易股份有限公司。保留所有權利。<br></font><a href="mailto: conwencf@ms19.hinet.net"><font size="2"> conwencf@ms19.hinet.net</font></a></p>
+        </td>
+    </tr>
+</table>
+<p align="center">
+　</body>
+
+</html>
