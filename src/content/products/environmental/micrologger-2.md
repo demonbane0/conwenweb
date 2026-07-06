@@ -2,6 +2,7 @@
 title: "資料蒐集器"
 model: Micrologger 2
 category: environmental
+brand: "EUROTRON"
 image: /images/products/micrologger-2.jpg
 features:
   - "雙通道資料蒐集，測量輸入 mV 及 12 種熱電偶"

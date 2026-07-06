@@ -2,6 +2,7 @@
 title: "單相變壓器匝比測試器"
 model: "TR Jr"
 category: "high-voltage"
+brand: "Raytech"
 image: "/images/products/tr-jr.jpg"
 features:
   - "全自動連續操作"

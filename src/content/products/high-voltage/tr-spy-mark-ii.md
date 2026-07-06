@@ -2,6 +2,7 @@
 title: "三相變壓器匝比測試器"
 model: "TR Spy Mark II"
 category: "high-voltage"
+brand: "Raytech"
 image: "/images/products/tr-spy-mark-ii.jpg"
 features:
   - "全自動電壓比、匝數比、勵磁電流及相位移量測"

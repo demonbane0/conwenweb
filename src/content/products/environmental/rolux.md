@@ -2,6 +2,7 @@
 title: "閃頻測速儀"
 model: Rolux
 category: environmental
+brand: "RHEIN TACHO"
 image: /images/products/rolux.jpg
 features:
   - "轉速測量範圍 30 ~ 12,500 FPM"

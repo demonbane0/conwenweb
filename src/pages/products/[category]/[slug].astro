@@ -43,9 +43,28 @@ const productPath = (id: string) => {
 
 const productSearchText = (item: (typeof relatedProducts)[number]) =>
   `${item.data.model} ${item.data.title} ${item.data.brand ?? ""}`.toLowerCase();
+
+const brandName = product.data.brand?.trim();
+const pageTitle = [brandName, product.data.model, product.data.title].filter(Boolean).join(" ");
+const pageDescription = [
+  `${pageTitle}。`,
+  product.data.features[0] ? `${product.data.features[0]}。` : "",
+  `耕紋貿易專業代理測試測量儀器，北中南三據點提供選型報價與維修保固服務。`,
+].join("");
+
+const jsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: `${product.data.model} ${product.data.title}`,
+  model: product.data.model,
+  ...(brandName ? { brand: { "@type": "Brand", name: brandName } } : {}),
+  image: new URL(withBase(product.data.image), Astro.site).href,
+  description: pageDescription,
+  ...(category ? { category: category.name } : {}),
+});
 ---
 
-<Layout title={`${product.data.model} ${product.data.title}`}>
+<Layout title={pageTitle} description={pageDescription}>
   <section class="section">
     <div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -88,7 +107,7 @@ const productSearchText = (item: (typeof relatedProducts)[number]) =>
         </button>
 
         <div class="card product-detail__info">
-          <p class="eyebrow">Product</p>
+          <p class="eyebrow">{brandName ?? "Product"}</p>
           <h1>{product.data.title}</h1>
           <dl class="product-meta">
             <div>
@@ -141,6 +160,8 @@ const productSearchText = (item: (typeof relatedProducts)[number]) =>
           </div>
         </div>
       </article>
+
+      <script type="application/ld+json" set:html={jsonLd} is:inline />
 
       <dialog class="lightbox" data-lightbox aria-label={`${product.data.model} ${product.data.title} 大圖檢視`}>
         <button class="lightbox__close" type="button" data-lightbox-close aria-label="關閉大圖">

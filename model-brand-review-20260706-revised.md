@@ -136,6 +136,24 @@
 - `3000`：同名撞型號，需看產品名稱或圖片。
 
 ---
+## 4.1 人工確認結果
+- `4049`：APLAB
+- `PALM T2`：Elcotronic 
+- `SV-511`：Nippon Static
+ - `2000 系列`RHEINTACHO Rotaro 系列數位手持式轉速計
+ 、`8400`：Lucas Microtach 8400
+ - `25H` STB 
+DHH: Sibille Fameca Electric (SFE) 生產的 TAG8000 型數位核相系統
+`MT186` :Motech MT 186
+`5200`: PAN-GLOBE 5200 
+`2020E`:HT Instruments 生產的 EnergyTest 2020E 
+`GAT-I/II`: YOTSUGI 
+`GLOVE`:YOTSUGI 
+`GUM`:YOTSUGI
+`SJBOOT`:YOTSUGI
+`SJGLOVE`:YOTSUGI
+`5080`:HT Italia Genius 5080 
+`3000`:Isotech Cropico 3000
 
 ## 5. 回填建議
 

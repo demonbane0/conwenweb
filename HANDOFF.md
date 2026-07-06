@@ -60,8 +60,13 @@
   5. **修一個舊 bug**：`.product-card` 的 `display:grid` 蓋掉 `hidden` 屬性，
      搜尋/篩選只更新計數、卡片沒真的隱藏 → global.css 加 `[hidden]{display:none!important}`
   6. **產品頁燈箱**：詳細頁點產品圖開大圖（原生 `<dialog>`，Esc/點背景/按鈕可關，
-     放大上限原圖 2 倍防模糊；圖片容器右下有「點圖放大」提示）。
-     另產出 `BRAND-FILLED.md`（174 項逐項清單）供業主用 GPT-5 驗證廠牌中
+     放大上限原圖 2 倍防模糊；圖片容器右下有「點圖放大」提示）
+  7. **GPT-5 廠牌查核已回填**（依 `model-brand-review-20260706-revised.md`）：
+     +30 填、3 修正、2 清空 → **202/231 已填**；剩 29 項需舊型錄/實機照片
+     （查核檔第 1、4 節）。BRAND-FILLED.md 已更新為 202 項
+  8. **產品頁 SEO**：`<title>` 與 meta description 改為「廠牌 型號 品名」格式、
+     每頁加 JSON-LD Product 結構化資料（brand/model/image 絕對網址）、
+     眉標顯示廠牌。無廠牌產品自動降級不出現 undefined
 
 ## 網站已上線：https://demonbane0.github.io/conwenweb/
 
