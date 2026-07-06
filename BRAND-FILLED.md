@@ -1,4 +1,4 @@
-# 已自動填入廠牌的產品清單（共 229 項）
+# 已自動填入廠牌的產品清單（共 231 項）
 
 > 供外部驗證用：以下廠牌為依型號系列與代理產品線**自動推斷**的結果。
 > 請逐項檢查「廠牌」是否正確（該型號是否確為該廠牌之產品；產品皆為 2008 年前後在售機種）。
@@ -176,62 +176,64 @@
 | 168 | LEM | 現場測試用儀器 | Unilap ISO5KV | 數字式高壓高阻計 | src/content/products/field-testing/unilap-iso5kv.md |
 | 169 | LINE SEIKI | 環境相關測量儀器 | TC-700 | 數字式溫度計 | src/content/products/environmental/tc-700.md |
 | 170 | Lucas | 環境相關測量儀器 | 8400 | 光電轉速計 | src/content/products/environmental/8400.md |
-| 171 | Motech | 高壓維護測試 | MT186 | 數據傳輸測試器 | src/content/products/high-voltage/mt186.md |
-| 172 | Multi 萬用 | 鉤式電錶類儀器 | M-600 | 交直流洩漏電流計 | src/content/products/clamp-meters/m-600.md |
-| 173 | Multi 萬用 | 鉤式電錶類儀器 | Multi 230 | AC/DC 數字式鉤錶 | src/content/products/clamp-meters/multi-230.md |
-| 174 | Multi 萬用 | 鉤式電錶類儀器 | Multi 240 | AC/DC 數字式鉤錶 | src/content/products/clamp-meters/multi-240.md |
-| 175 | Multi 萬用 | 現場測試用儀器 | MCD-007 | 口袋型三用電錶 | src/content/products/field-testing/mcd-007.md |
-| 176 | Multi 萬用 | 高壓維護測試 | HCL-9000S | 高壓電流計 | src/content/products/high-voltage/hcl-9000s.md |
-| 177 | NGI | 電阻校正及記錄器 | SERVOGOR 102 | 筆式記錄器 | src/content/products/resistance-recorders/servogor-102.md |
-| 178 | Nippon Static | 環境相關測量儀器 | SV-511 | 靜電高壓計 | src/content/products/environmental/sv-511.md |
-| 179 | NISHIZAWA | 鉤式電錶類儀器 | NISHIZAWA 5127 | 指針式鉤錶 | src/content/products/clamp-meters/nishizawa-5127.md |
-| 180 | NISHIZAWA | 現場測試用儀器 | 3001-02 | 指針式三用電錶 | src/content/products/field-testing/3001-02.md |
-| 181 | NISHIZAWA | 現場測試用儀器 | 3007 | 指針式三用電錶 | src/content/products/field-testing/3007.md |
-| 182 | NISHIZAWA | 現場測試用儀器 | 3009 | 指針式三用電錶 | src/content/products/field-testing/3009.md |
-| 183 | NISHIZAWA | 現場測試用儀器 | 3015 | 指針式三用電錶 | src/content/products/field-testing/3015.md |
-| 184 | OMICRON | 高壓維護測試 | CMC 256 | 數位電驛試驗器 | src/content/products/high-voltage/cmc-256.md |
-| 185 | ONO SOKKI | 環境相關測量儀器 | EC-900 | 轉速計（電梯維護專用） | src/content/products/environmental/ec-900.md |
-| 186 | PAN-GLOBE | 高壓維護測試 | 5200 | 大電流低阻計 | src/content/products/high-voltage/5200.md |
-| 187 | Picotest | 電機電子測試測量 | G5100A | 函數/任意波形產生器 | src/content/products/electrical-testing/g5100a.md |
-| 188 | Picotest | 電機電子測試測量 | M3500A | 61/2數位萬用電錶 | src/content/products/electrical-testing/m3500a.md |
-| 189 | Picotest | 電機電子測試測量 | U6200A | 汎用頻率計數器 | src/content/products/electrical-testing/u6200a.md |
-| 190 | Pintek | 電機電子測試測量 | DP-25/50/100 | 差動探針 | src/content/products/electrical-testing/dp-25-50-100.md |
-| 191 | Pintek | 電機電子測試測量 | DS-603P | 類比+數位示波器 | src/content/products/electrical-testing/ds-603p.md |
-| 192 | Pintek | 電機電子測試測量 | HVC-803 | 數字式直流高壓計 | src/content/products/electrical-testing/hvc-803.md |
-| 193 | Pintek | 電機電子測試測量 | HVP-40M/40DM | 直流高壓計 | src/content/products/electrical-testing/hvp-40m-40dm.md |
-| 194 | Raytech | 高壓維護測試 | TR Jr | 單相變壓器匝比測試器 | src/content/products/high-voltage/tr-jr.md |
-| 195 | Raytech | 高壓維護測試 | TR Spy Mark II | 三相變壓器匝比測試器 | src/content/products/high-voltage/tr-spy-mark-ii.md |
-| 196 | Raytech | 高壓維護測試 | WR50-2 | 雙繞組線圈電阻計 | src/content/products/high-voltage/wr50-2.md |
-| 197 | RHEIN TACHO | 環境相關測量儀器 | 2000系列 | 數字式轉速計 | src/content/products/environmental/2000-series.md |
-| 198 | RHEIN TACHO | 環境相關測量儀器 | Rolux | 閃頻測速儀 | src/content/products/environmental/rolux.md |
-| 199 | SATO | 環境相關測量儀器 | ASAHI | 乾濕度計 | src/content/products/environmental/asahi.md |
-| 200 | SATO | 環境相關測量儀器 | SATO SK-L200TH | 數字溫濕度蒐集器 | src/content/products/environmental/sato-sk-l200th.md |
-| 201 | SEW | 高壓維護測試 | 4183CP | 肘形端頭相序計 | src/content/products/high-voltage/4183cp.md |
-| 202 | SFE | 高壓維護測試 | DHH | 數位高壓相序計 | src/content/products/high-voltage/dhh.md |
-| 203 | SOUKOU 双興 | 高壓維護測試 | VCBT-01K | 斷路器跳脫時間記錄器 | src/content/products/high-voltage/vcbt-01k.md |
-| 204 | SOUKOU 双興 | 電阻校正及記錄器 | HMR-100G | 高壓絕緣電阻校正器 | src/content/products/resistance-recorders/hmr-100g.md |
-| 205 | STB | 高壓維護測試 | 25H | 高壓相序計 | src/content/products/high-voltage/25h.md |
-| 206 | T&R | 高壓維護測試 | 100 ADM MK4 | 綜合電驛試驗器 | src/content/products/high-voltage/100-adm-mk4.md |
-| 207 | T&R | 高壓維護測試 | 200 ADM-P | 綜合電驛試驗器 | src/content/products/high-voltage/200-adm-p.md |
-| 208 | T&R | 高壓維護測試 | 200A-3PH/E | 三相電驛試驗器 | src/content/products/high-voltage/200a-3ph-e.md |
-| 209 | T&R | 高壓維護測試 | 50A-3PH | 三相電驛試驗器 | src/content/products/high-voltage/50a-3ph.md |
-| 210 | T&R | 高壓維護測試 | 750ADM | 大電流電驛試驗器 | src/content/products/high-voltage/750adm.md |
-| 211 | T&R | 高壓維護測試 | ART 3V | 三相電壓電驛測試器 | src/content/products/high-voltage/art-3v.md |
-| 212 | T&R | 高壓維護測試 | DMO200 | 超輕量微低阻器 | src/content/products/high-voltage/dmo200.md |
-| 213 | T&R | 高壓維護測試 | DMO600 | 超輕量微低阻器 | src/content/products/high-voltage/dmo600.md |
-| 214 | T&R | 高壓維護測試 | DVS3 mk2 | 綜合電驛試驗器 | src/content/products/high-voltage/dvs3-mk2.md |
-| 215 | T&R | 高壓維護測試 | KV30-40D MK2 | 交流耐壓試驗器 | src/content/products/high-voltage/kv30-40d-mk2.md |
-| 216 | T&R | 高壓維護測試 | PCU1-SP | 大電流電驛試驗器 | src/content/products/high-voltage/pcu1-sp.md |
-| 217 | T&R | 高壓維護測試 | PCU2/E | 大電流電驛試驗器 | src/content/products/high-voltage/pcu2-e.md |
-| 218 | T&R | 高壓維護測試 | VC24-24 | 真空測試器 | src/content/products/high-voltage/vc24-24.md |
-| 219 | T&R | 高壓維護測試 | Z-OVR | 電纜阻抗測試系統 | src/content/products/high-voltage/z-ovr.md |
-| 220 | TES 泰仕 | 環境相關測量儀器 | TES 1393 | 電磁場測試器 | src/content/products/environmental/tes-1393.md |
-| 221 | Time Electronics | 電阻校正及記錄器 | 1071 | 十進位電容箱 | src/content/products/resistance-recorders/1071.md |
-| 222 | Yokogawa 橫河 | 電阻校正及記錄器 | SR1006 | 打點式記錄器 | src/content/products/resistance-recorders/sr1006.md |
-| 223 | Yokogawa 橫河 | 電阻校正及記錄器 | μR 10000 | 可程式記錄器 | src/content/products/resistance-recorders/ur-10000.md |
-| 224 | YOTSUGI | 檢電及電源品質 | GAT-I | 絕緣毯 | src/content/products/power-quality/gat-i.md |
-| 225 | YOTSUGI | 檢電及電源品質 | GAT-II | 絕緣毯 | src/content/products/power-quality/gat-ii.md |
-| 226 | YOTSUGI | 檢電及電源品質 | GLOVE | 保護手套 | src/content/products/power-quality/glove.md |
-| 227 | YOTSUGI | 檢電及電源品質 | GUM | 絕緣安全帽 | src/content/products/power-quality/gum.md |
-| 228 | YOTSUGI | 檢電及電源品質 | SJBOOT | 橡膠絕緣長統鞋 | src/content/products/power-quality/sjboot.md |
-| 229 | YOTSUGI | 檢電及電源品質 | SJGLOVE | 橡膠絕緣手套 | src/content/products/power-quality/sjglove.md |
+| 171 | Megger | 高壓維護測試 | HCTT | 手搖式變壓比匝比測試器 | src/content/products/high-voltage/hctt.md |
+| 172 | Motech | 高壓維護測試 | MT186 | 數據傳輸測試器 | src/content/products/high-voltage/mt186.md |
+| 173 | Multi 萬用 | 鉤式電錶類儀器 | M-600 | 交直流洩漏電流計 | src/content/products/clamp-meters/m-600.md |
+| 174 | Multi 萬用 | 鉤式電錶類儀器 | Multi 230 | AC/DC 數字式鉤錶 | src/content/products/clamp-meters/multi-230.md |
+| 175 | Multi 萬用 | 鉤式電錶類儀器 | Multi 240 | AC/DC 數字式鉤錶 | src/content/products/clamp-meters/multi-240.md |
+| 176 | Multi 萬用 | 現場測試用儀器 | MCD-007 | 口袋型三用電錶 | src/content/products/field-testing/mcd-007.md |
+| 177 | Multi 萬用 | 高壓維護測試 | HCL-9000S | 高壓電流計 | src/content/products/high-voltage/hcl-9000s.md |
+| 178 | NGI | 電阻校正及記錄器 | SERVOGOR 102 | 筆式記錄器 | src/content/products/resistance-recorders/servogor-102.md |
+| 179 | Nippon Static | 環境相關測量儀器 | SV-511 | 靜電高壓計 | src/content/products/environmental/sv-511.md |
+| 180 | NISHIZAWA | 鉤式電錶類儀器 | NISHIZAWA 5127 | 指針式鉤錶 | src/content/products/clamp-meters/nishizawa-5127.md |
+| 181 | NISHIZAWA | 現場測試用儀器 | 3001-02 | 指針式三用電錶 | src/content/products/field-testing/3001-02.md |
+| 182 | NISHIZAWA | 現場測試用儀器 | 3007 | 指針式三用電錶 | src/content/products/field-testing/3007.md |
+| 183 | NISHIZAWA | 現場測試用儀器 | 3009 | 指針式三用電錶 | src/content/products/field-testing/3009.md |
+| 184 | NISHIZAWA | 現場測試用儀器 | 3015 | 指針式三用電錶 | src/content/products/field-testing/3015.md |
+| 185 | OMICRON | 高壓維護測試 | CMC 256 | 數位電驛試驗器 | src/content/products/high-voltage/cmc-256.md |
+| 186 | ONO SOKKI | 環境相關測量儀器 | EC-900 | 轉速計（電梯維護專用） | src/content/products/environmental/ec-900.md |
+| 187 | PAN-GLOBE | 高壓維護測試 | 5200 | 大電流低阻計 | src/content/products/high-voltage/5200.md |
+| 188 | Picotest | 電機電子測試測量 | G5100A | 函數/任意波形產生器 | src/content/products/electrical-testing/g5100a.md |
+| 189 | Picotest | 電機電子測試測量 | M3500A | 61/2數位萬用電錶 | src/content/products/electrical-testing/m3500a.md |
+| 190 | Picotest | 電機電子測試測量 | U6200A | 汎用頻率計數器 | src/content/products/electrical-testing/u6200a.md |
+| 191 | Pintek | 電機電子測試測量 | DP-25/50/100 | 差動探針 | src/content/products/electrical-testing/dp-25-50-100.md |
+| 192 | Pintek | 電機電子測試測量 | DS-603P | 類比+數位示波器 | src/content/products/electrical-testing/ds-603p.md |
+| 193 | Pintek | 電機電子測試測量 | HVC-803 | 數字式直流高壓計 | src/content/products/electrical-testing/hvc-803.md |
+| 194 | Pintek | 電機電子測試測量 | HVP-40M/40DM | 直流高壓計 | src/content/products/electrical-testing/hvp-40m-40dm.md |
+| 195 | Raytech | 高壓維護測試 | TR Jr | 單相變壓器匝比測試器 | src/content/products/high-voltage/tr-jr.md |
+| 196 | Raytech | 高壓維護測試 | TR Spy Mark II | 三相變壓器匝比測試器 | src/content/products/high-voltage/tr-spy-mark-ii.md |
+| 197 | Raytech | 高壓維護測試 | WR50-2 | 雙繞組線圈電阻計 | src/content/products/high-voltage/wr50-2.md |
+| 198 | RHEIN TACHO | 環境相關測量儀器 | 2000系列 | 數字式轉速計 | src/content/products/environmental/2000-series.md |
+| 199 | RHEIN TACHO | 環境相關測量儀器 | Rolux | 閃頻測速儀 | src/content/products/environmental/rolux.md |
+| 200 | SATO | 環境相關測量儀器 | ASAHI | 乾濕度計 | src/content/products/environmental/asahi.md |
+| 201 | SATO | 環境相關測量儀器 | SATO SK-L200TH | 數字溫濕度蒐集器 | src/content/products/environmental/sato-sk-l200th.md |
+| 202 | Schleich | 高壓維護測試 | PORTATEST A-2 | 全自動油耐壓測試器 | src/content/products/high-voltage/portatest-a-2.md |
+| 203 | SEW | 高壓維護測試 | 4183CP | 肘形端頭相序計 | src/content/products/high-voltage/4183cp.md |
+| 204 | SFE | 高壓維護測試 | DHH | 數位高壓相序計 | src/content/products/high-voltage/dhh.md |
+| 205 | SOUKOU 双興 | 高壓維護測試 | VCBT-01K | 斷路器跳脫時間記錄器 | src/content/products/high-voltage/vcbt-01k.md |
+| 206 | SOUKOU 双興 | 電阻校正及記錄器 | HMR-100G | 高壓絕緣電阻校正器 | src/content/products/resistance-recorders/hmr-100g.md |
+| 207 | STB | 高壓維護測試 | 25H | 高壓相序計 | src/content/products/high-voltage/25h.md |
+| 208 | T&R | 高壓維護測試 | 100 ADM MK4 | 綜合電驛試驗器 | src/content/products/high-voltage/100-adm-mk4.md |
+| 209 | T&R | 高壓維護測試 | 200 ADM-P | 綜合電驛試驗器 | src/content/products/high-voltage/200-adm-p.md |
+| 210 | T&R | 高壓維護測試 | 200A-3PH/E | 三相電驛試驗器 | src/content/products/high-voltage/200a-3ph-e.md |
+| 211 | T&R | 高壓維護測試 | 50A-3PH | 三相電驛試驗器 | src/content/products/high-voltage/50a-3ph.md |
+| 212 | T&R | 高壓維護測試 | 750ADM | 大電流電驛試驗器 | src/content/products/high-voltage/750adm.md |
+| 213 | T&R | 高壓維護測試 | ART 3V | 三相電壓電驛測試器 | src/content/products/high-voltage/art-3v.md |
+| 214 | T&R | 高壓維護測試 | DMO200 | 超輕量微低阻器 | src/content/products/high-voltage/dmo200.md |
+| 215 | T&R | 高壓維護測試 | DMO600 | 超輕量微低阻器 | src/content/products/high-voltage/dmo600.md |
+| 216 | T&R | 高壓維護測試 | DVS3 mk2 | 綜合電驛試驗器 | src/content/products/high-voltage/dvs3-mk2.md |
+| 217 | T&R | 高壓維護測試 | KV30-40D MK2 | 交流耐壓試驗器 | src/content/products/high-voltage/kv30-40d-mk2.md |
+| 218 | T&R | 高壓維護測試 | PCU1-SP | 大電流電驛試驗器 | src/content/products/high-voltage/pcu1-sp.md |
+| 219 | T&R | 高壓維護測試 | PCU2/E | 大電流電驛試驗器 | src/content/products/high-voltage/pcu2-e.md |
+| 220 | T&R | 高壓維護測試 | VC24-24 | 真空測試器 | src/content/products/high-voltage/vc24-24.md |
+| 221 | T&R | 高壓維護測試 | Z-OVR | 電纜阻抗測試系統 | src/content/products/high-voltage/z-ovr.md |
+| 222 | TES 泰仕 | 環境相關測量儀器 | TES 1393 | 電磁場測試器 | src/content/products/environmental/tes-1393.md |
+| 223 | Time Electronics | 電阻校正及記錄器 | 1071 | 十進位電容箱 | src/content/products/resistance-recorders/1071.md |
+| 224 | Yokogawa 橫河 | 電阻校正及記錄器 | SR1006 | 打點式記錄器 | src/content/products/resistance-recorders/sr1006.md |
+| 225 | Yokogawa 橫河 | 電阻校正及記錄器 | μR 10000 | 可程式記錄器 | src/content/products/resistance-recorders/ur-10000.md |
+| 226 | YOTSUGI | 檢電及電源品質 | GAT-I | 絕緣毯 | src/content/products/power-quality/gat-i.md |
+| 227 | YOTSUGI | 檢電及電源品質 | GAT-II | 絕緣毯 | src/content/products/power-quality/gat-ii.md |
+| 228 | YOTSUGI | 檢電及電源品質 | GLOVE | 保護手套 | src/content/products/power-quality/glove.md |
+| 229 | YOTSUGI | 檢電及電源品質 | GUM | 絕緣安全帽 | src/content/products/power-quality/gum.md |
+| 230 | YOTSUGI | 檢電及電源品質 | SJBOOT | 橡膠絕緣長統鞋 | src/content/products/power-quality/sjboot.md |
+| 231 | YOTSUGI | 檢電及電源品質 | SJGLOVE | 橡膠絕緣手套 | src/content/products/power-quality/sjglove.md |

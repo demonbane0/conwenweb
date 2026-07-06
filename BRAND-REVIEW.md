@@ -21,9 +21,10 @@
 >    8400→Lucas、25H→STB、GAT-I/II・GLOVE・GUM・SJBOOT・SJGLOVE→YOTSUGI；
 >    PALM T2 顯示名定為 Elcotronic
 >
-> 現況 **229/231 已填**。僅剩 2 項：**HCTT**（手搖式匝比測試器）、
-> **PORTATEST A-2**（全自動油耐壓測試器）——照片無商標、網路證據不足，
-> 需舊型錄或實品確認。最新逐項清單見 `BRAND-FILLED.md`。
+> 5. 業主確認最後 2 項：HCTT→Megger（550005B 單相手搖式 TTR）、
+>    PORTATEST A-2→Schleich
+>
+> ✅ **231/231 全數完成**（2026-07-06）。最新逐項清單見 `BRAND-FILLED.md`。
 
 ## 一、已自動填入（信心高，抽查即可）— 174 項
 

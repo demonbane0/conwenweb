@@ -71,8 +71,9 @@
      修 4（PC6→GE Druck、ASAHI→SATO、SERVOGOR→NGI）；產品照辨識商標補 18
      （Aplab/Pintek/Elcotronic/ONO SOKKI/LINE SEIKI/Nippon Static/SFE/
      PAN-GLOBE/DENSOKU/SOUKOU/Motech/HT Italia/ISUZU/Time Electronics…）；
-     業主人工確認補 9（RHEIN TACHO/Lucas/STB/YOTSUGI×5）。
-     **僅剩 HCTT、PORTATEST A-2 兩項**需舊型錄確認
+     業主人工確認補 9（RHEIN TACHO/Lucas/STB/YOTSUGI×5）+ 最後 2
+     （HCTT→Megger、PORTATEST A-2→Schleich）。
+     ✅ **231/231 全數完成**，廠牌待辦清空
   10. **產品卡型號前顯示廠牌**（一覽/分類/相關產品）：廠牌淡色+型號粗體
       同一行，原廠牌小徽章移除
 

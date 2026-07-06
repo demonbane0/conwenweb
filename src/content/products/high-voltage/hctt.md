@@ -2,6 +2,7 @@
 title: "手搖式變壓比匝比測試器"
 model: "HCTT"
 category: "high-voltage"
+brand: "Megger"
 image: "/images/products/hctt.jpg"
 features:
   - "手搖發電無須外加電源"

@@ -2,6 +2,7 @@
 title: "全自動油耐壓測試器"
 model: "PORTATEST A-2"
 category: "high-voltage"
+brand: "Schleich"
 image: "/images/products/portatest-a-2.jpg"
 features:
   - "60/80/100KV RMS 三機型供選擇"
