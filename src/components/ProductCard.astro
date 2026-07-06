@@ -22,9 +22,11 @@ const linkLabel = `查看 ${model} ${title}`;
     <img src={withBase(image)} alt={imageAlt} loading="lazy" decoding="async" />
   </div>
   <div class="product-card__body">
-    <p class="product-card__model">{model}</p>
+    <p class="product-card__model">
+      {brand && <span class="product-card__model-brand">{brand}</span>}
+      {model}
+    </p>
     <h2 class="product-card__title">{title}</h2>
-    {brand && <p class="product-card__brand"><span>{brand}</span></p>}
   </div>
   <div class="product-card__actions">
     <button
@@ -106,19 +108,11 @@ const linkLabel = `查看 ${model} ${title}`;
     line-height: 1.5;
   }
 
-  .product-card__brand {
-    margin-bottom: 0;
-  }
-
-  .product-card__brand span {
-    display: inline-block;
-    padding: 0.05rem 0.55rem;
-    border: 1px solid var(--color-border);
-    border-radius: 999px;
-    background: var(--color-section);
+  .product-card__model-brand {
+    margin-right: 0.15rem;
     color: var(--color-muted);
-    font-size: 0.8rem;
-    font-weight: 500;
+    font-size: 0.92rem;
+    font-weight: 600;
   }
 
   .product-card__actions {

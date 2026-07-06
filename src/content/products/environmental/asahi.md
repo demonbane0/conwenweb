@@ -2,7 +2,7 @@
 title: "乾濕度計"
 model: ASAHI
 category: environmental
-brand: "ASAHI"
+brand: "SATO"
 image: /images/products/asahi.jpg
 features:
   - "測定範圍 -10 ~ 50℃"

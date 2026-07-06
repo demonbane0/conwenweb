@@ -3,6 +3,7 @@ slug: th-27r
 title: 溫濕度記錄器
 model: TH-27R
 category: resistance-recorders
+brand: "ISUZU"
 image: /images/products/th-27r.jpg
 features:
   - 測定溫度範圍：-20 ~ 50℃

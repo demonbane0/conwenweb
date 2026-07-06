@@ -2,6 +2,7 @@
 title: "數位高壓相序計"
 model: "DHH"
 category: "high-voltage"
+brand: "SFE"
 image: "/images/products/dhh.jpg"
 features:
   - "測試電壓回路 10KV ~ 35KV, 110KV ~ 220KV"

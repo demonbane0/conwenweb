@@ -2,6 +2,7 @@
 title: "斷路器跳脫時間記錄器"
 model: "VCBT-01K"
 category: "high-voltage"
+brand: "SOUKOU 双興"
 image: "/images/products/vcbt-01k.jpg"
 features:
   - "測量單或三相斷路器投入或跳脫時間"

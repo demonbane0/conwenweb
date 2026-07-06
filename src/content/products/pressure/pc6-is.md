@@ -3,7 +3,7 @@ slug: pc6-is
 title: 防爆型壓力校正器
 model: PC6 IS
 category: pressure
-brand: "EUROTRON"
+brand: "GE Druck"
 image: /images/products/pc6-is.jpg
 features:
   - 壓力範圍：0 ~ 1000Bar (可依需求選定範圍)

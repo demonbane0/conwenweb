@@ -4,11 +4,22 @@
 > 與代理廠牌產品線推斷。**只需掃一眼有沒有填錯，以及補「未填」的部分**；
 > 修改方式：打開 `src/content/products/<分類>/<型號>.md`，改 `brand:` 一行即可。
 
-> **2026-07-06 更新**：已依 GPT-5 查核結果（`model-brand-review-20260706-revised.md`）
-> 回填信心高/中-高共 30 項、修正 3 項（HMR-100G→SOUKOU 双興、ALT120/60→
-> High Voltage Inc、DP6→CROPICO）、清空 2 項存疑（1071、'3000'）。
-> 現況 **202/231 已填**；剩餘 29 項為查核「先抽查再回填」與「未確認」者，
-> 需舊型錄或實機照片才能判定，清單見查核檔第 1、4 節。
+> **2026-07-06 更新（三輪查核後）**：
+> 1. 依 GPT-5 查核（`model-brand-review-20260706-revised.md`）回填 30 項、
+>    修正 3 項（HMR-100G→SOUKOU 双興、ALT120/60→High Voltage Inc、DP6→CROPICO）
+> 2. 依 174 項驗證（`BRAND-VALIDATION-RESULT.md`）修正 4 項
+>    （PC6 IS/PRO→GE Druck、ASAHI→SATO、SERVOGOR 102→NGI）
+> 3. **以舊站產品照片逐張辨識商標**，補回「需照片確認」的 18 項：
+>    Aplab（SA3010/3011、4049）、Pintek（DS-603P）、elcotronic（PALM T2）、
+>    ONO SOKKI（EC-900）、LINE SEIKI（TC-700）、Nippon Static（SV-511）、
+>    NISHIZAWA（3001-02）、SFE（DHH＝TAG8000）、PAN-GLOBE（5200）、
+>    DENSOKU（CDM-330）、SOUKOU 双興（VCBT-01K）、Motech（MT186）、
+>    HT Italia（2020E、5080）、ISUZU（TH-27R）、Time Electronics（1071）、
+>    CROPICO（'3000'）
+>
+> 現況 **220/231 已填**。剩 11 項照片無商標可辨：25H、HCTT、PORTATEST A-2、
+> 8400、2000系列（轉速類，疑 RHEIN TACHO）、GAT-I/II、GLOVE、GUM、
+> SJBOOT、SJGLOVE（絕緣防護具，需看實品標籤）。
 > 最新逐項清單見 `BRAND-FILLED.md`。
 
 ## 一、已自動填入（信心高，抽查即可）— 174 項

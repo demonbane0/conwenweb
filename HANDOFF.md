@@ -67,6 +67,13 @@
   8. **產品頁 SEO**：`<title>` 與 meta description 改為「廠牌 型號 品名」格式、
      每頁加 JSON-LD Product 結構化資料（brand/model/image 絕對網址）、
      眉標顯示廠牌。無廠牌產品自動降級不出現 undefined
+  9. **廠牌三輪查核完成 → 220/231**：BRAND-VALIDATION-RESULT.md 修正 4 項
+     （PC6→GE Druck、ASAHI→SATO、SERVOGOR→NGI）；再以舊站產品照辨識商標
+     補 18 項（Aplab/Pintek/elcotronic/ONO SOKKI/LINE SEIKI/Nippon Static/
+     SFE/PAN-GLOBE/DENSOKU/SOUKOU/Motech/HT Italia/ISUZU/Time Electronics…）。
+     剩 11 項照片無商標（防護具類+25H/HCTT/PORTATEST/8400/2000系列）
+  10. **產品卡型號前顯示廠牌**（一覽/分類/相關產品）：廠牌淡色+型號粗體
+      同一行，原廠牌小徽章移除
 
 ## 網站已上線：https://demonbane0.github.io/conwenweb/
 
