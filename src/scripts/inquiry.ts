@@ -24,9 +24,16 @@ declare global {
   }
 }
 
+const MAX_QTY = 999;
+
 const normalizeQty = (qty: unknown) => {
   const value = typeof qty === "number" ? qty : Number.parseInt(String(qty), 10);
-  return Number.isFinite(value) && value > 0 ? Math.floor(value) : 1;
+
+  if (!Number.isFinite(value) || value < 1) {
+    return 1;
+  }
+
+  return Math.min(Math.floor(value), MAX_QTY);
 };
 
 const normalizeItem = (item: Partial<InquiryItem>): InquiryItem | null => {
