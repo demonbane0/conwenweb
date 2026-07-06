@@ -140,17 +140,12 @@
   未來若真要 WAF 可把 DNS 搬 Cloudflare（免費）擋在 Pages 前面
 - ~~三據點地址電話~~、~~資本額~~：**業主已確認無誤**（2026-07-07）
 
-## 自有網域切換計畫（conwen.com.tw，等 DNS）
+## 自有網域切換（conwen.com.tw）— ✅ 已完成（2026-07-07）
 
-- 業主提供網域 conwen.com.tw；**目前 DNS 指向舊主機 139.162.121.129（Linode，
-  還在跑 2008 舊站），不可先改站台設定**，否則 github.io 會轉址到舊主機
-- 切換步驟（依序）：
-  1. **業主到網域 DNS 管理處**把 A 記錄改成 GitHub Pages 四個 IP：
-     185.199.108.153 / 185.199.109.153 / 185.199.110.153 / 185.199.111.153；
-     `www` CNAME 改指向 `demonbane0.github.io`
-  2. DNS 生效後（`Resolve-DnsName conwen.com.tw` 看到 185.199.x）由我執行：
-     `gh api repos/demonbane0/conwenweb/pages -X PUT -f cname=conwen.com.tw`、
-     新增 `public/CNAME`（內容 conwen.com.tw）、`astro.config.mjs` 改
-     `site: 'https://conwen.com.tw'`、`base: '/'`，push 部署
-  3. Pages 憑證簽發後開 Enforce HTTPS；驗證 og:image/JSON-LD 絕對網址已換新域
-  4. withBase() 機制不變（BASE_URL 變 '/'），資料檔不用動
+- 業主已在 HiNet DNS 紀錄管理改好：apex 四筆 A → 185.199.108-111.153、
+  www CNAME → demonbane0.github.io（權威主機與 8.8.8.8 均已驗證生效）
+- GitHub 端已設 cname=conwen.com.tw；astro.config 改 site=conwen.com.tw、
+  base='/'；public/CNAME 已加；og:image/JSON-LD 絕對網址已換新域
+- 待辦：憑證簽發後開 Enforce HTTPS（`gh api repos/demonbane0/conwenweb/pages
+  -X PUT -F https_enforced=true`）；新網域穩定一兩週後**退租 Cloudways**
+- 注意：舊 TTL 86400，部分使用者端最長一天內仍可能解析到舊 IP，屬正常過渡

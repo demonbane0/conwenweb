@@ -119,13 +119,16 @@ push 後自動部署。** 所有設計決策不得破壞這個工作流程。
 
 ## 部署與 base path（重要）
 
-- GitHub Pages 專案網址為 `https://demonbane0.github.io/conwenweb/`，因此
-  `astro.config.mjs` 設 `site: 'https://demonbane0.github.io'`、`base: '/conwenweb'`
-- **所有內部連結與圖片 src 一律經過 `src/utils/url.ts` 的 `withBase(path)`**
-  （實作：`import.meta.env.BASE_URL` + 去重斜線），不得寫死 `/products/...`
+- 正式網址 **`https://conwen.com.tw/`**（自訂網域，2026-07-07 切換；
+  `demonbane0.github.io/conwenweb` 會自動轉址）。`astro.config.mjs` 設
+  `site: 'https://conwen.com.tw'`、`base: '/'`；`public/CNAME` 內容為網域名
+- **所有內部連結與圖片 src 仍一律經過 `src/utils/url.ts` 的 `withBase(path)`**
+  （實作：`import.meta.env.BASE_URL` + 去重斜線），不得寫死路徑——
+  base 現在是 '/'，但保留 withBase 讓未來搬遷零成本
 - 產品 .md 的 `image` 欄位維持根相對路徑（`/images/products/x.jpg`），
   由顯示元件套 `withBase()`；資料檔不帶 base
-- dev server 也會跑在 `/conwenweb/` 底下，漏套 withBase 會直接 404，驗證時可抓到
+- DNS：HiNet 代管（dnmgt.hinet.net DNS 紀錄管理），apex 四筆 A → GitHub Pages
+  IP（185.199.108-111.153）、www CNAME → demonbane0.github.io
 
 ## 驗證要求（每個實裝任務完成前必做）
 
