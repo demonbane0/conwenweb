@@ -94,6 +94,14 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
 
 ## 已知注意事項
 
+- **2026-07-07 手機版圖片爆版已修**（業主 iOS Safari 回報，截圖存 `bug/`）：
+  產品卡與產品內頁圖片原用「`aspect-ratio` flex 容器 + 圖片百分比
+  max-width/max-height」，踩到 WebKit 已知 bug，圖片被排成超大尺寸撐破卡片、
+  整頁橫向溢出。改為 `::before padding-top: 75%` 撐 4:3 + 圖片絕對定位置中
+  （ProductCard.astro、[slug].astro），並把手機版 grid 的 `1fr` 全改
+  `minmax(0, 1fr)` 當第二道防線。日後圖片容器一律沿用此寫法，
+  **勿再用 aspect-ratio + flex + 百分比 max 尺寸的組合**
+
 - **`legacy/utf8/product_2.html` 是壞檔**（原檔本來就是 UTF-8、被當 Big5 二次
   轉換；legacy/ 唯讀故未修）。要再抽 environmental 資料時直接以 UTF-8 讀
   `legacy/product_2.html` 原檔

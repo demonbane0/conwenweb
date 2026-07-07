@@ -276,13 +276,14 @@ const breadcrumbJsonLd = JSON.stringify({
     align-items: start;
   }
 
+  /* 4:3 比例用 padding 撐高 + 圖片絕對定位置中：
+     避開 iOS Safari 對 aspect-ratio 容器內百分比圖片尺寸的解析 bug（同 ProductCard） */
   .product-detail__media {
     position: relative;
-    display: flex;
-    aspect-ratio: 4 / 3;
-    align-items: center;
-    justify-content: center;
-    padding: var(--space-3);
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    padding: 0;
     border: 1px solid var(--color-border);
     border-radius: 8px;
     background: #ffffff;
@@ -291,16 +292,25 @@ const breadcrumbJsonLd = JSON.stringify({
     transition: border-color 140ms ease, box-shadow 140ms ease;
   }
 
+  .product-detail__media::before {
+    content: "";
+    display: block;
+    padding-top: 75%;
+  }
+
   .product-detail__media:hover {
     border-color: var(--color-primary);
     box-shadow: var(--shadow-card-hover);
   }
 
   .product-detail__media img {
+    position: absolute;
+    inset: 0;
+    margin: auto;
     width: auto;
     height: auto;
-    max-width: 100%;
-    max-height: 100%;
+    max-width: calc(100% - 2 * var(--space-3));
+    max-height: calc(100% - 2 * var(--space-3));
     object-fit: contain;
   }
 
@@ -488,7 +498,7 @@ const breadcrumbJsonLd = JSON.stringify({
   @media (max-width: 768px) {
     .product-detail,
     .related-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .product-actions {
