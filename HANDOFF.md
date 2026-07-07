@@ -17,8 +17,8 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
   測試信寄達）；防濫用三層：蜜罐（不耗額度）、失敗自動退回 mailto（不漏單）、
   送出鎖定；輕量防呆：電話須含 7 位數字、欄位長度上限、數量上限 999
 - 設計系統（深藍 #14467b + 橙 #c2410c、LogoMark、刻度尺眉標、等寬型號、
-  格線紋理）與 SEO（廠牌+型號 title、meta description、JSON-LD Product、
-  OG 分享圖）詳見 CLAUDE.md
+  格線紋理）與 SEO（廠牌+型號 title、meta description、BreadcrumbList
+  JSON-LD、OG 分享圖）詳見 CLAUDE.md
 - 最新消息：舊 2008 消息已移除，頁面留空狀態等新公告
 
 ## 剩餘待辦
@@ -35,8 +35,13 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
 ## SEO 現況（2026-07-07 強化後）
 
 - sitemap（`/sitemap-index.xml`，248 URL）+ robots.txt + 全站 canonical
-- 產品頁：廠牌+型號 title、逐頁 meta description、Product + BreadcrumbList
-  JSON-LD；首頁：Organization JSON-LD；全站 OG/Twitter 分享標籤 + 品牌分享圖
+- 產品頁：廠牌+型號 title、逐頁 meta description、BreadcrumbList JSON-LD；
+  首頁：Organization JSON-LD；全站 OG/Twitter 分享標籤 + 品牌分享圖
+- **產品頁不放 Product JSON-LD**（2026-07-07 決策）：GSC 來信判定
+  「必須指定 offers/review/aggregateRating」重大問題——Google 規定 Product
+  標記要吃豐富結果必須三選一，詢價制無公開價格、無評論資料，填假的違反
+  政策，故整段移除（本來也拿不到加成）。**日後勿再加回**，除非網站開始
+  放公開價格。GSC 該問題頁面業主可按「驗證修正」加速清除，或等自然重爬
 - **舊站網址轉址**：2008 年的 product_1~10.html、company/customer/news/
   contact/main.html 共 16 個舊網址做了 meta-refresh + canonical 轉址 stub
   （public/ 下的 .html），接住搜尋引擎裡的舊連結

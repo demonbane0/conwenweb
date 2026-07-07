@@ -52,17 +52,9 @@ const pageDescription = [
   `耕紋貿易專業代理測試測量儀器，北中南三據點提供選型報價與維修保固服務。`,
 ].join("");
 
-const jsonLd = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "Product",
-  name: `${product.data.model} ${product.data.title}`,
-  model: product.data.model,
-  ...(brandName ? { brand: { "@type": "Brand", name: brandName } } : {}),
-  image: new URL(withBase(product.data.image), Astro.site).href,
-  description: pageDescription,
-  ...(category ? { category: category.name } : {}),
-});
-
+// 不放 Product JSON-LD：Google 要求 Product 必須帶 offers（含價格）/review/
+// aggregateRating 之一才有效，詢價制 B2B 無法誠實提供，缺了會被 GSC 判定
+// 「重大問題」持續寄警告信（2026-07-07 業主收到）。拿掉不影響一般收錄。
 const breadcrumbJsonLd = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -181,7 +173,6 @@ const breadcrumbJsonLd = JSON.stringify({
         </div>
       </article>
 
-      <script type="application/ld+json" set:html={jsonLd} is:inline />
       <script type="application/ld+json" set:html={breadcrumbJsonLd} is:inline />
 
       <dialog class="lightbox" data-lightbox aria-label={`${product.data.model} ${product.data.title} 大圖檢視`}>
