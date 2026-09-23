@@ -1,3 +1,6 @@
+@.lessons/rules.md
+@.lessons/orchestration.md
+
 # 耕紋貿易股份有限公司 — 公司網站重建
 
 耕紋貿易（Conwen Trading Co., Ltd.）1988 年成立，專業代理進口電機電子測試測量儀器，
