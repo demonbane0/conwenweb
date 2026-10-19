@@ -31,6 +31,9 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
 
 - [ ] **第 1 步（等業主）**：`review/2026-10-brand-decisions.xlsx` 給業主填
   52 個廠牌的代理狀態（仍代理／已不代理／不確定）、能否取得最新型錄、原廠現名。
+  紙本手寫用 `review/2026-10-brand-decisions-print.pdf`（A4 共 8 頁：說明直式 1 頁＋
+  表格橫式 7 頁，選項印成 ☐ 勾選、列出全部型號、表頭每頁重複）；xlsx 本身也已設
+  A4 列印（電子版直接印的備案）。兩者由同一支 scratchpad 產生器產出，Excel COM 轉 PDF
   收回後：「已不代理」→ 該廠牌全標 `status: discontinued`（備註寫「刪除」才刪檔，
   且要同步 `src/data/brands.ts` 的 logo 廠牌）；能拿到型錄 PDF 的廠牌優先用型錄比對。
   ⚠️ **repo 是 PUBLIC**：業主填好的版本（代理關係＝商業資訊）與原廠型錄**不得 commit**，
