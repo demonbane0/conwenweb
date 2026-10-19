@@ -151,6 +151,9 @@ push 後自動部署。** 所有設計決策不得破壞這個工作流程。
   由顯示元件套 `withBase()`；資料檔不帶 base
 - DNS：HiNet 代管（dnmgt.hinet.net DNS 紀錄管理），apex 四筆 A → GitHub Pages
   IP（185.199.108-111.153）、www CNAME → demonbane0.github.io
+- **repo 必須維持 public**：GitHub 免費方案的 private repo 不能用 Pages，
+  改 private 的當下 Pages 會被撤銷、全站 404（2026-10-19 實際發生過）。
+  不想公開的資料（業主填寫的表、原廠型錄）一律放 repo 外，不靠改 private 保護
 
 ## 驗證要求（每個實裝任務完成前必做）
 

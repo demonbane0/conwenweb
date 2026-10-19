@@ -36,8 +36,8 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
   A4 列印（電子版直接印的備案）。兩者由同一支 scratchpad 產生器產出，Excel COM 轉 PDF
   收回後：「已不代理」→ 該廠牌全標 `status: discontinued`（備註寫「刪除」才刪檔，
   且要同步 `src/data/brands.ts` 的 logo 廠牌）；能拿到型錄 PDF 的廠牌優先用型錄比對。
-  ⚠️ **repo 是 PUBLIC**：業主填好的版本（代理關係＝商業資訊）與原廠型錄**不得 commit**，
-  放 repo 外；入庫的只有空白表
+  ⚠️ **repo 是 PUBLIC（且必須維持 public，見下方事件紀錄）**：業主填好的版本
+  （代理關係＝商業資訊）與原廠型錄**不得 commit**，放 repo 外；入庫的只有空白表
 - [x] 第 2 步：schema／停產頁顯示／列表過濾／build 檢查／audit 報表（2026-10-19）
 - [ ] **第 3 步**：「仍代理」廠牌逐項審查表，從 Kyoritsu 共立（52 項）開始。
   Claude 預填（型號是否停產、後繼型號、**查證來源網址**、可信度；查不到留空，
@@ -147,6 +147,17 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
   curl 線上路由 → 一事一 commit（訊息附驗證結果）
 
 ## 已知注意事項
+
+- **2026-10-19 事件：repo 改 private → 全站下線**。免費方案 private repo 不能用
+  Pages，GitHub 當下撤銷 Pages 設定，conwen.com.tw／www／github.io 全部 404。
+  已改回 public 恢復。**恢復程序**（日後若再發生）：
+  1. `gh repo edit --visibility public --accept-visibility-change-consequences`
+  2. `gh api -X POST "repos/{owner}/{repo}/pages" -f build_type=workflow`
+  3. `gh api -X PUT "repos/{owner}/{repo}/pages" -f cname=conwen.com.tw`
+     （**不要**同時帶 `https_enforced`，憑證未就緒會 404 整筆失敗；當次憑證沿用、
+     自動 approved＋強制 HTTPS）
+  4. `gh workflow run "Deploy to GitHub Pages" --ref main` → 盯到 success
+  5. curl 驗 apex／www／github.io／http 轉址
 
 - （小問題，未修）站上沒有 favicon，瀏覽器請求 `/favicon.ico` 會 404；
   詢價頁 `.inquiry-remove` 是 scoped 樣式，JS 產生的「移除」按鈕吃不到
