@@ -15,8 +15,8 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
 - 產品搜尋 + 分類 chips + 廠牌下拉篩選（`?brand=` 參數）、產品頁燈箱、
   詢價車（localStorage + 跨頁徽章）
 - 詢價表單**站內送出**（Formspree `f/mqevjpbn`，2026-07-07 實測成功、
-  測試信寄達）；防濫用三層：蜜罐（不耗額度）、失敗自動退回 mailto（不漏單）、
-  送出鎖定；輕量防呆：電話須含 7 位數字、欄位長度上限、數量上限 999
+  測試信寄達）；具防濫用與輸入防呆機制，Formspree 失敗時自動改走 mailto
+  不漏單。防護細節見本機 `HANDOFF.local.md`（不入版控）
 - 設計系統（深藍 #14467b + 橙 #c2410c、LogoMark、刻度尺眉標、等寬型號、
   格線紋理）與 SEO（廠牌+型號 title、meta description、BreadcrumbList
   JSON-LD、OG 分享圖）詳見 CLAUDE.md
@@ -92,14 +92,9 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
 - **詢價信**：寄到 conwencf@ms19.hinet.net（寄件者 Formspree，建議設安全
   寄件者）；用量到 formspree.io 後台看（免費 50 封/月；超量時客戶端自動
   退回 mailto，不會漏單）
-- **表單防濫用應變手冊**（平時不用做事）：
-  1. **每月順手看一次 Formspree 後台用量**——收件匣正常但額度異常飆高
-     ＝蜜罐已被繞過的唯一訊號
-  2. 真被灌時的兩條升級路（都不用租主機）：
-     a. Formspree 付費版開 reCAPTCHA（約 US$10/月，含額度 1000 封）
-     b. DNS 從 HiNet 搬到 Cloudflare 免費版 + 開 Bot Fight Mode
-        （順便拿到 WAF；搬 NS 在 HiNet「DNS異動&查詢」頁改，
-        記得先在 Cloudflare 把現有 A/CNAME/TXT 記錄照抄）
+- **表單防濫用**（平時不用做事）：每月順手看一次 Formspree 後台用量。
+  用量異常時的判讀與升級做法見本機 `HANDOFF.local.md`（不入版控；
+  repo 是 public，防護細節不公開）
 - **DNS**：HiNet 代管（dnmgt.hinet.net「DNS 紀錄管理」）；apex 四筆 A →
   185.199.108-111.153、www CNAME → demonbane0.github.io，**不要動**
 

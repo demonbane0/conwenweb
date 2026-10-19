@@ -7,3 +7,6 @@ dist/
 
 # lessons-vault junction（勿 commit，git 會把 junction 當一般目錄遞迴）
 .lessons/
+
+# local-only handoff notes (not committed; repo is public)
+HANDOFF.local.md
