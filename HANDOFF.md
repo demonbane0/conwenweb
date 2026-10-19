@@ -1,9 +1,10 @@
 # HANDOFF — Session 交接文件
 
 > 每個 session 開始先讀本檔 + CLAUDE.md；有變動時收尾前更新並 commit。
-> 最後更新：2026-07-07（**專案收尾**：網站全功能上線，唯一剩餘待辦見下）
+> 最後更新：2026-10-19（**產品資料更新專案啟動**：停產/後繼機種機制上線，
+> 等業主回填廠牌決策表）
 
-## 專案狀態：✅ 完成
+## 專案狀態：✅ 網站上線；🔄 產品資料更新進行中（見下方「產品資料更新」）
 
 **正式網址：https://conwen.com.tw**（HTTPS 強制；舊網址
 demonbane0.github.io/conwenweb 自動 301 轉址）
@@ -20,6 +21,36 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
   格線紋理）與 SEO（廠牌+型號 title、meta description、BreadcrumbList
   JSON-LD、OG 分享圖）詳見 CLAUDE.md
 - 最新消息：舊 2008 消息已移除，頁面留空狀態等新公告
+- **停產/後繼機種機制**（2026-10-19）：frontmatter `status`／`replacedBy`／
+  `lastReviewed`、`npm run audit:products` 報表，規格見 CLAUDE.md「停產與後繼機種」。
+  上線時 0 項標停產，全站 265 個 HTML 與改動前逐檔比對一致（僅空白/CSS 差異）
+
+## 產品資料更新（2026-10-19 起）
+
+231 項多為 2008 年資料。流程：**廠牌層級先決 → 仍代理廠牌逐項審查 → 批次套用**。
+
+- [ ] **第 1 步（等業主）**：`review/2026-10-brand-decisions.xlsx` 給業主填
+  52 個廠牌的代理狀態（仍代理／已不代理／不確定）、能否取得最新型錄、原廠現名。
+  收回後：「已不代理」→ 該廠牌全標 `status: discontinued`（備註寫「刪除」才刪檔，
+  且要同步 `src/data/brands.ts` 的 logo 廠牌）；能拿到型錄 PDF 的廠牌優先用型錄比對。
+  ⚠️ **repo 是 PUBLIC**：業主填好的版本（代理關係＝商業資訊）與原廠型錄**不得 commit**，
+  放 repo 外；入庫的只有空白表
+- [x] 第 2 步：schema／停產頁顯示／列表過濾／build 檢查／audit 報表（2026-10-19）
+- [ ] **第 3 步**：「仍代理」廠牌逐項審查表，從 Kyoritsu 共立（52 項）開始。
+  Claude 預填（型號是否停產、後繼型號、**查證來源網址**、可信度；查不到留空，
+  寧缺勿錯，比照 BRAND-REVIEW 多輪查核）→ 業主只改狀態欄 → Claude 批次改 .md
+  （`status`/`replacedBy`/`lastReviewed`）＋新增後繼機種頁（圖用原廠圖，
+  特點由規格書草擬中文、業主審）
+- [ ] 批次標停產上線前：發**里程碑紅隊審查**（對外發布節點）
+- [ ] 現行品掉到 200 以下時改文案「兩百餘項」（`src/pages/index.astro` advantages、
+  `src/pages/about.astro`）；首頁統計數字已自動計算，不用改
+- 之後每年依 `npm run audit:products -- --list` 重確認一次（lastReviewed 超過 12 個月）
+- 發包紀錄：`REVIEW-DISCONTINUED-20261019`｜Codex `gpt-5.6-sol xhigh` 唯讀盲審｜T2
+  （部署）｜11 條（0 P0）：採納 9（詢價單標停產、只剩停產品的廠牌保留篩選、
+  資料夾＝分類檢查、lastReviewed 嚴格格式、audit 日曆日截止與壞資料報錯、
+  aria-live 計數、純停產結果文字、後繼縮圖 alt=""）；不採納 2（新樣式寫
+  `#ffffff`＝沿用既有慣例；無 JS 找不到停產品＝既有搜尋本就需 JS，停產頁仍在
+  sitemap）
 
 ## 剩餘待辦
 
@@ -51,6 +82,8 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
 - **加產品**：`src/content/products/<分類slug>/<型號slug>.md` + 圖到
   `public/images/products/<slug>.jpg`（格式見 CLAUDE.md；`brand:` 顯示名
   要沿用 BRAND-REVIEW.md 第三節清單，拼法不同會變成兩個篩選項）→ push 自動上線
+- **產品停產**：不刪檔，在該 .md 加 `status: discontinued`；有新款就加
+  `replacedBy: "新款檔名"`（新款要先有自己的 .md）→ push。寫錯 build 會擋下並說明
 - **加消息**：`src/content/news/xxx.md`，frontmatter 放 `title: "標題"`、
   `date: 2026-08-01`，內文 Markdown → push 自動上線（新到舊排序）
 - **詢價信**：寄到 conwencf@ms19.hinet.net（寄件者 Formspree，建議設安全
@@ -80,7 +113,9 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
 ## 已確認的業主決策
 
 1. 詢價寄信走 Formspree 免費方案（已上線）；商品管理用 Markdown 工作流
-2. 繁體中文 only；舊站 10 分類全遷、停售品業主後續自行刪
+2. 繁體中文 only；舊站 10 分類全遷。停售品**改為標 `status: discontinued`
+   保留頁面、不刪檔**（2026-10-19 使用者同意；原決策為「業主後續自行刪」）——
+   保住舊型號搜尋流量並導向後繼機種
 3. 交接用本檔；同指令權限確認 2 次以上加 allowlist（存長期記憶）
 4. 地址/電話/資本額沿用舊站資料，業主 2026-07-07 確認為現況
 5. 舊消息移除；日後由業主加新消息（新產品追加等）
@@ -92,12 +127,27 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
   `Emulation.setDeviceMetricsOverride {width:390, mobile:true}` +
   `Page.captureScreenshot`；Node 24 內建 WebSocket 即可驅動 CDP，無需 puppeteer
 - Edge 路徑：`C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe`
+- **改動不應影響外觀時的回歸驗證**：`git worktree add` 舊版到 scratchpad、
+  junction node_modules、兩邊 build 後把 dist 的 HTML 去掉 `_astro/` hash、
+  inline module script、`<style>`、cid、空白後逐檔比對（2026-10-19 用過，265 檔）
+- **停產功能測試**：暫時把幾個 .md 加 `status`/`replacedBy`（含鏈與錯誤樣本）
+  build＋CDP 實測，**測完務必還原**（先備份到 scratchpad 再改）
+- Excel 驗證：本機有 Excel（無 LibreOffice）→ PowerShell COM 唯讀開檔
+  `CalculateFull` 讀公式結果、`ExportAsFixedFormat` 出 PDF 再用 pymupdf 轉圖檢查
+  版面。**.ps1 內不可有中文**（PS 5.1 以 cp950 讀無 BOM 檔會吞換行，L-094 實踩）；
+  中文值用 `[string]::new([char[]](0x4ECD,…))` 組
+- Python：PATH 上的 `python` 是別的專案 venv（L-037），用 `py -3 -m venv`
+  在 scratchpad 建隔離環境裝 openpyxl/pymupdf
 - Pages deploy 偶發 "Deployment failed, try again later"（本專案遇過 2 次）
   → `gh run rerun <id> --failed` 即可
 - 驗收流程：`npm.cmd run build` 零錯誤 → preview + CDP 實測關鍵流程 →
   curl 線上路由 → 一事一 commit（訊息附驗證結果）
 
 ## 已知注意事項
+
+- （小問題，未修）站上沒有 favicon，瀏覽器請求 `/favicon.ico` 會 404；
+  詢價頁 `.inquiry-remove` 是 scoped 樣式，JS 產生的「移除」按鈕吃不到
+  （仍有全域 `.btn` 外觀，不影響使用）——JS 產生的元素要用 `:global(...)`
 
 - **2026-07-07 手機版圖片爆版已修**（業主 iOS Safari 回報，截圖存 `bug/`）：
   產品卡與產品內頁圖片原用「`aspect-ratio` flex 容器 + 圖片百分比
