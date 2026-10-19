@@ -5,6 +5,7 @@ import CategoryChips from "../../../components/CategoryChips.astro";
 import { categories } from "../../../data/categories";
 import Layout from "../../../layouts/Layout.astro";
 import { withBase } from "../../../utils/url";
+import { compareProducts, isDiscontinued, productPath, resolveSuccessor, type Product } from "../../../utils/products";
 
 export async function getStaticPaths() {
   const allProducts = await getCollection("products");
@@ -13,31 +14,23 @@ export async function getStaticPaths() {
     params: { category: category.slug },
     props: {
       category,
-      products: allProducts
-        .filter((product) => product.data.category === category.slug)
-        .sort((a, b) => {
-          const orderDiff =
-            (a.data.order ?? Number.MAX_SAFE_INTEGER) - (b.data.order ?? Number.MAX_SAFE_INTEGER);
-
-          if (orderDiff !== 0) {
-            return orderDiff;
-          }
-
-          return a.data.model.localeCompare(b.data.model, "zh-Hant-TW");
-        }),
+      allProducts,
+      products: allProducts.filter((product) => product.data.category === category.slug).sort(compareProducts),
     },
   }));
 }
 
-const { category, products } = Astro.props;
+const { category, products, allProducts } = Astro.props;
+const activeCount = products.filter((product) => !isDiscontinued(product)).length;
+const discontinuedCount = products.length - activeCount;
 
-const productPath = (id: string) => {
-  const [categorySlug, slug] = id.split("/");
-  return `/products/${categorySlug}/${slug}/`;
-};
-
-const productSearchText = (product: (typeof products)[number]) =>
+const productSearchText = (product: Product) =>
   `${product.data.model} ${product.data.title} ${product.data.brand ?? ""}`.toLowerCase();
+
+const successorLink = (product: Product) => {
+  const successor = isDiscontinued(product) ? resolveSuccessor(product, allProducts) : undefined;
+  return successor ? { href: productPath(successor.id), model: successor.data.model } : undefined;
+};
 ---
 
 <Layout title={category.name}>
@@ -67,11 +60,22 @@ const productSearchText = (product: (typeof products)[number]) =>
             name="keyword"
             placeholder="輸入型號、產品名稱或品牌"
             autocomplete="off"
+            aria-describedby={discontinuedCount > 0 ? "product-hint" : undefined}
             data-product-search
           />
         </label>
-        <p class="product-count" data-product-visible-count>顯示 {products.length} / {products.length} 項產品</p>
+        <p class="product-count" data-product-visible-count role="status" aria-live="polite">
+          顯示 {activeCount} / {activeCount} 項產品
+        </p>
       </div>
+
+      {
+        discontinuedCount > 0 && (
+          <p class="product-hint" id="product-hint">
+            另有 {discontinuedCount} 項停產機種未列出，輸入型號搜尋即可查看與後繼機種。
+          </p>
+        )
+      }
 
       <div class="product-grid">
         {
@@ -84,6 +88,8 @@ const productSearchText = (product: (typeof products)[number]) =>
               brand={product.data.brand}
               slug={product.id}
               search={productSearchText(product)}
+              discontinued={isDiscontinued(product)}
+              successor={successorLink(product)}
             />
           ))
         }
@@ -100,18 +106,27 @@ const productSearchText = (product: (typeof products)[number]) =>
     const cards = Array.from(root.querySelectorAll<HTMLElement>("[data-product-card]"));
     const empty = root.querySelector<HTMLElement>("[data-product-empty]");
     const count = root.querySelector<HTMLElement>("[data-product-visible-count]");
+    const activeCards = cards.filter((card) => !card.hasAttribute("data-discontinued"));
 
     const update = () => {
       const keyword = input?.value.trim().toLowerCase() ?? "";
+      // 停產品只在有輸入關鍵字、或整個分類都停產時顯示，讓找舊型號的客戶看得到後繼機種
+      const showDiscontinued = Boolean(keyword) || activeCards.length === 0;
       let visible = 0;
+      let visibleDiscontinued = 0;
 
       for (const card of cards) {
         const searchText = card.dataset.search ?? "";
-        const isVisible = !keyword || searchText.includes(keyword);
+        const isDiscontinued = card.hasAttribute("data-discontinued");
+        const isVisible = (!keyword || searchText.includes(keyword)) && (!isDiscontinued || showDiscontinued);
         card.hidden = !isVisible;
 
         if (isVisible) {
           visible += 1;
+
+          if (isDiscontinued) {
+            visibleDiscontinued += 1;
+          }
         }
       }
 
@@ -120,7 +135,13 @@ const productSearchText = (product: (typeof products)[number]) =>
       }
 
       if (count) {
-        count.textContent = `顯示 ${visible} / ${cards.length} 項產品`;
+        const visibleActive = visible - visibleDiscontinued;
+        count.textContent =
+          visibleDiscontinued === 0
+            ? `顯示 ${visibleActive} / ${activeCards.length} 項產品`
+            : visibleActive === 0
+              ? `找到 ${visibleDiscontinued} 項停產機種`
+              : `顯示 ${visibleActive} / ${activeCards.length} 項產品，另找到 ${visibleDiscontinued} 項停產機種`;
       }
     };
 
@@ -181,6 +202,12 @@ const productSearchText = (product: (typeof products)[number]) =>
     color: var(--color-muted);
     font-size: 0.95rem;
     white-space: nowrap;
+  }
+
+  .product-hint {
+    margin: calc(-1 * var(--space-1)) 0 var(--space-3);
+    color: var(--color-muted);
+    font-size: 0.92rem;
   }
 
   .product-grid {

@@ -1,7 +1,18 @@
 ---
+import { getCollection } from "astro:content";
 import { COMPANY, FORMSPREE_ENDPOINT } from "../data/site";
 import Layout from "../layouts/Layout.astro";
+import { isDiscontinued, resolveSuccessor } from "../utils/products";
 import { withBase } from "../utils/url";
+
+// 詢價車存的是加入當下的資料；停產狀態以建置時為準，讓清單與寄出的信都標得出停產與後繼機種
+const products = await getCollection("products");
+const discontinuedNotes = Object.fromEntries(
+  products.filter(isDiscontinued).map((product) => {
+    const successor = resolveSuccessor(product, products);
+    return [product.id, successor ? `已停產，後繼機種 ${successor.data.model}` : "已停產"];
+  }),
+);
 ---
 
 <Layout title="詢價單">
@@ -10,6 +21,7 @@ import { withBase } from "../utils/url";
     id="inquiry-page"
     data-formspree-endpoint={FORMSPREE_ENDPOINT}
     data-company-email={COMPANY.email}
+    data-discontinued-notes={JSON.stringify(discontinuedNotes)}
   >
     <div class="container">
       <div class="section-title">
@@ -95,6 +107,15 @@ import { withBase } from "../utils/url";
     const endpoint = root.dataset.formspreeEndpoint?.trim() ?? "";
     const companyEmail = root.dataset.companyEmail ?? "";
     const api = window.ConwenInquiry;
+    let discontinuedNotes: Record<string, string> = {};
+
+    try {
+      discontinuedNotes = JSON.parse(root.dataset.discontinuedNotes ?? "{}");
+    } catch {
+      discontinuedNotes = {};
+    }
+
+    const noteFor = (slug: string) => discontinuedNotes[slug] ?? "";
 
     const showMessage = (text: string, type: "success" | "error" | "notice") => {
       if (!message) {
@@ -108,7 +129,10 @@ import { withBase } from "../utils/url";
 
     const productsText = () =>
       (api?.getItems() ?? [])
-        .map((item) => `${item.model} x ${item.qty} ${item.title}`)
+        .map((item) => {
+          const note = noteFor(item.slug);
+          return `${item.model} x ${item.qty} ${item.title}${note ? `（${note}）` : ""}`;
+        })
         .join("\n");
 
     const renderItems = () => {
@@ -132,6 +156,13 @@ import { withBase } from "../utils/url";
 
         model.textContent = item.model;
         title.textContent = item.title;
+
+        if (noteFor(item.slug)) {
+          const note = document.createElement("span");
+          note.className = "inquiry-note";
+          note.textContent = noteFor(item.slug);
+          title.append(note);
+        }
         qty.type = "number";
         qty.min = "1";
         qty.max = "999";
@@ -362,6 +393,14 @@ import { withBase } from "../utils/url";
   .inquiry-remove {
     min-height: 40px;
     padding-inline: 0.85rem;
+  }
+
+  /* 列由 JS 產生、沒有 scoped cid，須用 :global */
+  .inquiry-table :global(.inquiry-note) {
+    display: block;
+    color: var(--color-accent-dark);
+    font-size: 0.85rem;
+    font-weight: 700;
   }
 
   .inquiry-form {

@@ -4,18 +4,23 @@ import ProductCard from "../../components/ProductCard.astro";
 import CategoryChips from "../../components/CategoryChips.astro";
 import { categories } from "../../data/categories";
 import Layout from "../../layouts/Layout.astro";
+import { compareProducts, isDiscontinued, productPath, resolveSuccessor, type Product } from "../../utils/products";
 
 const categoryOrder = new Map(categories.map((category) => [category.slug, category.order]));
 
-const productPath = (id: string) => {
-  const [category, slug] = id.split("/");
-  return `/products/${category}/${slug}/`;
-};
-
-const productSearchText = (product: Awaited<ReturnType<typeof getCollection<"products">>>[number]) =>
+const productSearchText = (product: Product) =>
   `${product.data.model} ${product.data.title} ${product.data.brand ?? ""}`.toLowerCase();
 
-const products = (await getCollection("products")).sort((a, b) => {
+const allProducts = await getCollection("products");
+
+// 停產品排在全部現行產品之後，前端預設隱藏，輸入關鍵字時才顯示符合者
+const products = [...allProducts].sort((a, b) => {
+  const statusDiff = Number(isDiscontinued(a)) - Number(isDiscontinued(b));
+
+  if (statusDiff !== 0) {
+    return statusDiff;
+  }
+
   const categoryDiff =
     (categoryOrder.get(a.data.category) ?? Number.MAX_SAFE_INTEGER) -
     (categoryOrder.get(b.data.category) ?? Number.MAX_SAFE_INTEGER);
@@ -24,20 +29,22 @@ const products = (await getCollection("products")).sort((a, b) => {
     return categoryDiff;
   }
 
-  const orderDiff = (a.data.order ?? Number.MAX_SAFE_INTEGER) - (b.data.order ?? Number.MAX_SAFE_INTEGER);
-
-  if (orderDiff !== 0) {
-    return orderDiff;
-  }
-
-  return a.data.model.localeCompare(b.data.model, "zh-Hant-TW");
+  return compareProducts(a, b);
 });
+const activeCount = products.filter((product) => !isDiscontinued(product)).length;
+const discontinuedCount = products.length - activeCount;
 
+const successorLink = (product: Product) => {
+  const successor = isDiscontinued(product) ? resolveSuccessor(product, allProducts) : undefined;
+  return successor ? { href: productPath(successor.id), model: successor.data.model } : undefined;
+};
+
+// 廠牌選項含只剩停產品的廠牌，讓代理廠牌頁與首頁的 ?brand= 連結不會失效；數量只算現行產品
 const brandCounts = new Map<string, number>();
 for (const product of products) {
   const brand = product.data.brand?.trim();
   if (brand) {
-    brandCounts.set(brand, (brandCounts.get(brand) ?? 0) + 1);
+    brandCounts.set(brand, (brandCounts.get(brand) ?? 0) + (isDiscontinued(product) ? 0 : 1));
   }
 }
 const brandOptions = [...brandCounts.entries()].sort(
@@ -64,6 +71,7 @@ const brandOptions = [...brandCounts.entries()].sort(
             name="keyword"
             placeholder="輸入型號、產品名稱或廠牌"
             autocomplete="off"
+            aria-describedby={discontinuedCount > 0 ? "product-hint" : undefined}
             data-product-search
           />
         </label>
@@ -71,11 +79,27 @@ const brandOptions = [...brandCounts.entries()].sort(
           <span>廠牌</span>
           <select data-product-brand>
             <option value="">全部廠牌</option>
-            {brandOptions.map(([brand, count]) => <option value={brand}>{brand}（{count}）</option>)}
+            {
+              brandOptions.map(([brand, count]) => (
+                <option value={brand}>
+                  {brand}（{count > 0 ? count : "僅停產機種"}）
+                </option>
+              ))
+            }
           </select>
         </label>
-        <p class="product-count" data-product-visible-count>顯示 {products.length} / {products.length} 項產品</p>
+        <p class="product-count" data-product-visible-count role="status" aria-live="polite">
+          顯示 {activeCount} / {activeCount} 項產品
+        </p>
       </div>
+
+      {
+        discontinuedCount > 0 && (
+          <p class="product-hint" id="product-hint">
+            另有 {discontinuedCount} 項停產機種未列出，輸入型號搜尋即可查看與後繼機種。
+          </p>
+        )
+      }
 
       <div class="product-grid">
         {
@@ -88,6 +112,8 @@ const brandOptions = [...brandCounts.entries()].sort(
               brand={product.data.brand}
               slug={product.id}
               search={productSearchText(product)}
+              discontinued={isDiscontinued(product)}
+              successor={successorLink(product)}
             />
           ))
         }
@@ -105,21 +131,31 @@ const brandOptions = [...brandCounts.entries()].sort(
     const cards = Array.from(root.querySelectorAll<HTMLElement>("[data-product-card]"));
     const empty = root.querySelector<HTMLElement>("[data-product-empty]");
     const count = root.querySelector<HTMLElement>("[data-product-visible-count]");
+    const activeCards = cards.filter((card) => !card.hasAttribute("data-discontinued"));
+    const brandsWithActive = new Set(activeCards.map((card) => card.dataset.brand ?? ""));
 
     const update = () => {
       const keyword = input?.value.trim().toLowerCase() ?? "";
       const brand = brandSelect?.value ?? "";
+      // 停產品只在有輸入關鍵字、或所選廠牌只剩停產品時顯示，讓找舊型號的客戶看得到後繼機種
+      const showDiscontinued = Boolean(keyword) || (Boolean(brand) && !brandsWithActive.has(brand));
       let visible = 0;
+      let visibleDiscontinued = 0;
 
       for (const card of cards) {
         const searchText = card.dataset.search ?? "";
+        const isDiscontinued = card.hasAttribute("data-discontinued");
         const matchesKeyword = !keyword || searchText.includes(keyword);
         const matchesBrand = !brand || card.dataset.brand === brand;
-        const isVisible = matchesKeyword && matchesBrand;
+        const isVisible = matchesKeyword && matchesBrand && (!isDiscontinued || showDiscontinued);
         card.hidden = !isVisible;
 
         if (isVisible) {
           visible += 1;
+
+          if (isDiscontinued) {
+            visibleDiscontinued += 1;
+          }
         }
       }
 
@@ -128,7 +164,13 @@ const brandOptions = [...brandCounts.entries()].sort(
       }
 
       if (count) {
-        count.textContent = `顯示 ${visible} / ${cards.length} 項產品`;
+        const visibleActive = visible - visibleDiscontinued;
+        count.textContent =
+          visibleDiscontinued === 0
+            ? `顯示 ${visibleActive} / ${activeCards.length} 項產品`
+            : visibleActive === 0
+              ? `找到 ${visibleDiscontinued} 項停產機種`
+              : `顯示 ${visibleActive} / ${activeCards.length} 項產品，另找到 ${visibleDiscontinued} 項停產機種`;
       }
     };
 
@@ -220,6 +262,12 @@ const brandOptions = [...brandCounts.entries()].sort(
     color: var(--color-muted);
     font-size: 0.95rem;
     white-space: nowrap;
+  }
+
+  .product-hint {
+    margin: calc(-1 * var(--space-1)) 0 var(--space-3);
+    color: var(--color-muted);
+    font-size: 0.92rem;
   }
 
   .product-grid {

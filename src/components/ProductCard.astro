@@ -9,17 +9,27 @@ interface Props {
   slug: string;
   brand?: string;
   search?: string;
+  discontinued?: boolean;
+  successor?: { href: string; model: string };
 }
 
-const { href, image, model, title, slug, brand, search } = Astro.props;
+const { href, image, model, title, slug, brand, search, discontinued = false, successor } = Astro.props;
 const imageAlt = `${model} ${title} 產品圖片`;
-const linkLabel = `查看 ${model} ${title}`;
+const linkLabel = `查看 ${model} ${title}${discontinued ? "（已停產）" : ""}`;
 ---
 
-<article class="card product-card" data-product-card data-search={search} data-brand={brand ?? ""}>
+<article
+  class:list={["card product-card", { "is-discontinued": discontinued }]}
+  data-product-card
+  data-search={search}
+  data-brand={brand ?? ""}
+  data-discontinued={discontinued ? "" : undefined}
+  hidden={discontinued}
+>
   <a class="product-card__overlay" href={withBase(href)} aria-label={linkLabel}></a>
   <div class="product-card__media">
     <img src={withBase(image)} alt={imageAlt} loading="lazy" decoding="async" />
+    {discontinued && <span class="product-card__badge">已停產</span>}
   </div>
   <div class="product-card__body">
     <p class="product-card__model">
@@ -29,16 +39,24 @@ const linkLabel = `查看 ${model} ${title}`;
     <h2 class="product-card__title">{title}</h2>
   </div>
   <div class="product-card__actions">
-    <button
-      class="btn btn-accent product-card__button"
-      type="button"
-      data-inquiry-add
-      data-slug={slug}
-      data-model={model}
-      data-title={title}
-    >
-      加入詢價單
-    </button>
+    {
+      successor ? (
+        <a class="btn product-card__button" href={withBase(successor.href)}>
+          改看後繼機種 {successor.model}
+        </a>
+      ) : (
+        <button
+          class="btn btn-accent product-card__button"
+          type="button"
+          data-inquiry-add
+          data-slug={slug}
+          data-model={model}
+          data-title={title}
+        >
+          {discontinued ? "詢問替代機種" : "加入詢價單"}
+        </button>
+      )
+    }
   </div>
 </article>
 
@@ -95,6 +113,23 @@ const linkLabel = `查看 ${model} ${title}`;
     max-width: calc(100% - 2 * var(--space-2));
     max-height: calc(100% - 2 * var(--space-2));
     object-fit: contain;
+  }
+
+  .is-discontinued .product-card__media img {
+    filter: grayscale(0.7);
+    opacity: 0.75;
+  }
+
+  .product-card__badge {
+    position: absolute;
+    top: var(--space-1);
+    left: var(--space-1);
+    padding: 0.1rem 0.55rem;
+    border-radius: 999px;
+    background: var(--color-muted);
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 700;
   }
 
   .product-card__body {

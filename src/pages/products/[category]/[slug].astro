@@ -4,50 +4,54 @@ import ProductCard from "../../../components/ProductCard.astro";
 import { categories } from "../../../data/categories";
 import Layout from "../../../layouts/Layout.astro";
 import { withBase } from "../../../utils/url";
+import {
+  assertValidProducts,
+  compareProducts,
+  isDiscontinued,
+  productPath,
+  resolveSuccessor,
+  type Product,
+} from "../../../utils/products";
 
 export async function getStaticPaths() {
   const products = await getCollection("products");
+  assertValidProducts(products);
 
   return products.map((product) => {
     const [category, slug] = product.id.split("/");
 
     return {
       params: { category, slug },
-      props: { product },
+      props: { product, successor: isDiscontinued(product) ? resolveSuccessor(product, products) : undefined },
     };
   });
 }
 
-const { product } = Astro.props;
+const { product, successor } = Astro.props;
 const [categorySlug] = product.id.split("/");
 const category = categories.find((item) => item.slug === categorySlug);
 const { Content } = await render(product);
+const discontinued = isDiscontinued(product);
 
 const relatedProducts = (await getCollection("products"))
-  .filter((item) => item.data.category === product.data.category && item.id !== product.id)
-  .sort((a, b) => {
-    const orderDiff = (a.data.order ?? Number.MAX_SAFE_INTEGER) - (b.data.order ?? Number.MAX_SAFE_INTEGER);
-
-    if (orderDiff !== 0) {
-      return orderDiff;
-    }
-
-    return a.data.model.localeCompare(b.data.model, "zh-Hant-TW");
-  })
+  .filter(
+    (item) => item.data.category === product.data.category && item.id !== product.id && !isDiscontinued(item),
+  )
+  .sort(compareProducts)
   .slice(0, 4);
 
-const productPath = (id: string) => {
-  const [itemCategory, itemSlug] = id.split("/");
-  return `/products/${itemCategory}/${itemSlug}/`;
-};
-
-const productSearchText = (item: (typeof relatedProducts)[number]) =>
+const productSearchText = (item: Product) =>
   `${item.data.model} ${item.data.title} ${item.data.brand ?? ""}`.toLowerCase();
 
 const brandName = product.data.brand?.trim();
-const pageTitle = [brandName, product.data.model, product.data.title].filter(Boolean).join(" ");
+const productName = [brandName, product.data.model, product.data.title].filter(Boolean).join(" ");
+const pageTitle = discontinued ? `${productName}（已停產）` : productName;
+const successorName = successor
+  ? [successor.data.brand?.trim(), successor.data.model, successor.data.title].filter(Boolean).join(" ")
+  : "";
 const pageDescription = [
-  `${pageTitle}。`,
+  `${productName}。`,
+  discontinued ? (successor ? `本型號已停產，後繼機種為 ${successorName}。` : "本型號已停產，歡迎洽詢替代機種。") : "",
   product.data.features[0] ? `${product.data.features[0]}。` : "",
   `耕紋貿易專業代理測試測量儀器，北中南三據點提供選型報價與維修保固服務。`,
 ].join("");
@@ -119,6 +123,32 @@ const breadcrumbJsonLd = JSON.stringify({
         </button>
 
         <div class="card product-detail__info">
+          {
+            discontinued && (
+              <div class="discontinued-notice" role="note">
+                <p class="discontinued-notice__title">本型號已停產</p>
+                {successor ? (
+                  <>
+                    <p>原廠已推出後繼機種，規格與報價歡迎洽詢；既有設備仍可洽詢維修服務。</p>
+                    <a class="successor-link" href={withBase(productPath(successor.id))}>
+                      <span class="successor-link__media">
+                        {/* 型號品名已是連結可見文字，縮圖設為裝飾避免讀屏重複朗讀 */}
+                        <img src={withBase(successor.data.image)} alt="" loading="lazy" decoding="async" />
+                      </span>
+                      <span class="successor-link__text">
+                        <span class="successor-link__label">後繼機種</span>
+                        <span class="successor-link__model">{successor.data.model}</span>
+                        <span>{successor.data.title}</span>
+                      </span>
+                      <span class="successor-link__arrow" aria-hidden="true">→</span>
+                    </a>
+                  </>
+                ) : (
+                  <p>歡迎加入詢價單或來電詢問替代機種；既有設備仍可洽詢維修服務。</p>
+                )}
+              </div>
+            )
+          }
           <p class="eyebrow">{brandName ?? "Product"}</p>
           <h1>{product.data.title}</h1>
           <dl class="product-meta">
@@ -166,7 +196,7 @@ const breadcrumbJsonLd = JSON.stringify({
               data-model={product.data.model}
               data-title={product.data.title}
             >
-              加入詢價單
+              {discontinued ? "詢問替代機種" : "加入詢價單"}
             </button>
             <a class="btn" href={withBase("/contact/")}>聯絡我們詢問</a>
           </div>
@@ -395,6 +425,92 @@ const breadcrumbJsonLd = JSON.stringify({
 
   .product-detail__info h1 {
     margin-bottom: var(--space-2);
+  }
+
+  .discontinued-notice {
+    display: grid;
+    gap: var(--space-1);
+    margin-bottom: var(--space-3);
+    padding: var(--space-2);
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-accent);
+    border-radius: 8px;
+    background: var(--color-soft-accent);
+  }
+
+  .discontinued-notice p {
+    margin: 0;
+  }
+
+  .discontinued-notice__title {
+    color: var(--color-accent-dark);
+    font-weight: 800;
+  }
+
+  .successor-link {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr) auto;
+    gap: var(--space-2);
+    align-items: center;
+    padding: var(--space-1);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: #ffffff;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: border-color 120ms ease, box-shadow 120ms ease;
+  }
+
+  .successor-link:hover,
+  .successor-link:focus-visible {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* 同產品圖：padding 撐 4:3 + 絕對定位，避開 iOS Safari aspect-ratio bug */
+  .successor-link__media {
+    position: relative;
+    display: block;
+  }
+
+  .successor-link__media::before {
+    content: "";
+    display: block;
+    padding-top: 75%;
+  }
+
+  .successor-link__media img {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .successor-link__text {
+    display: grid;
+    line-height: 1.45;
+  }
+
+  .successor-link__label {
+    color: var(--color-muted);
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .successor-link__model {
+    color: var(--color-primary-dark);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .successor-link__arrow {
+    color: var(--color-primary);
+    font-weight: 800;
   }
 
   .product-meta {

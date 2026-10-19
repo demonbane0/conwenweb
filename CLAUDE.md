@@ -61,12 +61,31 @@ features:                      # 特點列表（來自舊站 ◆ 項目）
   - 高精確度與穩定性
   - 19 種全方位量測功能
 order: 10                      # 分類內排序，選填
+status: discontinued           # 選填，預設 active；停產品才寫
+replacedBy: "m3510a"           # 選填，後繼機種檔名 slug（或「分類/檔名」），加引號
+lastReviewed: "2026-10-19"     # 選填，最後確認資料仍正確的日期
 ---
 （選填的補充說明內文）
 ```
 
 **新增商品 = 新增一個上述格式的 .md 檔 + 一張圖到 public/images/products/，
 push 後自動部署。** 所有設計決策不得破壞這個工作流程。
+
+### 停產與後繼機種
+
+- **停產品不刪檔**，改標 `status: discontinued`：從列表與首頁統計排除
+  （輸入關鍵字搜尋、或所選廠牌／分類只剩停產品時才顯示），產品頁保留
+  （接住舊型號搜尋流量）並顯示停產提示、後繼機種連結，詢價按鈕改
+  「詢問替代機種」；詢價單與寄出的信會標「已停產，後繼機種 X」
+- `replacedBy` 指向後繼機種；後繼也停產時自動沿鏈找現行機種。指向不存在、
+  自己或形成循環、或用在非停產品上，**build 會失敗**並列出檔名；
+  檔案所在資料夾與 `category` 不一致也會擋（`src/utils/products.ts` 的
+  `assertValidProducts`，掛在產品頁 getStaticPaths）
+- `lastReviewed` 必須是有效的 `YYYY-MM-DD` 且不晚於明天，否則 build 失敗
+- 純數字 slug（如 `2006`）雖有容錯，仍一律加引號（YAML 陷阱）
+- 維護報表：`npm run audit:products`（各廠牌現行／停產／待確認數；
+  `-- --brand "廠牌名"` 看明細、`-- --list` 列全部待確認），唯讀不改檔
+- 共用判斷／排序／路徑 helper 在 `src/utils/products.ts`，新頁面一律沿用
 
 - 圖檔名一律用 slug（ASCII），不用中文檔名
 - `brand` 建議填寫：/products 頁有廠牌下拉篩選（支援 `?brand=` URL 參數，
