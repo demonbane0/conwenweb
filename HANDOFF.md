@@ -158,11 +158,10 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
      自動 approved＋強制 HTTPS）
   4. `gh workflow run "Deploy to GitHub Pages" --ref main` → 盯到 success
   5. curl 驗 apex／www／github.io／http 轉址
-- [ ] **未解：`https://www.conwen.com.tw` 回 404**（GitHub「Site not found」）——
-  2026-10-19 重建 Pages 後出現；`http://www` 正常 301 → apex、憑證含 www 且有效、
-  `pages/health` 判 alt_domain 有效。已試（主網域全程 200）：重存 cname、重新部署、
-  強制 HTTPS 關→開，各等 15–30 分鐘無效。下一步依序：等滿 24 小時 →
-  離峰時段解除再重綁 cname（主網域可能中斷數分鐘）→ GitHub Support
+  6. **若 `https://www` 仍回 404「Site not found」**（`http://www` 卻正常 301）：
+     強制 HTTPS 關→開——`gh api -X PUT "repos/{owner}/{repo}/pages" -F https_enforced=false`，
+     等 20 秒再 `-F https_enforced=true`，約 2 分鐘後 www 恢復 301（2026-10-19 實證；
+     單純重存 cname、重新部署各等 30 分鐘都無效）。主網域全程不中斷
 
 - （小問題，未修）站上沒有 favicon，瀏覽器請求 `/favicon.ico` 會 404；
   詢價頁 `.inquiry-remove` 是 scoped 樣式，JS 產生的「移除」按鈕吃不到
