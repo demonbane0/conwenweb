@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { COMPANY } from "../data/site";
+import { COMPANY, formatAddress } from "../data/site";
 
 const offices = COMPANY.branches.map((branch) => ({
   ...branch,
@@ -24,7 +24,7 @@ const offices = COMPANY.branches.map((branch) => ({
               <div>
                 <h2>{office.name}</h2>
                 <div class="contact-lines">
-                  <p>地址：{office.address}</p>
+                  <p>地址：{formatAddress(office)}</p>
                   <p>
                     電話：<a href={office.telHref}>{office.phone}</a>
                   </p>

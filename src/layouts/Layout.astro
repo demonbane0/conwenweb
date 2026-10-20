@@ -1,7 +1,7 @@
 ---
 import "../styles/global.css";
 import LogoMark from "../components/LogoMark.astro";
-import { COMPANY } from "../data/site";
+import { COMPANY, formatAddress } from "../data/site";
 import { withBase } from "../utils/url";
 
 interface Props {
@@ -104,7 +104,7 @@ const ogImage = new URL(withBase("/images/og.png"), Astro.site).href;
             COMPANY.branches.map((branch) => (
               <section class="footer-office">
                 <h3>{branch.name}</h3>
-                <p>{branch.address}</p>
+                <p>{formatAddress(branch)}</p>
                 <p>
                   <a href={`tel:${branch.phone.replace(/[^\d+]/g, "")}`}>{branch.phone}</a>
                 </p>
