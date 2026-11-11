@@ -145,7 +145,22 @@ const successorLink = (product: Product) => {
       }
     };
 
-    input?.addEventListener("input", update);
+    // 注音等輸入法選字期間不篩選：未選字的「ㄉㄧㄢˋ」比對不到任何產品，會讓整片卡片閃成「找不到」
+    let composing = false;
+    input?.addEventListener("compositionstart", () => {
+      composing = true;
+    });
+    input?.addEventListener("compositionend", () => {
+      composing = false;
+      update();
+    });
+    input?.addEventListener("input", (event) => {
+      if (composing || (event as InputEvent).isComposing) {
+        return;
+      }
+
+      update();
+    });
     update();
   }
 </script>

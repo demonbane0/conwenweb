@@ -1,8 +1,8 @@
 # HANDOFF — Session 交接文件
 
 > 每個 session 開始先讀本檔 + CLAUDE.md；有變動時收尾前更新並 commit。
-> 最後更新：2026-11-04（Kyoritsu 價格表 vs 網站比對報告產出，等老闆勾選）
-> 前次：2026-10-20（台中、高雄分公司遷址：地址更新＋發布遷址消息）
+> 最後更新：2026-11-11（裝 modern-web-guidance 外掛＋前端四項小修）
+> 前次：2026-11-04（Kyoritsu 價格表 vs 網站比對報告產出，等老闆勾選）
 
 ## 專案狀態：✅ 網站上線；🔄 產品資料更新進行中（見下方「產品資料更新」）
 
@@ -74,6 +74,10 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
   與 sitemap 提交，狀態「成功」，網頁陸續收錄中）。之後到 GSC 看
   關鍵字曝光/點擊與收錄進度（「網頁」報表）；新增產品後 sitemap 會自動
   更新，不用重提交
+- [ ] **請業主用 iPhone 驗證注音搜尋**：iOS Safari 在 /products/ 搜尋框打注音
+  （例「電錶」），確認選字過程中產品卡不會閃成「找不到符合產品」。2026-11-11
+  的修正只在 Chromium（Edge headless＋CDP 模擬 composition 事件，含 Safari 事件順序）
+  驗證過，**iOS/WebKit 未真機驗證**（L-032）
 - [ ]（可選）流量分析工具：業主若想看訪客數/來源，申請 GA4 取得
   評估 ID（G-XXXXXXX）給 Claude 接上即可；不裝也不影響 SEO
 
@@ -118,6 +122,10 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
    修 `[hidden]` 被 display:grid 蓋掉的篩選 bug、燈箱、SEO
 4. **收尾**（2026-07-07）：廠牌 231/231、frontend-design plugin 最終美化
    （刻度尺/等寬字/導覽指示/OG）、自訂網域切換、Formspree 接線、表單防呆
+5. **2026-11-11**：裝 `modern-web-guidance` 外掛（Google Chrome 團隊，專案範圍；
+   `legacy-scan` 0 項）＋依其指南四項小修：注音選字期間不篩選、產品頁主圖
+   `fetchpriority="high"`（不 lazy）、燈箱 `overscroll-behavior` 防背景捲動
+   （Safari 不生效，漸進增強）、段落 `text-wrap: pretty`（標題試過 balance 會拆中文詞，已撤）
 
 ## 已確認的業主決策
 
@@ -152,6 +160,9 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
   在 scratchpad 建隔離環境裝 openpyxl/pymupdf
 - Pages deploy 偶發 "Deployment failed, try again later"（本專案遇過 2 次）
   → `gh run rerun <id> --failed` 即可
+- **注音篩選測法**：CDP 對搜尋框依序派 `compositionstart` → `input`（isComposing、值為注音）
+  → `compositionend` → `input`（isComposing:false，模擬 Safari 順序），斷言選字中卡片數不變、
+  不顯示「找不到」（2026-11-11 修正前的正式站可重現閃空）
 - 驗收流程：`npm.cmd run build` 零錯誤 → preview + CDP 實測關鍵流程 →
   curl 線上路由 → 一事一 commit（訊息附驗證結果）
 

@@ -110,7 +110,7 @@ const breadcrumbJsonLd = JSON.stringify({
           <img
             src={withBase(product.data.image)}
             alt={`${product.data.model} ${product.data.title} 產品圖片`}
-            loading="lazy"
+            fetchpriority="high"
             decoding="async"
           />
           <span class="product-detail__zoom" aria-hidden="true">
@@ -370,7 +370,15 @@ const breadcrumbJsonLd = JSON.stringify({
     box-shadow: 0 24px 64px rgba(8, 31, 58, 0.4);
   }
 
+  /* 燈箱開著時，捲動手勢不傳到底下頁面（漸進增強：Chrome/Edge 144+、Firefox 150+；
+     不改 body overflow，避免捲軸消失造成版面跳動、sticky header 失效） */
+  .lightbox:modal {
+    overscroll-behavior: contain;
+  }
+
   .lightbox::backdrop {
+    overflow: hidden;
+    overscroll-behavior: contain;
     background: rgba(8, 31, 58, 0.72);
   }
 

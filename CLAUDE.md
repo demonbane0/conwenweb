@@ -14,6 +14,9 @@ frameset 舊站重建為現代靜態網站。
 - CSS：單一 `src/styles/global.css` 設計代幣 + 各元件 scoped `<style>`；不用 Tailwind
 - 字體：Noto Sans TC（Google Fonts），全站 UTF-8、繁體中文、`lang="zh-Hant-TW"`
 - 部署：GitHub Actions → GitHub Pages
+- **瀏覽器支援**：Baseline Widely available 的功能直接用；Newly／Limited available 的
+  功能只能當漸進增強（不支援的瀏覽器照常可用，不寫 polyfill）——B2B 客戶公司電腦可能較舊。
+  `modern-web-guidance` 外掛（專案範圍啟用）依此判斷是否需要 fallback
 
 ## 指令
 
@@ -123,6 +126,7 @@ push 後自動部署。** 所有設計決策不得破壞這個工作流程。
   （僅用於粗體大字或非文字元素）、藍底淡色 `#e8eef6`、
   背景 `#ffffff` / 區塊底 `#f4f6f9`、文字 `#1f2933`、次要文字 `#5b6b7c`、邊框 `#dde3ea`
 - **字級**：base 16px；h1 clamp(1.85rem,4vw,2.6rem)；行高 1.7；中文不用斜體；
+  段落 `text-wrap: pretty`，**標題不用 `text-wrap: balance`**（中文無詞界，會拆詞）；
   數字用 `tabular-nums`（統計、型號、序號）
 - **佈局**：max-width 1140px 置中；卡片圓角 10px、雙層淡陰影；間距 8px 的倍數
 - **識別元素**：`LogoMark.astro`（圓角方塊 + 白色波形 + 橙點）用於 header/footer；
@@ -135,7 +139,8 @@ push 後自動部署。** 所有設計決策不得破壞這個工作流程。
   （產品介紹、代理廠牌、公司簡介、最新消息、聯絡我們）+ 詢價單按鈕（橙色、含數量）
 - **手機**：≤768px 漢堡選單；產品格 1 欄、平板 2 欄、桌機 3 欄
 - **產品圖**：舊圖解析度低 — 一律置於固定比例（4:3）白底容器內 `object-fit: contain`，
-  不放大超過原始尺寸；`loading="lazy"`
+  不放大超過原始尺寸；列表／卡片圖 `loading="lazy"`，**產品頁主圖例外**（首屏最大元素，
+  改 `fetchpriority="high"`、不可 lazy，否則拖慢 LCP）
 - 禁止：跑馬燈、自動輪播、進場動畫等舊式效果；hover/focus 過渡 ≤150ms 即可
 - 無障礙：所有互動元件可鍵盤操作，圖片有 alt，對比至少 AA
 

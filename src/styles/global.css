@@ -100,6 +100,15 @@ p {
   margin-top: 0;
 }
 
+/* 斷行美化（漸進增強，舊瀏覽器忽略）：段落避免最後一行只剩一兩個字。
+   標題刻意不用 text-wrap: balance——中文無詞界，balance 只求各行等長，
+   實測把首頁「值得信賴的」拆成「值得信／賴的」（2026-11-11） */
+p,
+li,
+dd {
+  text-wrap: pretty;
+}
+
 h1,
 .h1 {
   color: var(--color-primary-dark);
