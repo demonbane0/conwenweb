@@ -125,6 +125,8 @@ const brandOptions = [...brandCounts.entries()].sort(
 </Layout>
 
 <script>
+  import { matchesKeyword, normalizeKeyword } from "../../utils/search";
+
   for (const root of document.querySelectorAll("[data-product-filter-root]")) {
     const input = root.querySelector<HTMLInputElement>("[data-product-search]");
     const brandSelect = root.querySelector<HTMLSelectElement>("[data-product-brand]");
@@ -135,7 +137,7 @@ const brandOptions = [...brandCounts.entries()].sort(
     const brandsWithActive = new Set(activeCards.map((card) => card.dataset.brand ?? ""));
 
     const update = () => {
-      const keyword = input?.value.trim().toLowerCase() ?? "";
+      const keyword = normalizeKeyword(input?.value ?? "");
       const brand = brandSelect?.value ?? "";
       // 停產品只在有輸入關鍵字、或所選廠牌只剩停產品時顯示，讓找舊型號的客戶看得到後繼機種
       const showDiscontinued = Boolean(keyword) || (Boolean(brand) && !brandsWithActive.has(brand));
@@ -145,9 +147,9 @@ const brandOptions = [...brandCounts.entries()].sort(
       for (const card of cards) {
         const searchText = card.dataset.search ?? "";
         const isDiscontinued = card.hasAttribute("data-discontinued");
-        const matchesKeyword = !keyword || searchText.includes(keyword);
+        const keywordHit = matchesKeyword(searchText, keyword);
         const matchesBrand = !brand || card.dataset.brand === brand;
-        const isVisible = matchesKeyword && matchesBrand && (!isDiscontinued || showDiscontinued);
+        const isVisible = keywordHit && matchesBrand && (!isDiscontinued || showDiscontinued);
         card.hidden = !isVisible;
 
         if (isVisible) {

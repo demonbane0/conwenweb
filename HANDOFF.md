@@ -1,15 +1,15 @@
 # HANDOFF — Session 交接文件
 
 > 每個 session 開始先讀本檔 + CLAUDE.md；有變動時收尾前更新並 commit。
-> 最後更新：2026-11-11（裝 modern-web-guidance 外掛＋前端四項小修）
-> 前次：2026-11-04（Kyoritsu 價格表 vs 網站比對報告產出，等老闆勾選）
+> 最後更新：2026-11-12（Kyoritsu 依價格表全面更新：新品 62 頁、停產 26 頁、既有 27 頁換官網內容）
+> 前次：2026-11-11（裝 modern-web-guidance 外掛＋前端四項小修）
 
 ## 專案狀態：✅ 網站上線；🔄 產品資料更新進行中（見下方「產品資料更新」）
 
 **正式網址：https://conwen.com.tw**（HTTPS 強制；舊網址
 demonbane0.github.io/conwenweb 自動 301 轉址）
 
-- 231 項產品全數遷移（10 分類），**廠牌 231/231 全數回填**（四輪查核：
+- 產品 294 頁（現行 268、停產 26；2026-11-12 Kyoritsu 更新後）。原 231 項全數遷移（10 分類），**廠牌 231/231 全數回填**（四輪查核：
   型號系列推斷 → GPT-5 網路查核 → 產品照商標辨識 → 業主人工確認；
   逐項清單見 `BRAND-FILLED.md`，查核紀錄見 `BRAND-REVIEW.md` 等三份 md）
 - 產品搜尋 + 分類 chips + 廠牌下拉篩選（`?brand=` 參數）、產品頁燈箱、
@@ -44,17 +44,30 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
   寧缺勿錯，比照 BRAND-REVIEW 多輪查核）→ 業主只改狀態欄 → Claude 批次改 .md
   （`status`/`replacedBy`/`lastReviewed`）＋新增後繼機種頁（圖用原廠圖，
   特點由規格書草擬中文、業主審）
-  - **2026-11-04 Kyoritsu 進度（等老闆勾選）**：業主提供代理商現行定價表
-    （有效期 2026-10～2027-03，PDF 9 頁）→ 產出 A4 比對報告（7 頁，**不含價格**、
-    每列 ☐ 勾選）給老闆決定。結果：網站 52 頁中 26 頁一致、10 頁型號字尾不同
-    （疑似改版，14 型號）、17 頁有型號不在價格表（疑似停產，18 型號）；價格表有、
-    網站無的儀器 58 款＋選配件 6 項。**價格表、報告、比對腳本與中間資料一律本機**：
-    放在 repo 根目錄 `KY價格表/`（已加進 `.git/info/exclude`，不會被 add；
-    建議日後移到 repo 外）。腳本 `KY價格表/比對工具/ky_compare.py`（型號轉錄＋
-    正規化比對，含與 PDF 文字層交叉核對）、`ky_report.py`（HTML→Edge headless
-    `--print-to-pdf` 出 A4）。收回勾選結果後：停產/改版走 `status`/`replacedBy`，
-    新品逐項建 .md（同系列可併頁）
-- [ ] 批次標停產上線前：發**里程碑紅隊審查**（對外發布節點）
+  - ✅ **2026-11-12 Kyoritsu 完成**（使用者指示「先以價格表為準」，取代 11-04
+    比對報告的逐項勾選）：價格表 104 個儀器型號全數處置——既有 27 頁換官網特點／
+    規格表／原廠圖（網址不變）、新增 62 頁、25 頁標停產＋新增 2040 停產頁（從
+    2040/2046R/2055/2056R 系列頁拆出）。決策見下方「已確認的業主決策」第 6 點。
+    內容來源：Kyoritsu 官網 EN 優先（台灣用外銷版）、無 EN 才用 JA；子代理中譯後以
+    驗收腳本逐頁比對原廠數字（不漏不杜撰），91/91 PASS
+  - [ ] **待業主／代理商**：① 5200、5201 照度計原廠只剩蓋「販売終了品」章的圖，
+    文字已寫好暫存在本機 `KY價格表/官網抽取工具/staging/`，有實品照或型錄圖再上架
+    （圖放 `public/images/products/5200-kyoritsu.jpg`／`5201.jpg`，md 搬回
+    `src/content/products/environmental/`；5200 檔名避開 PAN-GLOBE 的 high-voltage/5200）；
+    ② 3312（原廠 1995 停產，疑為 3442 誤植）、4113（查無）向代理商確認型號後再建頁；
+    ③ 選配件 6 項（8241、8115、8161、9189、8008、8112）業主決定這次不建頁
+  - 價格表上有、原廠已停產者照價格表當現行（2027、2608A、8030、5510、3021A/3023A、
+    4500），公開頁面**不寫**「原廠停產／價格表」等內部資訊
+  - **工具與中間資料一律本機**：`KY價格表/`（`.git/info/exclude` 排除）。11-04 比對腳本在
+    `比對工具/`；11-12 官網抽取全套在 `官網抽取工具/`：`ky_plan.py`（處置對照表，L-067
+    單一來源）→ `plan_check.py`（對帳：價格表型號全有處置、無撞名）→ `crawl_index.py`
+    （分類頁含分頁，與官網宣稱總數對帳）→ `ky_detail.py`（只抽主內容區、h1 型號不符即拒）
+    → `ky_images.py`（白底 JPG、不放大）→ `ky_bundles.py`（每頁資料包＋固定欄位）→
+    子代理依 `bundles/GUIDE.md` 中譯 → `ky_md_check.py`（驗收）→ `collapse_common.py`
+    （多欄表相同列移到「共通規格」表）。日後其他廠牌可沿用此管線
+  - 原廠官網停產頁的圖蓋有「販売終了品／Discontinued products」大章，**不可用於現行品**；
+    乾淨圖原廠已刪，只能從型錄 PDF 取（`pdf_img_mask.py` 套 smask 去背）
+- [x] 批次標停產上線前：發**里程碑紅隊審查**（2026-11-12 Kyoritsu 批次，結果見發包紀錄）
 - [ ] 現行品掉到 200 以下時改文案「兩百餘項」（`src/pages/index.astro` advantages、
   `src/pages/about.astro`）；首頁統計數字已自動計算，不用改
 - 之後每年依 `npm run audit:products -- --list` 重確認一次（lastReviewed 超過 12 個月）
@@ -64,8 +77,32 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
   aria-live 計數、純停產結果文字、後繼縮圖 alt=""）；不採納 2（新樣式寫
   `#ffffff`＝沿用既有慣例；無 JS 找不到停產品＝既有搜尋本就需 JS，停產頁仍在
   sitemap）
+- 發包紀錄：`KY-PRICELIST-20261112`｜T2（資料大改＋部署）
+  - 中譯 9 包 `[sonnet-5.5 high]`（sonnet-implementer，寫入檔案互不相交）→ 主模型驗收
+    91/91（`ky_md_check.py` 親跑）＋人工修正：子代理把「價格表／原廠停產／官網註記」
+    寫進公開內文 10 頁（已刪，資料包 notes 是給子代理看的背景，日後 GUIDE 要明寫
+    「notes 不得原樣公開」）、2062 誤列藍牙（原廠頁錯）、KT200 CAT 筆誤、5410 精度
+    第二列實為測試電流、5510 發射率／瞄準拆列；多欄表相同列移到「共通規格」表
+  - 盲審 Codex `gpt-5.6-sol xhigh` 唯讀：0 P0／2 P1／6 P2。採納 4（5510 區間順序、
+    DUTY 譯名統一為「工作週期」〔「占空比」為大陸用語，未照建議〕、表格容器依段落
+    命名、第一欄轉 `th scope="row"`）；不採納 2 P1（3021 系列連 3021A/3023A 而非原廠建議的
+    3551＝決策「價格表有即現行」下 3021A 為直接改版；3125 沿鏈 3125A→3125B＝停產鏈機制
+    本意）；記入既有缺口 2（見剩餘待辦）
+  - 里程碑紅隊 Codex `gpt-6-astra xhigh` 唯讀：0 P0／1 P1／5 P2。採納 2（2040 系列頁加
+    停產備註；搜尋支援「KEW 2007R／KEW MATE 2000A／KT 170／KM2000A」寫法——
+    `src/utils/search.ts` 去原廠前綴＋忽略空白，兩個列表頁共用，注音選字回歸測試通過）；
+    其餘為既有缺口或本機資料位置，記入剩餘待辦
 
 ## 剩餘待辦
+
+- [ ] **Kyoritsu 待業主／代理商**（詳見上方產品資料更新）：5200／5201 產品照、
+  3312／4113 型號確認
+- [ ] （建議）`KY價格表/` 移到 repo 外（CLAUDE.md 規範；目前靠 `.git/info/exclude`
+  擋，排除規則不隨 repo 傳遞）。`bug/` 的 4 張舊截圖同理，勿 `git add .`
+- [ ]（既有缺口，審查發現，未修）① `replacedBy` 只能單一後繼（原廠有時指定多個）；
+  ② 停產品產品卡以後繼連結取代詢價按鈕（產品頁仍有「詢問替代機種」）；③ 詢價頁
+  不會跟著其他分頁的詢價車變動重繪（徽章會更新、送出內容以 storage 為準）；
+  ④ 舊站 `index.htm`、`map1~3.html` 無轉址 stub
 
 - [x] ~~退租舊主機~~：✅ **已完成**（2026-10-20 業主告知已退租）。
   同日確認 DNS 已無任何紀錄指向舊主機（apex/www 皆為 GitHub Pages、
@@ -83,7 +120,7 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
 
 ## SEO 現況（2026-07-07 強化後）
 
-- sitemap（`/sitemap-index.xml`，248 URL）+ robots.txt + 全站 canonical
+- sitemap（`/sitemap-index.xml`，2026-11-12 為 311 URL）+ robots.txt + 全站 canonical
 - 產品頁：廠牌+型號 title、逐頁 meta description、BreadcrumbList JSON-LD；
   首頁：Organization JSON-LD；全站 OG/Twitter 分享標籤 + 品牌分享圖
 - **產品頁不放 Product JSON-LD**（2026-07-07 決策）：GSC 來信判定
@@ -139,8 +176,28 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
    地址顯示改為「郵遞區號＋地址」，地圖查詢不帶郵遞區號）。電話/傳真業主未提及變更，
    沿用原號碼——**待業主確認**；總公司 6 碼郵遞區號待業主提供（`postalCode` 留空）
 5. 舊消息移除；日後由業主加新消息（新產品追加等）
+6. **Kyoritsu 以代理商價格表為準**（2026-11-11 使用者）：價格表有、網站無＝新品；
+   網站有、價格表無＝停產並連後繼。細則：①價格表有但原廠已停產→照價格表當現行；
+   ②後繼機種：原廠指定且在價格表上→連；原廠未指定→Claude 挑價格表上功能最接近者
+   （2004→2033、2006→2031、2805→2608A、2414/2415→2432、5409→5410）；原廠指定但不在
+   價格表（6300→6305、6310→6315、5000→5001）→不連；③選配件不建頁；④仍現行的既有頁
+   一併換官網特點、規格表與原廠圖。停產提示文案改中性「可改選下列後繼機種」（因部分
+   後繼非原廠指定）。介紹文字不受舊站字數限制，業主日後會再追加
 
 ## 測試 know-how
+
+- **改 `astro.config.mjs` 的 rehype／remark 外掛後，本機要先刪
+  `node_modules/.astro/data-store.json` 再 build**：內容層快取不會因外掛函式改動失效，
+  舊的 markdown 渲染結果會沿用（2026-11-12 實踩；CI 每次全新 build 不受影響）。
+  大量檔案異動後首次 build 出現 `Duplicate id` 警告也是同一快取，第二次即消失
+- **CDP 測試腳本**：建立 WebSocket 後要立刻掛 `open` 監聽（或先檢查 `readyState`），
+  中間若 `await sleep()`，`open` 早已觸發會永遠等不到（2026-11-12 實踩）
+
+- **Codex 唯讀審查在本機**：`~/.codex/config.toml` 的 `[windows] sandbox = "elevated"`，
+  沙盒首次初始化要 UAC 提權——背景執行時 UAC 沒人按會失敗（`ShellExecuteExW ... 1223`，
+  審查員讀不到 repo、回「審查受阻」）。解法：先在前景跑一個小 `codex exec` 讓使用者按
+  UAC，之後背景審查即正常（2026-11-12 實證）。呼叫一律 `-s read-only`、prompt 寫檔後
+  `"$(cat file)"` 傳入、`< /dev/null`
 
 - **headless 手機截圖不可用 `--window-size`**（Windows DPI 縮放會讓 layout
   viewport 比截圖寬 → 右側元素被裁掉造成假警報）。正確做法：CDP
@@ -203,7 +260,7 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
 - `.claude/settings.local.json` 會被 harness「always allow」持續覆寫，
   merge 通用規則時保留 harness 條目（政策見長期記憶）
 - 手機版詢價徽章收在漢堡選單內，業主若反映不好找可改 header 常駐 icon
-- /products/ 單頁含全部 231 產品（~250KB）供客戶端搜尋，量再大時改建置期索引
+- /products/ 單頁含全部產品供客戶端搜尋（2026-11-12：294 項、~350KB），量再大時改建置期索引
 - git 的 CRLF 警告正常；PowerShell 會把 git stderr 誤標成錯誤，
   以 `git log`/`git status` 實查為準
 - 舊 DNS TTL 86400：切換後最長一天內少數使用者仍可能解析到舊 IP（過渡正常，

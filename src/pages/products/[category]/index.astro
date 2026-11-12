@@ -101,6 +101,8 @@ const successorLink = (product: Product) => {
 </Layout>
 
 <script>
+  import { matchesKeyword, normalizeKeyword } from "../../../utils/search";
+
   for (const root of document.querySelectorAll("[data-product-filter-root]")) {
     const input = root.querySelector<HTMLInputElement>("[data-product-search]");
     const cards = Array.from(root.querySelectorAll<HTMLElement>("[data-product-card]"));
@@ -109,7 +111,7 @@ const successorLink = (product: Product) => {
     const activeCards = cards.filter((card) => !card.hasAttribute("data-discontinued"));
 
     const update = () => {
-      const keyword = input?.value.trim().toLowerCase() ?? "";
+      const keyword = normalizeKeyword(input?.value ?? "");
       // 停產品只在有輸入關鍵字、或整個分類都停產時顯示，讓找舊型號的客戶看得到後繼機種
       const showDiscontinued = Boolean(keyword) || activeCards.length === 0;
       let visible = 0;
@@ -118,7 +120,7 @@ const successorLink = (product: Product) => {
       for (const card of cards) {
         const searchText = card.dataset.search ?? "";
         const isDiscontinued = card.hasAttribute("data-discontinued");
-        const isVisible = (!keyword || searchText.includes(keyword)) && (!isDiscontinued || showDiscontinued);
+        const isVisible = matchesKeyword(searchText, keyword) && (!isDiscontinued || showDiscontinued);
         card.hidden = !isVisible;
 
         if (isVisible) {

@@ -129,7 +129,7 @@ const breadcrumbJsonLd = JSON.stringify({
                 <p class="discontinued-notice__title">本型號已停產</p>
                 {successor ? (
                   <>
-                    <p>原廠已推出後繼機種，規格與報價歡迎洽詢；既有設備仍可洽詢維修服務。</p>
+                    <p>可改選下列後繼機種，規格與報價歡迎洽詢；既有設備仍可洽詢維修服務。</p>
                     <a class="successor-link" href={withBase(productPath(successor.id))}>
                       <span class="successor-link__media">
                         {/* 型號品名已是連結可見文字，縮圖設為裝飾避免讀屏重複朗讀 */}
@@ -179,14 +179,6 @@ const breadcrumbJsonLd = JSON.stringify({
             )
           }
 
-          {
-            product.body?.trim() && (
-              <div class="product-body">
-                <Content />
-              </div>
-            )
-          }
-
           <div class="product-actions">
             <button
               class="btn btn-accent product-add"
@@ -202,6 +194,14 @@ const breadcrumbJsonLd = JSON.stringify({
           </div>
         </div>
       </article>
+
+      {
+        product.body?.trim() && (
+          <div class="card product-body">
+            <Content />
+          </div>
+        )
+      }
 
       <script type="application/ld+json" set:html={breadcrumbJsonLd} is:inline />
 
@@ -572,14 +572,102 @@ const breadcrumbJsonLd = JSON.stringify({
     line-height: 1.9;
   }
 
+  /* 產品說明／規格：Markdown 內文，整欄寬卡片放在主圖與資訊下方 */
   .product-body {
-    margin-top: var(--space-3);
-    padding-top: var(--space-3);
-    border-top: 1px solid var(--color-border);
+    margin-top: var(--space-4);
+    padding: var(--space-4);
   }
 
-  .product-body :global(:last-child) {
+  .product-body > :global(:last-child) {
     margin-bottom: 0;
+  }
+
+  .product-body :global(h2) {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: var(--space-2);
+    font-size: 1.3rem;
+  }
+
+  /* 標題前置橙色短線，呼應 hero 脈波分隔線 */
+  .product-body :global(h2)::before {
+    content: "";
+    flex: none;
+    width: 4px;
+    height: 1.1em;
+    border-radius: 2px;
+    background: var(--color-accent-bright);
+  }
+
+  .product-body :global(h2:not(:first-child)) {
+    margin-top: var(--space-4);
+  }
+
+  .product-body :global(p),
+  .product-body :global(ul) {
+    max-width: 72ch;
+  }
+
+  .product-body :global(ul) {
+    padding-left: 1.25rem;
+  }
+
+  .product-body :global(.table-scroll) {
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+  }
+
+  /* 多欄表後接「共通規格」表時留間距 */
+  .product-body :global(.table-scroll + .table-scroll) {
+    margin-top: var(--space-2);
+  }
+
+  .product-body :global(.table-scroll:focus-visible) {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  .product-body :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .product-body :global(th),
+  .product-body :global(td) {
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .product-body :global(tr:last-child > *) {
+    border-bottom: 0;
+  }
+
+  .product-body :global(thead th) {
+    background: var(--color-primary-soft);
+    color: var(--color-primary-dark);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  /* 第一欄是項目名稱（rehype 轉成 th scope="row"）：淡底＋粗體，與數值欄區隔 */
+  .product-body :global(tbody th) {
+    width: 26%;
+    min-width: 7.5rem;
+    background: var(--color-section);
+    color: var(--color-primary-dark);
+    font-weight: 700;
+  }
+
+  .product-body :global(tbody th + td),
+  .product-body :global(td + td) {
+    border-left: 1px solid var(--color-border);
   }
 
   .product-actions {
@@ -605,7 +693,8 @@ const breadcrumbJsonLd = JSON.stringify({
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .product-detail__info {
+    .product-detail__info,
+    .product-body {
       padding: var(--space-3);
     }
   }
@@ -618,6 +707,15 @@ const breadcrumbJsonLd = JSON.stringify({
 
     .product-actions {
       display: grid;
+    }
+
+    .product-body {
+      padding: var(--space-2);
+    }
+
+    .product-body :global(th),
+    .product-body :global(td) {
+      padding: 0.5rem 0.65rem;
     }
   }
 </style>
