@@ -150,6 +150,9 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
   - 盲審 2（增量：favicon／舊站轉址／description 必填）同模型唯讀：0 發現
   - 主模型驗收：build 320 頁 0 錯誤；負向測試 3 組（filter 拼錯、slug 重複／大寫、漏傳
     description）皆 build 失敗且訊息指名；CDP 桌機＋手機 390 截圖無橫向溢出；舊網址轉址實測
+  - 上線：`a95ed70`，部署 run 43157191759 success（CI 冷建置通過）。線上 curl：8 廠牌頁 title 正確、
+    favicon 三檔 200、8 個舊網址 refresh 目標正確、首頁 JSON-LD 3 地址、不存在網址 404＋noindex、
+    sitemap 319 URL。**iOS／WebKit 未真機驗證**（新頁沿用既有 ProductCard 圖片容器）
 - **站外曝光（業主待辦，影響比站內大）**：見剩餘待辦「SEO 站外」
 - sitemap（`/sitemap-index.xml`，2026-11-12 為 319 URL）+ robots.txt + 全站 canonical
 - 產品頁：廠牌+型號 title、逐頁 meta description、BreadcrumbList JSON-LD；
