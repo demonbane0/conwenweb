@@ -186,6 +186,12 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
 
 ## 測試 know-how
 
+- ⚠️ **commit＝push＝上線**：使用者全域 `~/.claude/settings.json` 有 PostToolUse hook
+  （`auto-push after commit`），Bash 指令含 `git commit` 即自動 `git push` → 觸發 Pages 部署。
+  要「先本機 commit 不上線」時不能靠不 push；只改 HANDOFF 等文件的 commit 訊息加 `[skip ci]`。
+  2026-11-12 Kyoritsu 批次（`ddf00cd`）即由此 hook 推送，部署 run 43136762857 success，
+  線上 curl 驗證新品／停產／換圖頁 200、5201（未上架）404
+
 - **改 `astro.config.mjs` 的 rehype／remark 外掛後，本機要先刪
   `node_modules/.astro/data-store.json` 再 build**：內容層快取不會因外掛函式改動失效，
   舊的 markdown 渲染結果會沿用（2026-11-12 實踩；CI 每次全新 build 不受影響）。
