@@ -20,7 +20,7 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
 - 設計系統（深藍 #14467b + 橙 #c2410c、LogoMark、刻度尺眉標、等寬型號、
   格線紋理）與 SEO（廠牌+型號 title、meta description、BreadcrumbList
   JSON-LD、OG 分享圖）詳見 CLAUDE.md
-- 最新消息：舊 2008 消息已移除；2026-10-20「台中、高雄分公司遷址公告」、2026-11-12「Kyoritsu 共立產品資料全面更新」
+- 最新消息：舊 2008 消息已移除；2026-10-20「台中、高雄分公司遷址公告」、2026-11-12「Kyoritsu 共立產品資料更新」
 - **停產/後繼機種機制**（2026-10-19）：frontmatter `status`／`replacedBy`／
   `lastReviewed`、`npm run audit:products` 報表，規格見 CLAUDE.md「停產與後繼機種」。
   上線時 0 項標停產，全站 265 個 HTML 與改動前逐檔比對一致（僅空白/CSS 差異）
