@@ -1,0 +1,345 @@
+---
+import { getCollection } from "astro:content";
+import ProductCard from "../../components/ProductCard.astro";
+import { brandFullName, brandPath, brands, type Brand } from "../../data/brands";
+import { categories } from "../../data/categories";
+import Layout from "../../layouts/Layout.astro";
+import { withBase } from "../../utils/url";
+import { compareProducts, isDiscontinued, productPath, type Product } from "../../utils/products";
+
+// 每個代理廠牌一頁（/brands/<slug>/）：讓「廠牌名＋代理」這類搜尋有可收錄的落地頁。
+// /products/?brand= 是前端篩選，Google 不會把它當獨立頁面收錄
+export async function getStaticPaths() {
+  const allProducts = await getCollection("products");
+
+  // brands.ts 打錯字不會有任何報錯，只會讓廠牌頁靜默變成 0 項或網址撞名——在 build 擋下
+  const slugs = new Set<string>();
+  const badSlugs = brands.filter((brand) => {
+    const bad = !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(brand.slug) || slugs.has(brand.slug);
+    slugs.add(brand.slug);
+    return bad;
+  });
+  if (badSlugs.length > 0) {
+    throw new Error(
+      `src/data/brands.ts 的 slug 須為小寫 ASCII（連字號分隔）且不重複：${badSlugs.map((b) => b.slug).join("、")}`,
+    );
+  }
+  const unmatched = brands.filter(
+    (brand) => !allProducts.some((product) => product.data.brand?.trim() === brand.filter),
+  );
+  if (unmatched.length > 0) {
+    throw new Error(
+      `src/data/brands.ts 的 filter 對不到任何產品的 brand 欄位（拼法須完全相同）：${unmatched
+        .map((b) => b.filter)
+        .join("、")}`,
+    );
+  }
+
+  return brands.map((brand) => ({
+    params: { slug: brand.slug },
+    props: {
+      brand,
+      products: allProducts.filter((product) => product.data.brand?.trim() === brand.filter),
+    },
+  }));
+}
+
+interface Props {
+  brand: Brand;
+  products: Product[];
+}
+
+const { brand, products } = Astro.props;
+const activeProducts = products.filter((product) => !isDiscontinued(product)).sort(compareProducts);
+const discontinuedCount = products.length - activeProducts.length;
+const fullName = brandFullName(brand);
+
+// 依分類分組，只列有現行產品的分類；產品多的分類排前面（廠牌主力先出現），同數量依十大分類順序
+const groups = categories
+  .map((category) => ({
+    category,
+    products: activeProducts.filter((product) => product.data.category === category.slug),
+  }))
+  .filter((group) => group.products.length > 0)
+  .sort((a, b) => b.products.length - a.products.length || a.category.order - b.category.order);
+
+const heading = brand.role ? `${brand.filter} ${brand.role}` : `${brand.filter} 代理產品`;
+// 英文廠牌名與中文相鄰時補半形空白（「代理銷售 T&R 產品」）
+const spaced = (text: string) => `${/^[A-Za-z0-9]/.test(text) ? " " : ""}${text}${/[A-Za-z0-9]$/.test(text) ? " " : ""}`;
+const relation = brand.role ? `耕紋貿易為${spaced(fullName)}${brand.role}` : `耕紋貿易代理銷售${spaced(fullName)}產品`;
+const pageDescription = [
+  `${relation}，`,
+  activeProducts.length > 0 ? `現有 ${activeProducts.length} 項產品：` : "",
+  brand.description,
+  "北中南三據點提供選型諮詢、報價供貨與售後維修服務。",
+].join("");
+
+const productSearchText = (product: Product) =>
+  `${product.data.model} ${product.data.title} ${product.data.brand ?? ""}`.toLowerCase();
+
+const breadcrumbJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "首頁", item: new URL(withBase("/"), Astro.site).href },
+    { "@type": "ListItem", position: 2, name: "代理廠牌", item: new URL(withBase("/brands/"), Astro.site).href },
+    { "@type": "ListItem", position: 3, name: brand.filter, item: new URL(withBase(brandPath(brand)), Astro.site).href },
+  ],
+});
+---
+
+<Layout title={heading} description={pageDescription}>
+  <script type="application/ld+json" set:html={breadcrumbJsonLd} is:inline />
+  <section class="section">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href={withBase("/")}>首頁</a>
+        <span aria-hidden="true">›</span>
+        <a href={withBase("/brands/")}>代理廠牌</a>
+        <span aria-hidden="true">›</span>
+        <span>{brand.filter}</span>
+      </nav>
+
+      <div class="brand-intro">
+        <div class="section-title brand-intro__text">
+          <p class="eyebrow">{brand.origin}</p>
+          <h1>{heading}</h1>
+          <p>{`${relation}，主要產品包括${brand.description}新北泰山總公司與台中、高雄分公司就近提供選型諮詢、報價供貨與保固維修服務。`}</p>
+          <p class="brand-intro__count">
+            現行產品 <strong>{activeProducts.length}</strong> 項{groups.length > 0 && `，分布於 ${groups.length} 個產品分類`}
+          </p>
+        </div>
+        <div class="brand-intro__logo">
+          <img src={withBase(brand.image)} alt={`${brand.name} 標誌`} />
+        </div>
+      </div>
+
+      {
+        groups.length > 1 && (
+          <nav class="brand-jump" aria-label={`${brand.filter} 產品分類`}>
+            {groups.map((group) => (
+              <a class="brand-jump__link" href={withBase(`#group-${group.category.slug}`)}>
+                {group.category.name}
+                <span class="brand-jump__count">{group.products.length}</span>
+              </a>
+            ))}
+          </nav>
+        )
+      }
+
+      {
+        groups.map((group) => (
+          <section class="brand-group" aria-labelledby={`group-${group.category.slug}`}>
+            <h2 id={`group-${group.category.slug}`}>
+              {group.category.name}
+              <span class="brand-group__count">{group.products.length} 項</span>
+            </h2>
+            <div class="product-grid">
+              {group.products.map((product) => (
+                <ProductCard
+                  href={productPath(product.id)}
+                  image={product.data.image}
+                  model={product.data.model}
+                  title={product.data.title}
+                  brand={product.data.brand}
+                  slug={product.id}
+                  search={productSearchText(product)}
+                  headingLevel={3}
+                />
+              ))}
+            </div>
+          </section>
+        ))
+      }
+
+      {
+        activeProducts.length === 0 && (
+          <p class="brand-empty">目前網站上沒有此廠牌的現行產品資料，歡迎來電或填寫詢價單洽詢。</p>
+        )
+      }
+
+      {
+        discontinuedCount > 0 && (
+          <p class="brand-note">
+            另有 {discontinuedCount} 項停產機種未列出，可到
+            <a href={withBase(`/products/?brand=${encodeURIComponent(brand.filter)}`)}>產品介紹</a>
+            輸入型號查看後繼機種。
+          </p>
+        )
+      }
+
+      <div class="brand-cta">
+        <a class="btn btn-accent" href={withBase("/inquiry/")}>前往詢價單</a>
+        <a class="btn" href={withBase("/contact/")}>聯絡我們</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-bottom: var(--space-3);
+    color: var(--color-muted);
+    font-size: 0.95rem;
+  }
+
+  .breadcrumb a {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .brand-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 260px;
+    gap: var(--space-4);
+    align-items: start;
+    margin-bottom: var(--space-4);
+  }
+
+  .brand-intro__text {
+    margin-bottom: 0;
+  }
+
+  .brand-intro__count {
+    color: var(--color-muted);
+  }
+
+  .brand-intro__count strong {
+    color: var(--color-primary-dark);
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .brand-intro__logo {
+    display: flex;
+    min-height: 140px;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    background: #ffffff;
+  }
+
+  .brand-intro__logo img {
+    max-width: 100%;
+    max-height: 96px;
+    object-fit: contain;
+  }
+
+  .brand-jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    margin-bottom: var(--space-4);
+  }
+
+  .brand-jump__link {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.85rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-bg);
+    color: var(--color-primary-dark);
+    font-size: 0.95rem;
+    font-weight: 700;
+    transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+  }
+
+  .brand-jump__link:hover,
+  .brand-jump__link:focus-visible {
+    border-color: var(--color-primary);
+    background: var(--color-section);
+    color: var(--color-primary);
+  }
+
+  .brand-jump__count {
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .brand-group + .brand-group {
+    margin-top: var(--space-5);
+  }
+
+  .brand-group h2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    align-items: baseline;
+    margin-bottom: var(--space-3);
+    font-size: 1.35rem;
+    /* 跳轉錨點避開 sticky header */
+    scroll-margin-top: 96px;
+  }
+
+  .brand-group__count {
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  .brand-empty,
+  .brand-note {
+    margin: var(--space-4) 0 0;
+    color: var(--color-muted);
+  }
+
+  .brand-empty {
+    padding: var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-section);
+    text-align: center;
+  }
+
+  .brand-note a {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .brand-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  @media (max-width: 960px) {
+    .product-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .brand-intro {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-3);
+    }
+
+    .brand-intro__logo {
+      order: -1;
+      min-height: 112px;
+    }
+
+    .product-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

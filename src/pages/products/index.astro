@@ -50,9 +50,13 @@ for (const product of products) {
 const brandOptions = [...brandCounts.entries()].sort(
   (a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "zh-Hant-TW"),
 );
+const pageDescription = `耕紋貿易產品介紹：${activeCount} 項電機電子測試測量儀器，涵蓋十大分類與 ${brandOptions
+  .slice(0, 3)
+  .map(([brand]) => brand)
+  .join("、")} 等品牌，可依型號、分類、廠牌搜尋並加入詢價單線上詢價。`;
 ---
 
-<Layout title="產品介紹">
+<Layout title="產品介紹" description={pageDescription}>
   <section class="section">
     <div class="container" data-product-filter-root>
       <div class="section-title">

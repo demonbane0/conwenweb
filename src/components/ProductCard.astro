@@ -11,9 +11,12 @@ interface Props {
   search?: string;
   discontinued?: boolean;
   successor?: { href: string; model: string };
+  /** 卡片標題層級：頁面已有 h2 分組標題時傳 3，維持標題階層 */
+  headingLevel?: 2 | 3;
 }
 
-const { href, image, model, title, slug, brand, search, discontinued = false, successor } = Astro.props;
+const { href, image, model, title, slug, brand, search, discontinued = false, successor, headingLevel = 2 } = Astro.props;
+const Heading = headingLevel === 3 ? "h3" : "h2";
 const imageAlt = `${model} ${title} 產品圖片`;
 const linkLabel = `查看 ${model} ${title}${discontinued ? "（已停產）" : ""}`;
 ---
@@ -36,7 +39,7 @@ const linkLabel = `查看 ${model} ${title}${discontinued ? "（已停產）" : 
       {brand && <span class="product-card__model-brand">{brand}</span>}
       {model}
     </p>
-    <h2 class="product-card__title">{title}</h2>
+    <Heading class="product-card__title">{title}</Heading>
   </div>
   <div class="product-card__actions">
     {

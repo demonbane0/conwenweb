@@ -41,7 +41,7 @@ src/
     brands.ts     代理廠牌
     site.ts       公司資訊（地址電話、Email、Formspree endpoint）
   layouts/        Layout.astro（header/footer/詢價車徽章）
-  pages/          index、products/、brands、about、news、contact、inquiry
+  pages/          index、products/、brands/（總覽＋各廠牌頁）、about、news、contact、inquiry
   components/     ProductCard、CategoryNav、InquiryButton …
   styles/global.css
 public/
@@ -101,9 +101,12 @@ push 後自動部署。** 所有設計決策不得破壞這個工作流程。
 - 共用判斷／排序／路徑 helper 在 `src/utils/products.ts`，新頁面一律沿用
 
 - 圖檔名一律用 slug（ASCII），不用中文檔名
-- `brand` 建議填寫：/products 頁有廠牌下拉篩選（支援 `?brand=` URL 參數，
-  代理廠牌頁與首頁 logo 連到對應篩選）；廠牌顯示名須沿用既有值
-  （完整清單見 `BRAND-REVIEW.md` 第三節），拼法不同會被視為不同廠牌
+- `brand` 建議填寫：/products 頁有廠牌下拉篩選（支援 `?brand=` URL 參數）；
+  廠牌顯示名須沿用既有值（完整清單見 `BRAND-REVIEW.md` 第三節），拼法不同會被視為不同廠牌
+- 代理廠牌獨立頁 `/brands/<slug>/` 由 `src/data/brands.ts` 產生（代理廠牌頁、首頁 logo、
+  產品頁「品牌」欄都連過去）：`slug` 小寫 ASCII 不重複、`filter` 必須與產品 `brand:` 完全相同，
+  否則 build 失敗。**`role`（如「台灣總代理」）只有業主確認過才填**——目前僅 KYORITSU；
+  其他廠牌不得寫「總代理」
 
 ### 10 大分類 slug（固定，不可更動）
 
@@ -153,6 +156,16 @@ push 後自動部署。** 所有設計決策不得破壞這個工作流程。
   改 `fetchpriority="high"`、不可 lazy，否則拖慢 LCP）
 - 禁止：跑馬燈、自動輪播、進場動畫等舊式效果；hover/focus 過渡 ≤150ms 即可
 - 無障礙：所有互動元件可鍵盤操作，圖片有 alt，對比至少 AA
+
+## SEO 規範
+
+- **每頁必須傳 `description` 給 Layout**（無預設值，漏傳 build 失敗）；多頁共用同一段摘要＝重複內容。
+  不想被收錄的頁面傳 `noindex`（404 已用）
+- **產品頁不放 Product JSON-LD**（詢價制無價格，Google 判定重大問題；決策見 HANDOFF.md）；
+  可用的結構化資料：Organization（首頁）、BreadcrumbList（產品／分類／廠牌頁）
+- favicon（`public/favicon.svg`／`.ico`／`apple-touch-icon.png`）由 `LogoMark.astro` 衍生，
+  改 LogoMark 要一併重產
+- 舊站網址（`legacy/` 的 23 個 .htm(l)）在 `public/` 都有同名轉址 stub，不得刪除
 
 ## 部署與 base path（重要）
 

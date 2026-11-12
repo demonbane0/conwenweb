@@ -1,0 +1,65 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { brandFullName, brandPath, brands } from "../../data/brands";
+import { withBase } from "../../utils/url";
+
+const roleBrands = brands.filter((brand) => brand.role);
+const otherBrands = brands.filter((brand) => !brand.role);
+const pageDescription = [
+  "耕紋貿易",
+  ...roleBrands.map((brand) => `為${brandFullName(brand)}${brand.role}，`),
+  `代理廠牌另有 ${otherBrands.map(brandFullName).join("、")}，涵蓋英、德、義、日等國電機電子測試測量儀器。`,
+].join("");
+---
+
+<Layout title="代理廠牌" description={pageDescription}>
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <p class="eyebrow">Brands</p>
+        <h1>代理廠牌</h1>
+        <p>長期合作的英、德、義、日等國原廠，點選廠牌可查看介紹與全部產品。</p>
+      </div>
+      <div class="grid-3">
+        {
+          brands.map((brand) => (
+            <article class="card brand-card">
+              <div class="brand-card-media">
+                <img src={withBase(brand.image)} alt={`${brand.name} 標誌`} loading="lazy" />
+              </div>
+              <div>
+                <p class="eyebrow">{brand.origin}</p>
+                <h2>
+                  {brand.name}
+                  {brand.role && <span class="brand-role">{brand.role}</span>}
+                </h2>
+                <p>{brand.description}</p>
+              </div>
+              <a class="btn brand-card-link" href={withBase(brandPath(brand))}>
+                查看 {brand.filter} 產品
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .brand-card-link {
+    justify-self: start;
+  }
+
+  .brand-role {
+    display: inline-block;
+    margin-left: 0.5rem;
+    padding: 0.1rem 0.55rem;
+    border-radius: 999px;
+    background: var(--color-soft-accent);
+    color: var(--color-accent-dark);
+    font-size: 0.8rem;
+    font-weight: 700;
+    vertical-align: middle;
+  }
+</style>

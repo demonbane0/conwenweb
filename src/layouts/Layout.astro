@@ -6,13 +6,17 @@ import { withBase } from "../utils/url";
 
 interface Props {
   title?: string;
-  description?: string;
+  /** 必填：每頁自己的搜尋結果摘要。不給預設值——多頁共用同一段會被搜尋引擎視為重複內容 */
+  description: string;
+  /** 不希望被搜尋引擎收錄的頁面（如 404） */
+  noindex?: boolean;
 }
 
-const {
-  title = COMPANY.name,
-  description = "耕紋貿易股份有限公司專業代理進口與國產電機電子測試測量儀器，提供北中南服務據點與售後維修。",
-} = Astro.props;
+const { title = COMPANY.name, description, noindex = false } = Astro.props;
+
+if (!description?.trim()) {
+  throw new Error(`${Astro.url.pathname} 沒有傳 description 給 Layout（每頁必須有自己的摘要）`);
+}
 
 const pageTitle = title === COMPANY.name ? title : `${title}｜${COMPANY.name}`;
 const navItems = [
@@ -34,7 +38,11 @@ const ogImage = new URL(withBase("/images/og.png"), Astro.site).href;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={new URL(currentPath, Astro.site).href} />
+    <link rel="icon" href={withBase("/favicon.ico")} sizes="48x48" />
+    <link rel="icon" href={withBase("/favicon.svg")} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={withBase("/apple-touch-icon.png")} />
     <meta name="theme-color" content="#0d2f54" />
     <meta property="og:site_name" content={COMPANY.name} />
     <meta property="og:title" content={pageTitle} />

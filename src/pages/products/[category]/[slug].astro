@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import ProductCard from "../../../components/ProductCard.astro";
+import { brandFullName, brandPath, findBrand } from "../../../data/brands";
 import { categories } from "../../../data/categories";
 import Layout from "../../../layouts/Layout.astro";
 import { withBase } from "../../../utils/url";
@@ -44,6 +45,7 @@ const productSearchText = (item: Product) =>
   `${item.data.model} ${item.data.title} ${item.data.brand ?? ""}`.toLowerCase();
 
 const brandName = product.data.brand?.trim();
+const brandInfo = findBrand(brandName);
 const productName = [brandName, product.data.model, product.data.title].filter(Boolean).join(" ");
 const pageTitle = discontinued ? `${productName}（已停產）` : productName;
 const successorName = successor
@@ -53,7 +55,9 @@ const pageDescription = [
   `${productName}。`,
   discontinued ? (successor ? `本型號已停產，後繼機種為 ${successorName}。` : "本型號已停產，歡迎洽詢替代機種。") : "",
   product.data.features[0] ? `${product.data.features[0]}。` : "",
-  `耕紋貿易專業代理測試測量儀器，北中南三據點提供選型報價與維修保固服務。`,
+  brandInfo?.role
+    ? `耕紋貿易為${brandFullName(brandInfo)}${brandInfo.role}，北中南三據點提供選型報價與維修保固服務。`
+    : `耕紋貿易專業代理測試測量儀器，北中南三據點提供選型報價與維修保固服務。`,
 ].join("");
 
 // 不放 Product JSON-LD：Google 要求 Product 必須帶 offers（含價格）/review/
@@ -160,7 +164,16 @@ const breadcrumbJsonLd = JSON.stringify({
               product.data.brand && (
                 <div>
                   <dt>品牌</dt>
-                  <dd>{product.data.brand}</dd>
+                  <dd>
+                    {brandInfo ? (
+                      <a class="product-meta__brand-link" href={withBase(brandPath(brandInfo))}>
+                        {product.data.brand}
+                      </a>
+                    ) : (
+                      product.data.brand
+                    )}
+                    {brandInfo?.role && <span class="product-meta__role">耕紋為{brandInfo.role}</span>}
+                  </dd>
                 </div>
               )
             }
@@ -543,6 +556,27 @@ const breadcrumbJsonLd = JSON.stringify({
     margin: 0;
     color: var(--color-primary-dark);
     font-weight: 800;
+  }
+
+  .product-meta__brand-link {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .product-meta__brand-link:hover {
+    color: var(--color-accent-dark);
+  }
+
+  .product-meta__role {
+    display: inline-block;
+    margin-left: 0.5rem;
+    padding: 0.05rem 0.5rem;
+    border-radius: 999px;
+    background: var(--color-soft-accent);
+    color: var(--color-accent-dark);
+    font-size: 0.8rem;
+    font-weight: 700;
   }
 
   .product-meta__model {

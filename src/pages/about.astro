@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { brandFullName, brandPath, brands } from "../data/brands";
 import { COMPANY } from "../data/site";
 import { withBase } from "../utils/url";
 
@@ -22,9 +23,15 @@ const services = [
   "原廠貨源供應與交期回覆",
   "自設維修部門，提供保固與售後維修服務",
 ];
+const exclusiveBrands = brands.filter((brand) => brand.role);
+const pageDescription = [
+  `${COMPANY.name}成立於 ${COMPANY.establishedYear} 年，`,
+  ...exclusiveBrands.map((brand) => `為${brandFullName(brand)}${brand.role}，`),
+  "專業代理進口電機電子測試測量儀器，新北泰山總公司與台中、高雄分公司提供選型、報價與售後維修。",
+].join("");
 ---
 
-<Layout title="公司簡介">
+<Layout title="公司簡介" description={pageDescription}>
   <section class="section">
     <div class="container about-grid">
       <div class="about-copy">
@@ -33,7 +40,13 @@ const services = [
         <p>
           {COMPANY.name}成立於民國 {COMPANY.establishedMinguoYear} 年（{COMPANY.establishedYear}
           年），專業代理銷售進口及國產電機電子測試測量儀器，長期與英、德、義、日等國原廠合作，
-          供應涵蓋十大分類、兩百餘項的測試測量設備。
+          供應涵蓋十大分類、兩百餘項的測試測量設備{
+            exclusiveBrands.map((brand) => (
+              <>
+                ，並為<a class="about-brand-link" href={withBase(brandPath(brand))}>{brandFullName(brand)}</a>{brand.role}
+              </>
+            ))
+          }。
         </p>
         <p>
           總公司位於新北市泰山區，並於台中、高雄設立分公司；北中南三據點就近服務相關業界，
@@ -82,6 +95,7 @@ const services = [
 </Layout>
 
 <style>
+  .about-brand-link,
   .about-highlight a {
     color: var(--color-primary);
     font-weight: 700;

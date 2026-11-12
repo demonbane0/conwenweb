@@ -27,13 +27,47 @@ const discontinuedCount = products.length - activeCount;
 const productSearchText = (product: Product) =>
   `${product.data.model} ${product.data.title} ${product.data.brand ?? ""}`.toLowerCase();
 
+// 每個分類各自的摘要（品牌依現行產品數排序取前 3），避免十個分類頁共用同一段 description
+const brandCounts = new Map<string, number>();
+for (const product of products) {
+  const brand = product.data.brand?.trim();
+  if (brand && !isDiscontinued(product)) {
+    brandCounts.set(brand, (brandCounts.get(brand) ?? 0) + 1);
+  }
+}
+const topBrands = [...brandCounts.entries()]
+  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "zh-Hant-TW"))
+  .slice(0, 3)
+  .map(([brand]) => brand);
+const pageDescription = [
+  `耕紋貿易「${category.name}」產品共 ${activeCount} 項`,
+  topBrands.length > 0 ? `，含 ${topBrands.join("、")} 等品牌` : "",
+  "。提供型號規格查詢、選型諮詢與線上詢價，北中南三據點服務。",
+].join("");
+
+const breadcrumbJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "首頁", item: new URL(withBase("/"), Astro.site).href },
+    { "@type": "ListItem", position: 2, name: "產品介紹", item: new URL(withBase("/products/"), Astro.site).href },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: category.name,
+      item: new URL(withBase(`/products/${category.slug}/`), Astro.site).href,
+    },
+  ],
+});
+
 const successorLink = (product: Product) => {
   const successor = isDiscontinued(product) ? resolveSuccessor(product, allProducts) : undefined;
   return successor ? { href: productPath(successor.id), model: successor.data.model } : undefined;
 };
 ---
 
-<Layout title={category.name}>
+<Layout title={category.name} description={pageDescription}>
+  <script type="application/ld+json" set:html={breadcrumbJsonLd} is:inline />
   <section class="section">
     <div class="container" data-product-filter-root>
       <nav class="breadcrumb" aria-label="Breadcrumb">

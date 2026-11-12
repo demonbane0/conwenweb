@@ -37,4 +37,15 @@ export const COMPANY = {
 export const formatAddress = (branch: { postalCode: string; address: string }) =>
   [branch.postalCode, branch.address].filter(Boolean).join(" ");
 
+// 結構化資料用：「新北市泰山區福興二街38號」→ 縣市／鄉鎮區／街道
+export const splitAddress = (address: string) => {
+  const match = address.match(/^(.{2}[市縣])(.{1,3}?[區鄉鎮市])(.+)$/);
+  return match
+    ? { region: match[1], locality: match[2], street: match[3] }
+    : { region: "", locality: "", street: address };
+};
+
+// 結構化資料用：「(02)2297-3128」→「+886-2-2297-3128」（Google 建議電話帶國碼）
+export const internationalPhone = (phone: string) => phone.replace(/^\(0?(\d+)\)\s*/, "+886-$1-");
+
 export const FORMSPREE_ENDPOINT = "https://formspree.io/f/mqevjpbn";

@@ -1,8 +1,9 @@
 # HANDOFF — Session 交接文件
 
 > 每個 session 開始先讀本檔 + CLAUDE.md；有變動時收尾前更新並 commit。
-> 最後更新：2026-11-12（Kyoritsu 依價格表全面更新：新品 62 頁、停產 26 頁、既有 27 頁換官網內容）
-> 前次：2026-11-11（裝 modern-web-guidance 外掛＋前端四項小修）
+> 最後更新：2026-11-12（SEO 曝光強化：8 個廠牌獨立頁、全站逐頁 description、Organization 三據點；
+> 業主確認耕紋為 KYORITSU 台灣總代理）
+> 前次：2026-11-12（Kyoritsu 依價格表全面更新：新品 62 頁、停產 26 頁、既有 27 頁換官網內容）
 
 ## 專案狀態：✅ 網站上線；🔄 產品資料更新進行中（見下方「產品資料更新」）
 
@@ -54,7 +55,8 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
     文字已寫好暫存在本機 `KY價格表/官網抽取工具/staging/`，有實品照或型錄圖再上架
     （圖放 `public/images/products/5200-kyoritsu.jpg`／`5201.jpg`，md 搬回
     `src/content/products/environmental/`；5200 檔名避開 PAN-GLOBE 的 high-voltage/5200）；
-    ② 3312（原廠 1995 停產，疑為 3442 誤植）、4113（查無）向代理商確認型號後再建頁；
+    ② 3312（原廠 1995 停產，疑為 3442 誤植）、4113（查無）向原廠確認型號後再建頁
+    （耕紋即 KYORITSU 台灣總代理，見決策第 7 點）；
     ③ 選配件 6 項（8241、8115、8161、9189、8008、8112）業主決定這次不建頁
   - 價格表上有、原廠已停產者照價格表當現行（2027、2608A、8030、5510、3021A/3023A、
     4500），公開頁面**不寫**「原廠停產／價格表」等內部資訊
@@ -101,8 +103,8 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
   擋，排除規則不隨 repo 傳遞）。`bug/` 的 4 張舊截圖同理，勿 `git add .`
 - [ ]（既有缺口，審查發現，未修）① `replacedBy` 只能單一後繼（原廠有時指定多個）；
   ② 停產品產品卡以後繼連結取代詢價按鈕（產品頁仍有「詢問替代機種」）；③ 詢價頁
-  不會跟著其他分頁的詢價車變動重繪（徽章會更新、送出內容以 storage 為準）；
-  ④ 舊站 `index.htm`、`map1~3.html` 無轉址 stub
+  不會跟著其他分頁的詢價車變動重繪（徽章會更新、送出內容以 storage 為準）
+  （原 ④ 舊站 `index.htm`、`map1~3.html` 無轉址 stub → 2026-11-12 已補，見 SEO 現況）
 
 - [x] ~~退租舊主機~~：✅ **已完成**（2026-10-20 業主告知已退租）。
   同日確認 DNS 已無任何紀錄指向舊主機（apex/www 皆為 GitHub Pages、
@@ -117,10 +119,39 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
   驗證過，**iOS/WebKit 未真機驗證**（L-032）
 - [ ]（可選）流量分析工具：業主若想看訪客數/來源，申請 GA4 取得
   評估 ID（G-XXXXXXX）給 Claude 接上即可；不裝也不影響 SEO
+- [ ] **SEO 站外（業主自己做，Claude 無法代辦）**：
+  ① **Google 商家檔案**三據點各建一個（泰山／台中／高雄；地圖搜尋「儀器行」「鉤錶」排在
+  一般結果前面，B2B 在地曝光主力）；② **Bing Webmaster Tools** 從 GSC 匯入（Yahoo 奇摩搜尋
+  用 Bing 索引）；③ 請 KYORITSU 原廠在海外代理商列表放 `https://conwen.com.tw` 連結
+  （高權重外連，對「Kyoritsu 台灣」類搜尋最有效）；④ 產業目錄（台灣經貿網等）登錄網址
+- 看成效：GSC「成效」→查詢（曝光高點閱低＝改標題描述；平均排名 8–20＝最值得加強）、
+  「網頁」報表看收錄數 vs sitemap 319；新頁可用「網址檢查」→要求建立索引加速
 
-## SEO 現況（2026-07-07 強化後）
+## SEO 現況（2026-07-07 強化、2026-11-12 第二輪）
 
-- sitemap（`/sitemap-index.xml`，2026-11-12 為 311 URL）+ robots.txt + 全站 canonical
+- **2026-11-12 第二輪**：
+  - **廠牌獨立頁** `/brands/<slug>/`（8 個代理廠牌，`src/pages/brands/[slug].astro`）：
+    title「Kyoritsu 共立 台灣總代理」／「T&R 代理產品」，現行產品依分類分組（多的在前）＋
+    分類跳轉 chips、BreadcrumbList。代理廠牌頁卡片、首頁 logo、產品頁「品牌」欄都連過去
+    （`?brand=` 篩選照常可用）。`brands.ts` 的 slug 不合法／重複、filter 對不到任何產品
+    → build 失敗（防靜默空頁）
+  - **全站逐頁 description**：分類頁（品項數＋前 3 品牌，資料驅動）、產品總覽、廠牌、
+    公司簡介、聯絡、消息、詢價單各自一段；全站 320 頁 0 重複（驗證腳本見測試 know-how）
+  - 首頁 Organization JSON-LD：三據點地址（拆縣市／區／街道＋郵遞區號）＋三個
+    ContactPoint（電話傳真帶 +886）；分類頁補 BreadcrumbList
+  - **Layout 的 `description` 必填**（無預設值，漏傳 build 失敗並列出網址）；`noindex` 選項
+    （404 頁使用）
+  - **favicon**：`public/favicon.svg`（LogoMark 衍生，波形加粗）＋`favicon.ico`（16/32/48 PNG-in-ICO，
+    Google 搜尋結果要 48 倍數）＋`apple-touch-icon.png`（180 滿版）。改 LogoMark 時要重產：
+    Edge headless CDP 透明底截圖再打包 ICO（腳本為 session 暫存，照此規格重寫即可）
+- 發包紀錄：`SEO-20261112`｜T2（部署＋對外宣稱「總代理」）｜主模型直做
+  - 盲審 1 Codex `gpt-5.6-sol xhigh` 唯讀：0 P0／2 P1，採納 2（404 頁專屬 description＋noindex、
+    Layout description 改必填；廠牌頁跳轉錨點改經 `withBase()`）；既有缺口：無
+  - 盲審 2（增量：favicon／舊站轉址／description 必填）同模型唯讀：0 發現
+  - 主模型驗收：build 320 頁 0 錯誤；負向測試 3 組（filter 拼錯、slug 重複／大寫、漏傳
+    description）皆 build 失敗且訊息指名；CDP 桌機＋手機 390 截圖無橫向溢出；舊網址轉址實測
+- **站外曝光（業主待辦，影響比站內大）**：見剩餘待辦「SEO 站外」
+- sitemap（`/sitemap-index.xml`，2026-11-12 為 319 URL）+ robots.txt + 全站 canonical
 - 產品頁：廠牌+型號 title、逐頁 meta description、BreadcrumbList JSON-LD；
   首頁：Organization JSON-LD；全站 OG/Twitter 分享標籤 + 品牌分享圖
 - **產品頁不放 Product JSON-LD**（2026-07-07 決策）：GSC 來信判定
@@ -130,7 +161,10 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
   放公開價格。GSC 該問題頁面業主可按「驗證修正」加速清除，或等自然重爬
 - **舊站網址轉址**：2008 年的 product_1~10.html、company/customer/news/
   contact/main.html 共 16 個舊網址做了 meta-refresh + canonical 轉址 stub
-  （public/ 下的 .html），接住搜尋引擎裡的舊連結
+  （public/ 下的 .html），接住搜尋引擎裡的舊連結。2026-11-12 補齊剩餘 7 個：
+  `index.htm`／`left.htm`／`up.htm`／`newfile.html` → 首頁；`map1~3.html`（舊站地圖頁）→
+  `/contact/#headquarters`／`#taichung`／`#kaohsiung`（聯絡頁卡片 id＝`site.ts` 據點 slug）。
+  舊站 HTML 頁面至此全部有轉址（legacy/ 共 23 個 .htm(l)）
 
 ## 業主日常維護指南
 
@@ -139,6 +173,9 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
   要沿用 BRAND-REVIEW.md 第三節清單，拼法不同會變成兩個篩選項）→ push 自動上線
 - **產品停產**：不刪檔，在該 .md 加 `status: discontinued`；有新款就加
   `replacedBy: "新款檔名"`（新款要先有自己的 .md）→ push。寫錯 build 會擋下並說明
+- **加廠牌頁**：`src/data/brands.ts` 加一筆（`slug` 小寫 ASCII、`filter` 與產品 .md 的
+  `brand:` 完全相同、logo 放 `public/images/brands/`）→ 自動產生 `/brands/<slug>/` 並出現在
+  代理廠牌頁與首頁 logo 列。`role`（如「台灣總代理」）**只有業主確認過才填**
 - **加消息**：`src/content/news/xxx.md`，frontmatter 放 `title: "標題"`、
   `date: 2026-08-01`，內文 Markdown → push 自動上線（新到舊排序）
 - **詢價信**：寄到 conwencf@ms19.hinet.net（寄件者 Formspree，建議設安全
@@ -183,6 +220,10 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
    價格表（6300→6305、6310→6315、5000→5001）→不連；③選配件不建頁；④仍現行的既有頁
    一併換官網特點、規格表與原廠圖。停產提示文案改中性「可改選下列後繼機種」（因部分
    後繼非原廠指定）。介紹文字不受舊站字數限制，業主日後會再追加
+7. **耕紋貿易是 KYORITSU（日本共立）台灣總代理**（2026-11-12 使用者確認：「KYORITSU 代理商
+   就是我們」）。網站可公開寫「台灣總代理」——由 `src/data/brands.ts` 的 `role` 欄位驅動
+   （首頁 hero／description、公司簡介、廠牌頁、Kyoritsu 產品頁品牌標籤）。**其他廠牌代理關係
+   未確認，`role` 一律不填、不得寫「總代理」**；要加須業主逐一確認
 
 ## 測試 know-how
 
@@ -223,6 +264,13 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
   在 scratchpad 建隔離環境裝 openpyxl/pymupdf
 - Pages deploy 偶發 "Deployment failed, try again later"（本專案遇過 2 次）
   → `gh run rerun <id> --failed` 即可
+- **SEO 產物驗證**：scratchpad 的 `verify-seo.mjs <dist>`（session 專用、會清掉；要再用時照
+  此規格重寫）——掃 dist 全部 HTML（略過 meta-refresh 舊站 stub）：每頁有 description、
+  description 不重複、JSON-LD 皆可 parse、`href`/`src` 根相對路徑對得到檔案。2026-11-12：
+  320 頁、313 段 JSON-LD、0 重複、0 斷鏈
+- bash 的 `sed` 替換字串裡 `&` 代表「整段匹配」，測資含 `T&R` 要寫 `\&`（2026-11-12 實踩，
+  負向測試因此誤炸成語法錯誤）；Node 24 從 stdin（heredoc）讀的腳本走 evalTypeScript 路徑，
+  同日一次多行字串比對莫名對不到（原因未查明）——改原始碼一律用 Edit 工具
 - **注音篩選測法**：CDP 對搜尋框依序派 `compositionstart` → `input`（isComposing、值為注音）
   → `compositionend` → `input`（isComposing:false，模擬 Safari 順序），斷言選字中卡片數不變、
   不顯示「找不到」（2026-11-11 修正前的正式站可重現閃空）
@@ -246,8 +294,7 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
      等 20 秒再 `-F https_enforced=true`，約 2 分鐘後 www 恢復 301（2026-10-19 實證；
      單純重存 cname、重新部署各等 30 分鐘都無效）。主網域全程不中斷
 
-- （小問題，未修）站上沒有 favicon，瀏覽器請求 `/favicon.ico` 會 404；
-  詢價頁 `.inquiry-remove` 是 scoped 樣式，JS 產生的「移除」按鈕吃不到
+- （小問題，未修）詢價頁 `.inquiry-remove` 是 scoped 樣式，JS 產生的「移除」按鈕吃不到
   （仍有全域 `.btn` 外觀，不影響使用）——JS 產生的元素要用 `:global(...)`
 
 - **2026-07-07 手機版圖片爆版已修**（業主 iOS Safari 回報，截圖存 `bug/`）：
