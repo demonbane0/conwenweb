@@ -17,7 +17,7 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
   詢價車（localStorage + 跨頁徽章）
 - 詢價表單**站內送出**（Formspree `f/mqevjpbn`，2026-07-07 實測成功、
   測試信寄達）；具防濫用與輸入防呆機制，Formspree 失敗時自動改走 mailto
-  不漏單。防護細節見本機 `HANDOFF.local.md`（不入版控）
+  不漏單。防護細節見 `E:\Project\conwenweb-private\HANDOFF.local.md`（repo 外）
 - 設計系統（深藍 #14467b + 橙 #c2410c、LogoMark、刻度尺眉標、等寬型號、
   格線紋理）與 SEO（廠牌+型號 title、meta description、BreadcrumbList
   JSON-LD、OG 分享圖）詳見 CLAUDE.md
@@ -52,7 +52,7 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
     內容來源：Kyoritsu 官網 EN 優先（台灣用外銷版）、無 EN 才用 JA；子代理中譯後以
     驗收腳本逐頁比對原廠數字（不漏不杜撰），91/91 PASS
   - [ ] **待業主／代理商**：① 5200、5201 照度計原廠只剩蓋「販売終了品」章的圖，
-    文字已寫好暫存在本機 `KY價格表/官網抽取工具/staging/`，有實品照或型錄圖再上架
+    文字已寫好暫存在 `E:\Project\conwenweb-private\KY價格表\官網抽取工具\staging\`，有實品照或型錄圖再上架
     （圖放 `public/images/products/5200-kyoritsu.jpg`／`5201.jpg`，md 搬回
     `src/content/products/environmental/`；5200 檔名避開 PAN-GLOBE 的 high-voltage/5200）；
     ② 3312（原廠 1995 停產，疑為 3442 誤植）、4113（查無）向原廠確認型號後再建頁
@@ -60,7 +60,7 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
     ③ 選配件 6 項（8241、8115、8161、9189、8008、8112）業主決定這次不建頁
   - 價格表上有、原廠已停產者照價格表當現行（2027、2608A、8030、5510、3021A/3023A、
     4500），公開頁面**不寫**「原廠停產／價格表」等內部資訊
-  - **工具與中間資料一律本機**：`KY價格表/`（`.git/info/exclude` 排除）。11-04 比對腳本在
+  - **工具與中間資料一律放 repo 外**：`E:\Project\conwenweb-private\KY價格表\`（2026-11-18 從 repo 內搬出）。11-04 比對腳本在
     `比對工具/`；11-12 官網抽取全套在 `官網抽取工具/`：`ky_plan.py`（處置對照表，L-067
     單一來源）→ `plan_check.py`（對帳：價格表型號全有處置、無撞名）→ `crawl_index.py`
     （分類頁含分頁，與官網宣稱總數對帳）→ `ky_detail.py`（只抽主內容區、h1 型號不符即拒）
@@ -69,7 +69,8 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
     （多欄表相同列移到「共通規格」表）。日後其他廠牌可沿用此管線
   - 原廠官網停產頁的圖蓋有「販売終了品／Discontinued products」大章，**不可用於現行品**；
     乾淨圖原廠已刪，只能從型錄 PDF 取（`pdf_img_mask.py` 套 smask 去背）
-  - ✅ **2026-11-18 Raytech TR Jr**（使用者告知停產並提供型錄掃描 `20261118_104506.pdf`）：`tr-jr.md` 標停產 →
+  - ✅ **2026-11-18 Raytech TR Jr**（使用者告知停產並提供型錄掃描 `20261118_104506.pdf`；它和官網 Flyer 4.00、
+    說明書 1.12 都放在 `E:\Project\conwenweb-private\原廠型錄\Raytech\`）：`tr-jr.md` 標停產 →
     新增 `high-voltage/tr-1-tr-1p.md`（圖用 raytech.ch 官網 PNG 轉白底 JPG）。內容來源優先序：官網現行頁
     raytech.ch/products/detail/tr-1 ＞ 官網 Flyer 4.00（2025）＞ 說明書 1.12（2020）＞ 使用者掃描型錄（Raytech GmbH
     時期舊版，使用溫度、輸入電壓、電池容量與現行不一致，只當佐證不單獨採用）。原廠沒有指定 TR-Jr 後繼，後繼依使用者提供的型錄
@@ -116,9 +117,10 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
 
 - [ ] **Kyoritsu 待業主／代理商**（詳見上方產品資料更新）：5200／5201 產品照、
   3312／4113 型號確認
-- [ ] （建議）`KY價格表/` 移到 repo 外（CLAUDE.md 規範；目前靠 `.git/info/exclude`
-  擋，排除規則不隨 repo 傳遞）。`bug/` 的 4 張舊截圖、根目錄的原廠型錄 PDF（`20261118_104506.pdf`、
-  `Kyoritsu 產品更新待解決問題報告.pdf`）同理，勿 `git add .`
+- [x] ~~非公開檔案移到 repo 外~~：✅ 2026-11-18 建 `E:\Project\conwenweb-private\`（使用者指示；規則見其
+  README），`KY價格表/`、`bug/`、`2026-07-07*.png`、兩份型錄／報告 PDF、`HANDOFF.local.md` 全數搬入
+  （132 檔數量核對一致）。**使用者之後給的資料也放那裡的根目錄**。`.git/info/exclude` 的 `KY價格表/`、
+  `.gitignore` 的 `HANDOFF.local.md` 規則保留當防線
 - [ ]（既有缺口，審查發現，未修）① `replacedBy` 只能單一後繼（原廠有時指定多個）；
   ② 停產品產品卡以後繼連結取代詢價按鈕（產品頁仍有「詢問替代機種」）；③ 詢價頁
   不會跟著其他分頁的詢價車變動重繪（徽章會更新、送出內容以 storage 為準）
@@ -203,7 +205,7 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
   寄件者）；用量到 formspree.io 後台看（免費 50 封/月；超量時客戶端自動
   退回 mailto，不會漏單）
 - **表單防濫用**（平時不用做事）：每月順手看一次 Formspree 後台用量。
-  用量異常時的判讀與升級做法見本機 `HANDOFF.local.md`（不入版控；
+  用量異常時的判讀與升級做法見 `E:\Project\conwenweb-private\HANDOFF.local.md`（repo 外；
   repo 是 public，防護細節不公開）
 - **DNS**：HiNet 代管（dnmgt.hinet.net「DNS 紀錄管理」）；apex 四筆 A →
   185.199.108-111.153、www CNAME → demonbane0.github.io，**不要動**
@@ -318,7 +320,7 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
 - （小問題，未修）詢價頁 `.inquiry-remove` 是 scoped 樣式，JS 產生的「移除」按鈕吃不到
   （仍有全域 `.btn` 外觀，不影響使用）——JS 產生的元素要用 `:global(...)`
 
-- **2026-07-07 手機版圖片爆版已修**（業主 iOS Safari 回報，截圖存 `bug/`）：
+- **2026-07-07 手機版圖片爆版已修**（業主 iOS Safari 回報，截圖存 `E:\Project\conwenweb-private\截圖\bug\`）：
   產品卡與產品內頁圖片原用「`aspect-ratio` flex 容器 + 圖片百分比
   max-width/max-height」，踩到 WebKit 已知 bug，圖片被排成超大尺寸撐破卡片、
   整頁橫向溢出。改為 `::before padding-top: 75%` 撐 4:3 + 圖片絕對定位置中
