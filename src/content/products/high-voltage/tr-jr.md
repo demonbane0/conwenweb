@@ -9,4 +9,7 @@ features:
   - "匝數比 0.8 ~ 4,000"
   - "測量精度 ±0.1%"
 order: 260
+status: discontinued
+replacedBy: "tr-1-tr-1p"
+lastReviewed: "2026-11-18"
 ---

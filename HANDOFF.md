@@ -1,16 +1,16 @@
 # HANDOFF — Session 交接文件
 
 > 每個 session 開始先讀本檔 + CLAUDE.md；有變動時收尾前更新並 commit。
-> 最後更新：2026-11-12（SEO 曝光強化：8 個廠牌獨立頁、全站逐頁 description、Organization 三據點；
+> 最後更新：2026-11-18（Raytech TR Jr 標停產、新增後繼 TR-1 / TR-1P 頁）
+> 前次：2026-11-12（SEO 曝光強化：8 個廠牌獨立頁、全站逐頁 description、Organization 三據點；
 > 業主確認耕紋為 KYORITSU 台灣總代理）
-> 前次：2026-11-12（Kyoritsu 依價格表全面更新：新品 62 頁、停產 26 頁、既有 27 頁換官網內容）
 
 ## 專案狀態：✅ 網站上線；🔄 產品資料更新進行中（見下方「產品資料更新」）
 
 **正式網址：https://conwen.com.tw**（HTTPS 強制；舊網址
 demonbane0.github.io/conwenweb 自動 301 轉址）
 
-- 產品 294 頁（現行 268、停產 26；2026-11-12 Kyoritsu 更新後）。原 231 項全數遷移（10 分類），**廠牌 231/231 全數回填**（四輪查核：
+- 產品 295 頁（現行 268、停產 27；2026-11-18 Raytech TR Jr 更新後）。原 231 項全數遷移（10 分類），**廠牌 231/231 全數回填**（四輪查核：
   型號系列推斷 → GPT-5 網路查核 → 產品照商標辨識 → 業主人工確認；
   逐項清單見 `BRAND-FILLED.md`，查核紀錄見 `BRAND-REVIEW.md` 等三份 md）
 - 產品搜尋 + 分類 chips + 廠牌下拉篩選（`?brand=` 參數）、產品頁燈箱、
@@ -69,6 +69,13 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
     （多欄表相同列移到「共通規格」表）。日後其他廠牌可沿用此管線
   - 原廠官網停產頁的圖蓋有「販売終了品／Discontinued products」大章，**不可用於現行品**；
     乾淨圖原廠已刪，只能從型錄 PDF 取（`pdf_img_mask.py` 套 smask 去背）
+  - ✅ **2026-11-18 Raytech TR Jr**（使用者告知停產並提供型錄掃描 `20261118_104506.pdf`）：`tr-jr.md` 標停產 →
+    新增 `high-voltage/tr-1-tr-1p.md`（圖用 raytech.ch 官網 PNG 轉白底 JPG）。內容來源優先序：官網現行頁
+    raytech.ch/products/detail/tr-1 ＞ 官網 Flyer 4.00（2025）＞ 說明書 1.12（2020）＞ 使用者掃描型錄（Raytech GmbH
+    時期舊版，使用溫度、輸入電壓、電池容量與現行不一致，只當佐證不單獨採用）。原廠沒有指定 TR-Jr 後繼，後繼依使用者提供的型錄
+  - [ ] **待使用者／業主**：raytechusa.com「Retired Products」頁（2026-11-18 親驗）另列 **TR-Spy Mark II、WR50-2**
+    為停產，站上仍標現行；原廠未指定後繼。現行同類機為 TR-MARK III 250V／TR4（三相匝比）、
+    WR50-12／WR50-13（線圈電阻），站上尚無頁面——要標停產、建新頁或先不動，等指示
 - [x] 批次標停產上線前：發**里程碑紅隊審查**（2026-11-12 Kyoritsu 批次，結果見發包紀錄）
 - [ ] 現行品掉到 200 以下時改文案「兩百餘項」（`src/pages/index.astro` advantages、
   `src/pages/about.astro`）；首頁統計數字已自動計算，不用改
@@ -95,12 +102,23 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
     `src/utils/search.ts` 去原廠前綴＋忽略空白，兩個列表頁共用，注音選字回歸測試通過）；
     其餘為既有缺口或本機資料位置，記入剩餘待辦
 
+- 發包紀錄：`REVIEW-TRJR-TR1-20261118`｜T2（部署）｜主模型直做
+  - 盲審 A/B（GPT-6.1 Sol 試用協定第 1 次）Codex 唯讀 `gpt-6.1-sol xhigh`＋`gpt-5.6-sol xhigh`：皆 0 P0。
+    採納：精度補註適用模式（CT 模式只到 100）、兩機種改多欄表＋共通規格表、電源單位照原廠寫 VAC/VDC、
+    尺寸改用現行官網 246×124mm、刪掉只有舊型錄有的電池容量；不採納：「16 台變壓器比對」（現行來源皆無）、
+    原廠產品編號（站內不列）、Raytech 無廠牌頁（設計如此，只有 8 個 logo 廠牌有獨立頁）。
+    擴權題抓到 TR-Spy Mark II／WR50-2 已停產（見上方待辦）
+  - 主模型驗收：build 321 頁 0 錯誤；audit 報表 TR Jr 停產→tr-1-tr-1p；CDP 手機 390／桌機 1280 無橫向溢出、
+    停產提示與後繼卡片正常；列表頁 TR Jr 卡片 hidden＋data-discontinued
+
 ## 剩餘待辦
 
+- [ ] **Raytech 待使用者／業主**：TR-Spy Mark II、WR50-2 原廠已停產（詳見上方產品資料更新）
 - [ ] **Kyoritsu 待業主／代理商**（詳見上方產品資料更新）：5200／5201 產品照、
   3312／4113 型號確認
 - [ ] （建議）`KY價格表/` 移到 repo 外（CLAUDE.md 規範；目前靠 `.git/info/exclude`
-  擋，排除規則不隨 repo 傳遞）。`bug/` 的 4 張舊截圖同理，勿 `git add .`
+  擋，排除規則不隨 repo 傳遞）。`bug/` 的 4 張舊截圖、根目錄的原廠型錄 PDF（`20261118_104506.pdf`、
+  `Kyoritsu 產品更新待解決問題報告.pdf`）同理，勿 `git add .`
 - [ ]（既有缺口，審查發現，未修）① `replacedBy` 只能單一後繼（原廠有時指定多個）；
   ② 停產品產品卡以後繼連結取代詢價按鈕（產品頁仍有「詢問替代機種」）；③ 詢價頁
   不會跟著其他分頁的詢價車變動重繪（徽章會更新、送出內容以 storage 為準）
