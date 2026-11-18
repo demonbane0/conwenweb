@@ -1,7 +1,8 @@
 # HANDOFF — Session 交接文件
 
 > 每個 session 開始先讀本檔 + CLAUDE.md；有變動時收尾前更新並 commit。
-> 最後更新：2026-11-18（Raytech TR Jr 標停產、新增後繼 TR-1 / TR-1P 頁）
+> 最後更新：2026-11-18（新增 Raytech TR-MARK III 250V 頁、TR Spy Mark II 連後繼；搜尋忽略連字號＋逐詞比對。
+> 同日稍早：TR Jr 標停產、新增後繼 TR-1 / TR-1P 頁）
 > 前次：2026-11-12（SEO 曝光強化：8 個廠牌獨立頁、全站逐頁 description、Organization 三據點；
 > 業主確認耕紋為 KYORITSU 台灣總代理）
 
@@ -10,7 +11,7 @@
 **正式網址：https://conwen.com.tw**（HTTPS 強制；舊網址
 demonbane0.github.io/conwenweb 自動 301 轉址）
 
-- 產品 295 頁（現行 266、停產 29；2026-11-18 Raytech 更新後）。原 231 項全數遷移（10 分類），**廠牌 231/231 全數回填**（四輪查核：
+- 產品 296 頁（現行 267、停產 29；2026-11-18 Raytech 更新後）。原 231 項全數遷移（10 分類），**廠牌 231/231 全數回填**（四輪查核：
   型號系列推斷 → GPT-5 網路查核 → 產品照商標辨識 → 業主人工確認；
   逐項清單見 `BRAND-FILLED.md`，查核紀錄見 `BRAND-REVIEW.md` 等三份 md）
 - 產品搜尋 + 分類 chips + 廠牌下拉篩選（`?brand=` 參數）、產品頁燈箱、
@@ -75,9 +76,17 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
     raytech.ch/products/detail/tr-1 ＞ 官網 Flyer 4.00（2025）＞ 說明書 1.12（2020）＞ 使用者掃描型錄（Raytech GmbH
     時期舊版，使用溫度、輸入電壓、電池容量與現行不一致，只當佐證不單獨採用）。原廠沒有指定 TR-Jr 後繼，後繼依使用者提供的型錄
   - ✅ **2026-11-18 TR-Spy Mark II、WR50-2 標停產、不連後繼**（使用者裁決「只標停產」）：raytechusa.com
-    「Retired Products」頁（同日親驗）列為停產、原廠未指定後繼。現行同類機 TR-MARK III 250V／TR4（三相匝比）、
-    WR50-12／WR50-13（線圈電阻）站上尚無頁面；業主若要上架再建頁並補 `replacedBy`。
-    至此站上 Raytech 現行品只剩 TR-1 / TR-1P
+    「Retired Products」頁（同日親驗）列為停產、原廠未指定後繼。現行同類機 TR4（三相匝比）、
+    WR50-12／WR50-13（線圈電阻）站上尚無頁面；業主若要上架再建頁並補 `replacedBy`（TR-Spy Mark II 已連，見下條）
+  - ✅ **2026-11-18 新增 TR-MARK III 250V**（使用者：「TR-MARK III 也有代理…跟停產品有關係的話也加上去」）：
+    `high-voltage/tr-mark-iii-250v.md`（order 270.1）＋官網 PNG 轉白底 JPG；`tr-spy-mark-ii.md` 補
+    `replacedBy: "tr-mark-iii-250v"`——依據說明書 2.20 第 3.1 節沿革 TR-Spy → TR-Spy MARK II → TR-MARK III
+    （原廠沒逐字寫 replaced by；機箱尺寸、測試電壓組、電流／相位規格一脈相承）。原無 250V 的舊 TR-Mark III 已列
+    Raytech USA Retired，現行只有 250V 版（另有機架式 TR-MARK III R 250V，未建頁）。來源優先序同 TR-1：
+    官網現行頁 ＞ Flyer 3.07 ＞ 說明書 2.20（兩份 PDF 已歸檔 `conwenweb-private\原廠型錄\Raytech\`）。來源衝突的取捨：
+    匝比上限寫 40000（官網另一處孤立寫 45'000，與同頁精度表、型錄、說明書不符）；尺寸重量用官網 472×368×196mm／10.5kg
+    （2020 文件 470×371×190／9.5kg）；10V 分段精度官網與說明書互相矛盾 → 不列，只在備註寫各電壓量程上限並請客戶索取說明書。
+    至此站上 Raytech 現行品：TR-1 / TR-1P、TR-MARK III 250V
 - [x] 批次標停產上線前：發**里程碑紅隊審查**（2026-11-12 Kyoritsu 批次，結果見發包紀錄）
 - [ ] 現行品掉到 200 以下時改文案「兩百餘項」（`src/pages/index.astro` advantages、
   `src/pages/about.astro`）；首頁統計數字已自動計算，不用改
@@ -113,6 +122,17 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
   - 主模型驗收：build 321 頁 0 錯誤；audit 報表 TR Jr 停產→tr-1-tr-1p；CDP 手機 390／桌機 1280 無橫向溢出、
     停產提示與後繼卡片正常；列表頁 TR Jr 卡片 hidden＋data-discontinued
 
+- 發包紀錄：`REVIEW-TRMARK3-20261118`｜T2（部署）｜主模型直做
+  - 盲審 A/B（GPT-6.1 Sol 試用協定第 2 次）Codex 唯讀 `gpt-6.1-sol xhigh`（285s，5 條）＋`gpt-5.6-sol xhigh`
+    （290s，6 條）：皆 0 P0。採納：說明書註腳的 >45°C 連續量測降額（50W／0.5A@100V／0.2A@250V）寫進備註、
+    各測試電壓量程上限（10V 4000、1V 400）、ST-105 移出選購配件（官網列 Related Products）、
+    **搜尋忽略連字號＋多詞逐詞比對**（「RAYTECH TR-MARK III」「TR MARK III」「TRMARKIII」「TR-Spy Mark II」原本 0 筆；
+    `src/utils/search.ts`，兩個列表頁共用，新集合是舊集合的超集）。不採納：新增 Raytech 廠牌頁（只有 logo 廠牌有獨立頁，
+    要不要加交業主決定）、`<0.05VA` 改 `<0.05 VA`（站內慣例數字單位不空格，非數值變動）。記入既有缺口 1（見剩餘待辦 ④）
+  - 主模型驗收：build 322 頁 0 錯誤（首次 build 的 Duplicate id 為內容快取，第二次即消失）；audit 報表 TR Spy Mark II
+    停產→tr-mark-iii-250v；搜尋比對測試 19 例（用 dist 實際索引，含 KEW／KM／KT 舊寫法與注音）全過；CDP 搜尋框實測
+    4 種新寫法命中、注音選字中卡片數不變；CDP 手機 390／桌機 1280 無橫向溢出、TR Spy Mark II 頁後繼卡片正常
+
 ## 剩餘待辦
 
 - [ ] **Kyoritsu 待業主／代理商**（詳見上方產品資料更新）：5200／5201 產品照、
@@ -123,8 +143,13 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
   `.gitignore` 的 `HANDOFF.local.md` 規則保留當防線
 - [ ]（既有缺口，審查發現，未修）① `replacedBy` 只能單一後繼（原廠有時指定多個）；
   ② 停產品產品卡以後繼連結取代詢價按鈕（產品頁仍有「詢問替代機種」）；③ 詢價頁
-  不會跟著其他分頁的詢價車變動重繪（徽章會更新、送出內容以 storage 為準）
+  不會跟著其他分頁的詢價車變動重繪（徽章會更新、送出內容以 storage 為準）；
+  ④ localStorage 寫入失敗（隱私模式／容量滿）時 `inquiry.ts` 的 `writeItems` 吞掉錯誤，按鈕仍顯示「已加入 ✓」，
+  客戶到詢價單才發現是空的（2026-11-18 REVIEW-TRMARK3 盲審 6.1 Sol 擴權題）
   （原 ④ 舊站 `index.htm`、`map1~3.html` 無轉址 stub → 2026-11-12 已補，見 SEO 現況）
+- [ ] **Raytech 廠牌頁**（待業主決定）：使用者 2026-11-18 確認有代理 Raytech，但 `brands.ts` 只有 8 個 logo 廠牌，
+  Raytech 沒有 `/brands/raytech/` 與代理廠牌總覽入口。要加就照「加廠牌頁」流程（logo、slug、filter `Raytech`、
+  `role` 不填）；另機架式 TR-MARK III R 250V、TR4、WR50-12／-13 是否上架也待業主
 
 - [x] ~~退租舊主機~~：✅ **已完成**（2026-10-20 業主告知已退租）。
   同日確認 DNS 已無任何紀錄指向舊主機（apex/www 皆為 GitHub Pages、

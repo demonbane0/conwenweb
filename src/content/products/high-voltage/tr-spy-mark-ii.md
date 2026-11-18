@@ -11,5 +11,6 @@ features:
   - "100 組完整記憶包括銘牌訊息"
 order: 270
 status: discontinued
+replacedBy: "tr-mark-iii-250v"
 lastReviewed: "2026-11-18"
 ---
