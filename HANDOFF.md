@@ -10,7 +10,7 @@
 **正式網址：https://conwen.com.tw**（HTTPS 強制；舊網址
 demonbane0.github.io/conwenweb 自動 301 轉址）
 
-- 產品 295 頁（現行 268、停產 27；2026-11-18 Raytech TR Jr 更新後）。原 231 項全數遷移（10 分類），**廠牌 231/231 全數回填**（四輪查核：
+- 產品 295 頁（現行 266、停產 29；2026-11-18 Raytech 更新後）。原 231 項全數遷移（10 分類），**廠牌 231/231 全數回填**（四輪查核：
   型號系列推斷 → GPT-5 網路查核 → 產品照商標辨識 → 業主人工確認；
   逐項清單見 `BRAND-FILLED.md`，查核紀錄見 `BRAND-REVIEW.md` 等三份 md）
 - 產品搜尋 + 分類 chips + 廠牌下拉篩選（`?brand=` 參數）、產品頁燈箱、
@@ -73,9 +73,10 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
     新增 `high-voltage/tr-1-tr-1p.md`（圖用 raytech.ch 官網 PNG 轉白底 JPG）。內容來源優先序：官網現行頁
     raytech.ch/products/detail/tr-1 ＞ 官網 Flyer 4.00（2025）＞ 說明書 1.12（2020）＞ 使用者掃描型錄（Raytech GmbH
     時期舊版，使用溫度、輸入電壓、電池容量與現行不一致，只當佐證不單獨採用）。原廠沒有指定 TR-Jr 後繼，後繼依使用者提供的型錄
-  - [ ] **待使用者／業主**：raytechusa.com「Retired Products」頁（2026-11-18 親驗）另列 **TR-Spy Mark II、WR50-2**
-    為停產，站上仍標現行；原廠未指定後繼。現行同類機為 TR-MARK III 250V／TR4（三相匝比）、
-    WR50-12／WR50-13（線圈電阻），站上尚無頁面——要標停產、建新頁或先不動，等指示
+  - ✅ **2026-11-18 TR-Spy Mark II、WR50-2 標停產、不連後繼**（使用者裁決「只標停產」）：raytechusa.com
+    「Retired Products」頁（同日親驗）列為停產、原廠未指定後繼。現行同類機 TR-MARK III 250V／TR4（三相匝比）、
+    WR50-12／WR50-13（線圈電阻）站上尚無頁面；業主若要上架再建頁並補 `replacedBy`。
+    至此站上 Raytech 現行品只剩 TR-1 / TR-1P
 - [x] 批次標停產上線前：發**里程碑紅隊審查**（2026-11-12 Kyoritsu 批次，結果見發包紀錄）
 - [ ] 現行品掉到 200 以下時改文案「兩百餘項」（`src/pages/index.astro` advantages、
   `src/pages/about.astro`）；首頁統計數字已自動計算，不用改
@@ -107,13 +108,12 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
     採納：精度補註適用模式（CT 模式只到 100）、兩機種改多欄表＋共通規格表、電源單位照原廠寫 VAC/VDC、
     尺寸改用現行官網 246×124mm、刪掉只有舊型錄有的電池容量；不採納：「16 台變壓器比對」（現行來源皆無）、
     原廠產品編號（站內不列）、Raytech 無廠牌頁（設計如此，只有 8 個 logo 廠牌有獨立頁）。
-    擴權題抓到 TR-Spy Mark II／WR50-2 已停產（見上方待辦）
+    擴權題抓到 TR-Spy Mark II／WR50-2 已停產（使用者裁決只標停產，增量只改兩行 frontmatter、沿用本包判級未另發盲審）
   - 主模型驗收：build 321 頁 0 錯誤；audit 報表 TR Jr 停產→tr-1-tr-1p；CDP 手機 390／桌機 1280 無橫向溢出、
     停產提示與後繼卡片正常；列表頁 TR Jr 卡片 hidden＋data-discontinued
 
 ## 剩餘待辦
 
-- [ ] **Raytech 待使用者／業主**：TR-Spy Mark II、WR50-2 原廠已停產（詳見上方產品資料更新）
 - [ ] **Kyoritsu 待業主／代理商**（詳見上方產品資料更新）：5200／5201 產品照、
   3312／4113 型號確認
 - [ ] （建議）`KY價格表/` 移到 repo 外（CLAUDE.md 規範；目前靠 `.git/info/exclude`

@@ -10,4 +10,6 @@ features:
   - "系統測量精度 ±0.5%"
   - "100 組完整記憶包括銘牌訊息"
 order: 270
+status: discontinued
+lastReviewed: "2026-11-18"
 ---
