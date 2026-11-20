@@ -120,6 +120,10 @@ const discontinuedNotes = Object.fromEntries(
 
     const noteFor = (slug: string) => discontinuedNotes[slug] ?? "";
 
+    // 瀏覽器拒絕儲存時，改數量／移除不會生效（清單會重繪回原值），要明講並給替代管道
+    const STORAGE_FAIL_TEXT =
+      "無法儲存變更：您的瀏覽器目前不允許網站儲存資料（例如無痕模式或已封鎖網站資料），請改用電話或 Email 詢價。";
+
     const showMessage = (text: string, type: "success" | "error" | "notice") => {
       if (!message) {
         return;
@@ -130,8 +134,16 @@ const discontinuedNotes = Object.fromEntries(
       message.hidden = false;
     };
 
-    const productsText = () =>
-      (api?.getItems() ?? [])
+    // 儲存恢復正常後，收掉之前的儲存失敗訊息（其他訊息不動）
+    const clearStorageMessage = () => {
+      if (message && !message.hidden && message.textContent === STORAGE_FAIL_TEXT) {
+        message.hidden = true;
+      }
+    };
+
+    // 只對開始送出那一刻的快照序列化：線上送出與 mailto 退路寄的是同一份內容
+    const productsText = (items: { slug: string; model: string; title: string; qty: number }[]) =>
+      items
         .map((item) => {
           const note = noteFor(item.slug);
           return `${item.model} x ${item.qty} ${item.title}${note ? `（${note}）` : ""}`;
@@ -194,7 +206,20 @@ const discontinuedNotes = Object.fromEntries(
         return;
       }
 
-      api.setQty(input.dataset.qtySlug ?? "", Number.parseInt(input.value, 10));
+      const nextQty = Number.parseInt(input.value, 10);
+
+      // 數量欄清空或填 0 不可當成刪除（客戶可能只是要改數字）：還原原值並說明，刪除只能按「移除」
+      if (!Number.isFinite(nextQty) || nextQty < 1) {
+        showMessage("數量至少為 1；要刪除品項請按「移除」。", "notice");
+        renderItems();
+        return;
+      }
+
+      if (api.setQty(input.dataset.qtySlug ?? "", nextQty)) {
+        clearStorageMessage();
+      } else {
+        showMessage(STORAGE_FAIL_TEXT, "error");
+      }
       renderItems();
     });
 
@@ -205,7 +230,11 @@ const discontinuedNotes = Object.fromEntries(
         return;
       }
 
-      api.remove(button.dataset.removeSlug ?? "");
+      if (api.remove(button.dataset.removeSlug ?? "")) {
+        clearStorageMessage();
+      } else {
+        showMessage(STORAGE_FAIL_TEXT, "error");
+      }
       renderItems();
     });
 
@@ -231,7 +260,7 @@ const discontinuedNotes = Object.fromEntries(
         phone: String(formData.get("phone") ?? "").trim(),
         email,
         notes: String(formData.get("notes") ?? "").trim(),
-        products: productsText(),
+        products: productsText(items),
         _replyto: email,
         _gotcha: String(formData.get("_gotcha") ?? ""),
       };
@@ -253,7 +282,7 @@ const discontinuedNotes = Object.fromEntries(
       const sendViaMailto = (notice: string) => {
         const body = [
           "詢價產品：",
-          productsText(),
+          payload.products,
           "",
           "聯絡資訊：",
           `公司名稱：${payload.company}`,
@@ -293,9 +322,15 @@ const discontinuedNotes = Object.fromEntries(
             throw new Error(`Formspree request failed: ${response.status}`);
           }
 
-          api.clear();
+          // 只扣掉這次送出的品項；扣不掉（瀏覽器拒絕儲存）要明講，避免客戶以為清單沒送而重送
+          const cleared = api.removeSent(items);
           form.reset();
-          showMessage("詢價已送出，我們會盡快與您聯絡。", "success");
+          showMessage(
+            cleared
+              ? "詢價已送出，我們會盡快與您聯絡。"
+              : "詢價已送出，我們會盡快與您聯絡。（瀏覽器無法自動清除詢價單，請勿重複送出）",
+            "success",
+          );
           renderItems();
         } catch {
           // 線上送出失敗（額度用盡、服務中斷等）→ 自動退回 mailto，詢價不漏接

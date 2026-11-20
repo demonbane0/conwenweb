@@ -348,6 +348,26 @@ p {
   text-align: center;
 }
 
+/* 加入詢價單失敗的常駐提示（src/scripts/inquiry.ts 動態產生，故寫在全域） */
+.inquiry-error {
+  flex-basis: 100%;
+  margin: var(--space-1) 0 0;
+  padding: var(--space-1) var(--space-2);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 6px;
+  background: var(--color-soft-accent);
+  color: var(--color-text);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.inquiry-error a {
+  color: var(--color-accent-dark);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
 /* ---------- footer ---------- */
 
 .site-footer {

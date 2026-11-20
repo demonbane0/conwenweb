@@ -1,7 +1,8 @@
 # HANDOFF — Session 交接文件
 
 > 每個 session 開始先讀本檔 + CLAUDE.md；有變動時收尾前更新並 commit。
-> 最後更新：2026-11-20（依 Notion「官網型號更新表」：7 個型號標停產、6 個替代機種新頁、HT-680D 從合併頁拆出；
+> 最後更新：2026-11-20（詢價車漏單修正：儲存失敗不再顯示「已加入」、清空數量不再刪品項、跨分頁同步、
+> 送出只扣快照。同日稍早：依 Notion「官網型號更新表」7 個型號標停產、6 個替代機種新頁、HT-680D 從合併頁拆出；
 > 全站對外文案「後繼機種」改「替代機種」）
 > 前次：2026-11-18（新增 Raytech TR-MARK III 250V 頁、TR Spy Mark II 連後繼；搜尋忽略連字號＋逐詞比對；
 > TR Jr 標停產、新增後繼 TR-1 / TR-1P 頁）
@@ -163,6 +164,22 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
     替代連結與「詢問替代機種」按鈕、詢價單備註「已停產，替代機種 X」；公開頁「後繼」只剩 HTE-700D／HXA-6 特點
     （原廠自己的宣稱）；CDP 手機 390／桌機 1280 共 16 畫面無橫向溢出、無破圖
 
+- 發包紀錄：`REVIEW-INQUIRY-STORAGE-20261120`｜T2 高風險（詢價流程）｜主模型直做｜盲審依新規則雙跑
+  - 修正：`inquiry.ts` 寫入後讀回比對，add／remove／setQty／clear 回傳是否真的存進去；失敗時按鈕不顯示「已加入」，
+    在按鈕下方顯示常駐 `role="alert"` 提示＋聯絡頁連結（`.inquiry-error`，樣式在 global.css）；詢價單頁改數量／移除
+    失敗時顯示錯誤、恢復後自動收掉
+  - 盲審 Codex 唯讀依序 `gpt-6.1-sol xhigh`（283s）→`gpt-5.6-sol xhigh`（217s），兩邊重疊多。採納並修：送出後清單
+    扣不掉要提示勿重送、快速連按時「已加入 ✓」計時器沒取消、恢復後舊錯誤不收；既有缺口一併修：**數量欄清空或填 0
+    會直接刪掉品項**（5.6 獨有）→ 改還原原值並提示、詢價單頁不跟其他分頁重繪（原缺口 ③）→ storage 事件轉發
+    `inquiry:change`、送出途中其他分頁新增的品項會被清掉 → 改 `removeSent()` 只扣送出快照、mailto 退路改用送出快照
+    （6.1 獨有）。不採納：兩分頁同毫秒讀改寫互相覆蓋（每次操作都重讀 storage，真人無法同時點）、讀回比對遇另一分頁
+    同時寫入會誤報失敗（後果只是多一次警告）。記入既有缺口 ⑦（手機選單鍵盤，6.1 獨有）
+  - 主模型驗收：build 329 頁 0 錯誤；CDP 測試 27/27（正常加入、setItem 丟錯、setItem 靜默不存、恢復、快速連按、
+    卡片 390 寬不撐版、詢價單改數量／移除失敗與恢復、清空／填 0 不刪、跨分頁 storage 事件重繪、送出只扣快照且途中
+    新增保留、清單扣不掉提示勿重送）
+  - modern-web-guidance `persistent-toast-notifications`：指南建議需要注意的錯誤用頁面內提示而非 toast、且 Popover
+    為 Newly available → 採按鈕旁常駐 `role="alert"`，不用 popover
+
 ## 剩餘待辦
 
 - [ ] **HT-610α 是否仍現行（待業主）**：長谷川 JP／EN 現行目錄都沒有 HT-610α（低壓檢電器現行為 HTE-610 系列、
@@ -176,13 +193,15 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
   （132 檔數量核對一致）。**使用者之後給的資料也放那裡的根目錄**。`.git/info/exclude` 的 `KY價格表/`、
   `.gitignore` 的 `HANDOFF.local.md` 規則保留當防線
 - [ ]（既有缺口，審查發現，未修）① `replacedBy` 只能單一後繼（原廠有時指定多個）；
-  ② 停產品產品卡以後繼連結取代詢價按鈕（產品頁仍有「詢問替代機種」）；③ 詢價頁
-  不會跟著其他分頁的詢價車變動重繪（徽章會更新、送出內容以 storage 為準）；
-  ④ localStorage 寫入失敗（隱私模式／容量滿）時 `inquiry.ts` 的 `writeItems` 吞掉錯誤，按鈕仍顯示「已加入 ✓」，
-  客戶到詢價單才發現是空的（2026-11-18 REVIEW-TRMARK3 盲審 6.1 Sol 擴權題）；
+  ② 停產品產品卡以替代機種連結取代詢價按鈕（產品頁仍有「詢問替代機種」）；
+  ~~③ 詢價頁不跟其他分頁重繪~~、~~④ localStorage 寫入失敗仍顯示「已加入 ✓」~~ → 2026-11-20 已修（見發包紀錄
+  REVIEW-INQUIRY-STORAGE）；
   ⑤ 詢價車存「加入當下」的型號：合併頁拆出停產型號後（2040、HT-680D），之前已加入的「HT-610α / HT-680D」
   仍掛在現行 slug 下、不會標停產（REVIEW-NOTION-DISC 6.1 擴權題）；⑥ 停產狀態以整頁為單位，合併頁只有部分型號
-  停產時只能拆頁（REVIEW-NOTION-DISC 5.6 擴權題）
+  停產時只能拆頁（REVIEW-NOTION-DISC 5.6 擴權題）；
+  ⑦ **手機寬度（≤768px）漢堡選單無法用鍵盤打開**：`Layout.astro` 的 `.nav-toggle` checkbox 為 `display:none`、
+  label `aria-hidden`，鍵盤使用者（或桌機放大 200% 以上）打不開導覽、到不了詢價單入口（REVIEW-INQUIRY-STORAGE
+  6.1 擴權題，親驗屬實）。修法：改成 `<button aria-expanded aria-controls>`＋少量 JS，待使用者決定
   （原 ④ 舊站 `index.htm`、`map1~3.html` 無轉址 stub → 2026-11-12 已補，見 SEO 現況）
 - [ ] **Raytech 廠牌頁**（待業主決定）：使用者 2026-11-18 確認有代理 Raytech，但 `brands.ts` 只有 8 個 logo 廠牌，
   Raytech 沒有 `/brands/raytech/` 與代理廠牌總覽入口。要加就照「加廠牌頁」流程（logo、slug、filter `Raytech`、

@@ -1,3 +1,5 @@
+import { withBase } from "../utils/url";
+
 const STORAGE_KEY = "conwen-inquiry";
 const SETUP_FLAG = "__conwenInquirySetup";
 
@@ -8,13 +10,16 @@ export interface InquiryItem {
   qty: number;
 }
 
+// 寫入類操作回傳 true＝已確實存進 localStorage；false＝瀏覽器拒絕儲存（無痕模式、封鎖網站資料、容量已滿），
+// 呼叫端必須提示使用者，不可當成功處理（否則客戶以為已加入，到詢價單才發現是空的）
 interface InquiryApi {
-  add: (slug: string, model: string, title: string) => void;
-  remove: (slug: string) => void;
-  setQty: (slug: string, qty: number) => void;
+  add: (slug: string, model: string, title: string) => boolean;
+  remove: (slug: string) => boolean;
+  setQty: (slug: string, qty: number) => boolean;
   count: () => number;
   getItems: () => InquiryItem[];
-  clear: () => void;
+  clear: () => boolean;
+  removeSent: (sent: InquiryItem[]) => boolean;
 }
 
 declare global {
@@ -90,18 +95,26 @@ const writeItems = (items: InquiryItem[]) => {
   const normalized = items
     .map((item) => normalizeItem(item))
     .filter((item): item is InquiryItem => Boolean(item));
+  let saved = false;
 
   try {
     if (normalized.length > 0) {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(normalized));
+      const serialized = JSON.stringify(normalized);
+      window.localStorage.setItem(STORAGE_KEY, serialized);
+      // 讀回比對：有些環境 setItem 不丟錯卻沒存進去
+      saved = window.localStorage.getItem(STORAGE_KEY) === serialized;
     } else {
       window.localStorage.removeItem(STORAGE_KEY);
+      saved = window.localStorage.getItem(STORAGE_KEY) === null;
     }
   } catch {
-    // Storage can fail in private browsing; the UI still receives the change event.
+    // 無痕模式／封鎖網站資料／容量已滿：回傳 false 由呼叫端提示，不吞掉
+    saved = false;
   }
 
+  // 失敗也發事件：讓徽章與詢價單依實際儲存內容重繪（數量欄會回到原值）
   emitChange();
+  return saved;
 };
 
 export const getItems = () => readItems();
@@ -112,7 +125,7 @@ export const add = (slug: string, model: string, title: string) => {
   const item = normalizeItem({ slug, model, title, qty: 1 });
 
   if (!item) {
-    return;
+    return false;
   }
 
   const items = readItems();
@@ -124,29 +137,37 @@ export const add = (slug: string, model: string, title: string) => {
     items.push(item);
   }
 
-  writeItems(items);
+  return writeItems(items);
 };
 
-export const remove = (slug: string) => {
-  writeItems(readItems().filter((item) => item.slug !== slug));
-};
+export const remove = (slug: string) => writeItems(readItems().filter((item) => item.slug !== slug));
 
 export const setQty = (slug: string, qty: number) => {
   const nextQty = Math.floor(qty);
 
   if (!Number.isFinite(nextQty) || nextQty < 1) {
-    remove(slug);
-    return;
+    return remove(slug);
   }
 
-  writeItems(readItems().map((item) => (item.slug === slug ? { ...item, qty: nextQty } : item)));
+  return writeItems(readItems().map((item) => (item.slug === slug ? { ...item, qty: nextQty } : item)));
 };
 
-export const clear = () => {
-  writeItems([]);
+export const clear = () => writeItems([]);
+
+// 送出成功後只扣掉「送出當下」的品項與數量：送出途中在其他分頁新增或加量的部分保留，不會沒送出就被清掉
+export const removeSent = (sent: InquiryItem[]) => {
+  const sentQty = new Map(sent.map((item) => [item.slug, item.qty]));
+
+  return writeItems(
+    readItems()
+      .map((item) => ({ ...item, qty: item.qty - (sentQty.get(item.slug) ?? 0) }))
+      .filter((item) => item.qty > 0),
+  );
 };
 
-const inquiryApi: InquiryApi = { add, remove, setQty, count, getItems, clear };
+export const STORAGE_ERROR_TEXT = "無法加入詢價單：您的瀏覽器目前不允許網站儲存資料（例如無痕模式或已封鎖網站資料）。";
+
+const inquiryApi: InquiryApi = { add, remove, setQty, count, getItems, clear, removeSent };
 
 window.ConwenInquiry = inquiryApi;
 
@@ -169,6 +190,44 @@ const showAddedFeedback = (button: HTMLButtonElement) => {
   }, 1200);
 
   feedbackTimers.set(button, timer);
+};
+
+// 加入失敗時在按鈕所在區塊顯示常駐錯誤（不自動消失），並給替代管道；JS 產生的元素樣式寫在 global.css
+const errorFor = (button: HTMLButtonElement) =>
+  button.parentElement?.querySelector<HTMLElement>(":scope > [data-inquiry-error]") ?? null;
+
+const showStorageError = (button: HTMLButtonElement) => {
+  const container = button.parentElement;
+
+  // 前一次成功的「已加入 ✓」還在倒數時又失敗：先還原按鈕，避免成功字樣與錯誤並存
+  const previousTimer = feedbackTimers.get(button);
+
+  if (previousTimer) {
+    window.clearTimeout(previousTimer);
+    feedbackTimers.delete(button);
+  }
+
+  if (button.dataset.defaultText) {
+    button.textContent = button.dataset.defaultText;
+  }
+
+  if (!container) {
+    return;
+  }
+
+  errorFor(button)?.remove();
+
+  const error = document.createElement("p");
+  error.className = "inquiry-error";
+  error.dataset.inquiryError = "";
+  error.setAttribute("role", "alert");
+
+  const link = document.createElement("a");
+  link.href = withBase("/contact/");
+  link.textContent = "改用電話或 Email 詢價";
+
+  error.append(`${STORAGE_ERROR_TEXT}請`, link, "。");
+  container.append(error);
 };
 
 const updateBadge = () => {
@@ -208,14 +267,21 @@ const setup = () => {
     }
 
     event.preventDefault();
-    add(button.dataset.slug ?? "", button.dataset.model ?? "", button.dataset.title ?? "");
-    showAddedFeedback(button);
+
+    if (add(button.dataset.slug ?? "", button.dataset.model ?? "", button.dataset.title ?? "")) {
+      errorFor(button)?.remove();
+      showAddedFeedback(button);
+    } else {
+      showStorageError(button);
+    }
   });
 
   window.addEventListener("inquiry:change", updateBadge);
   window.addEventListener("storage", (event) => {
-    if (event.key === STORAGE_KEY) {
-      updateBadge();
+    // 其他分頁改了詢價單（key 為 null＝對方清空整個 storage）：轉發成 inquiry:change，
+    // 本頁徽章與詢價單表格一起重繪，畫面才會跟實際送出的內容一致
+    if (event.key === STORAGE_KEY || event.key === null) {
+      emitChange();
     }
   });
 
