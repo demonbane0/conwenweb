@@ -9,4 +9,7 @@ features:
   - "警報距離 6.6KV迴路約 80cm"
   - "密封型構造可防水防塵"
 order: 60
+status: discontinued
+replacedBy: "hxa-6-hxa-6s"
+lastReviewed: "2026-11-20"
 ---

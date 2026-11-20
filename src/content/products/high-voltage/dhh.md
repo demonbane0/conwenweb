@@ -11,4 +11,7 @@ features:
   - "顯示相角及相位向量圖"
   - "無線傳輸有效距離 30m"
 order: 140
+status: discontinued
+replacedBy: "etcr1600"
+lastReviewed: "2026-11-20"
 ---

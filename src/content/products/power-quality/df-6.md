@@ -10,4 +10,7 @@ features:
   - "具音響及發光機能"
   - "具高、低壓測試切換開關"
 order: 20
+status: discontinued
+replacedBy: "hsf-11"
+lastReviewed: "2026-11-20"
 ---

@@ -1,8 +1,10 @@
 # HANDOFF — Session 交接文件
 
 > 每個 session 開始先讀本檔 + CLAUDE.md；有變動時收尾前更新並 commit。
-> 最後更新：2026-11-18（新增 Raytech TR-MARK III 250V 頁、TR Spy Mark II 連後繼；搜尋忽略連字號＋逐詞比對。
-> 同日稍早：TR Jr 標停產、新增後繼 TR-1 / TR-1P 頁）
+> 最後更新：2026-11-20（依 Notion「官網型號更新表」：7 個型號標停產、6 個替代機種新頁、HT-680D 從合併頁拆出；
+> 全站對外文案「後繼機種」改「替代機種」）
+> 前次：2026-11-18（新增 Raytech TR-MARK III 250V 頁、TR Spy Mark II 連後繼；搜尋忽略連字號＋逐詞比對；
+> TR Jr 標停產、新增後繼 TR-1 / TR-1P 頁）
 > 前次：2026-11-12（SEO 曝光強化：8 個廠牌獨立頁、全站逐頁 description、Organization 三據點；
 > 業主確認耕紋為 KYORITSU 台灣總代理）
 
@@ -11,7 +13,7 @@
 **正式網址：https://conwen.com.tw**（HTTPS 強制；舊網址
 demonbane0.github.io/conwenweb 自動 301 轉址）
 
-- 產品 296 頁（現行 267、停產 29；2026-11-18 Raytech 更新後）。原 231 項全數遷移（10 分類），**廠牌 231/231 全數回填**（四輪查核：
+- 產品 303 頁（現行 266、停產 37；2026-11-20 Notion 型號更新表套用後）。原 231 項全數遷移（10 分類），**廠牌 231/231 全數回填**（四輪查核：
   型號系列推斷 → GPT-5 網路查核 → 產品照商標辨識 → 業主人工確認；
   逐項清單見 `BRAND-FILLED.md`，查核紀錄見 `BRAND-REVIEW.md` 等三份 md）
 - 產品搜尋 + 分類 chips + 廠牌下拉篩選（`?brand=` 參數）、產品頁燈箱、
@@ -87,6 +89,20 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
     匝比上限寫 40000（官網另一處孤立寫 45'000，與同頁精度表、型錄、說明書不符）；尺寸重量用官網 472×368×196mm／10.5kg
     （2020 文件 470×371×190／9.5kg）；10V 分段精度官網與說明書互相矛盾 → 不列，只在備註寫各電壓量程上限並請客戶索取說明書。
     至此站上 Raytech 現行品：TR-1 / TR-1P、TR-MARK III 250V
+  - ✅ **2026-11-20 Notion「官網型號更新表｜停產與替代」**（業主內部表，11 列皆「已無庫存」；Notion 頁
+    `41dc106abae1814799b3df6a4cf55ed9`）：3123、3125、TR-Jr 三列先前已處理。本次：
+    - 標停產＋連替代：EC-900→`ec-2100`、TM-601→`tm-901exp`、HX-6→`hxa-6-hxa-6s`、DF-6→`hsf-11`、
+      DHH→`etcr1600`（**跨廠牌**，SFE→ETCR，公司曾對客戶報此替代）；只標停產：MT186、DO5000
+    - **HT-680D 從 `ht-610-ht-680d.md` 拆出**成 `ht-680d.md`（停產→`hte-700d-hte-700dl`，圖用原廠停產頁未蓋章的
+      stop_img_05.png），原頁改只列 HT-610α 並加備註（比照 2040 拆頁）
+    - 新頁內容來源：長谷川 EN 站（外銷版優先）＋JP 站交叉核對，兩邊矛盾的不寫（HXA-6 頻率 JP「50/60Hz 共用」vs
+      EN「訂購時指定」→ 備註請詢價確認；HTE-700D 發光 JP「斷續」vs EN「連續」→ 只寫紅色發光）；HSF-11 只有 EN 站
+      （外銷專用、11.4kV 配電標準機）；ONO SOKKI EN/簡中頁＋型錄；**Kanetec 原廠站 11-20 連線被拒**（本機與遠端皆
+      ECONNREFUSED）→ 用網頁時光機 2026-08 存檔＋原廠英文型錄（2023.03），官網頁本身多處筆誤（DC×1 0-2000.0、
+      30mm 厚、250g），以型錄與數值連續性為準；ETCR 原廠簡中型錄。型錄／規格圖已歸檔 `conwenweb-private\原廠型錄\`
+      （Hasegawa、ONO SOKKI、Kanetec、ETCR）
+    - 盲審後補：EC-2100「1000 m/min 以上不得手持」「±1 count 不含手震」、HTE-700D/DL「僅限裸線」、
+      ETCR1600 品名照原廠「核相儀」＋補 DL/T 971-2005 等規範
 - [x] 批次標停產上線前：發**里程碑紅隊審查**（2026-11-12 Kyoritsu 批次，結果見發包紀錄）
 - [ ] 現行品掉到 200 以下時改文案「兩百餘項」（`src/pages/index.astro` advantages、
   `src/pages/about.astro`）；首頁統計數字已自動計算，不用改
@@ -133,8 +149,26 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
     停產→tr-mark-iii-250v；搜尋比對測試 19 例（用 dist 實際索引，含 KEW／KM／KT 舊寫法與注音）全過；CDP 搜尋框實測
     4 種新寫法命中、注音選字中卡片數不變；CDP 手機 390／桌機 1280 無橫向溢出、TR Spy Mark II 頁後繼卡片正常
 
+- 發包紀錄：`REVIEW-NOTION-DISC-20261120`｜T2（資料刪改＋部署）｜主模型直做
+  - 盲審 A/B（GPT-6.1 Sol 試用協定第 3 次）Codex 唯讀 `gpt-6.1-sol xhigh`（428s）＋`gpt-5.6-sol xhigh`（513s）。
+    首次同時背景跑被 Claude Code 因記憶體不足回收（零交付），經使用者同意**依序**重跑。採納：EC-2100 高速限制、
+    HTE-700D 僅限裸線、ETCR1600 品名與規範；**模板「後繼機種」違反 Notion「不等於原廠後繼」→ 業主裁決全站改
+    「替代機種」**；DO5000「本型號已停產」違反「不據此宣稱全球停產」→ **業主裁決維持「已停產」**。不採納：
+    3121/3122 整頁停產（原廠 sell_end 列 MODEL 3121/3122、3123 皆停產）、TM-901 探棒相容矛盾（型錄 ※ 註記為
+    圖片文字，明寫可用於舊機）、HX-6S 無頁（舊站從未上架）；5.6 一條與檔案矛盾（稱漏列 LED 5 小時，實已列）。
+    記入既有缺口 ⑤⑥
+  - **試用結案**：A/B 3 次累計屬實 6.1 Sol 14 < 5.6 Sol 17 → 依 11-13 授權**自動退回，T2 盲審改回 gpt-5.6-sol**
+    （vault `1b071ad`；6.1 屬實率 82% 較高、零捏造，但抓得較少）
+  - 主模型驗收：build 329 頁 0 錯誤 0 警告；audit 303 項（現行 266、停產 37），7 條替代對應正確；dist 停產頁
+    替代連結與「詢問替代機種」按鈕、詢價單備註「已停產，替代機種 X」；公開頁「後繼」只剩 HTE-700D／HXA-6 特點
+    （原廠自己的宣稱）；CDP 手機 390／桌機 1280 共 16 畫面無橫向溢出、無破圖
+
 ## 剩餘待辦
 
+- [ ] **HT-610α 是否仍現行（待業主）**：長谷川 JP／EN 現行目錄都沒有 HT-610α（低壓檢電器現行為 HTE-610 系列、
+  HTE-700D/DL、HT-670），停產頁也沒列。`ht-610-ht-680d.md` 目前仍當現行、未填 lastReviewed
+- [ ]（可選）HX-6S 舊型號搜尋入口：Notion 表列 HX-6S→HXA-6S，但舊站從未上架 HX-6S；搜尋只比對型號＋品名＋廠牌，
+  搜「HX-6S」0 筆（搜「HX-6」可找到停產頁）。業主要的話再建 HX-6S 停產頁
 - [ ] **Kyoritsu 待業主／代理商**（詳見上方產品資料更新）：5200／5201 產品照、
   3312／4113 型號確認
 - [x] ~~非公開檔案移到 repo 外~~：✅ 2026-11-18 建 `E:\Project\conwenweb-private\`（使用者指示；規則見其
@@ -145,7 +179,10 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
   ② 停產品產品卡以後繼連結取代詢價按鈕（產品頁仍有「詢問替代機種」）；③ 詢價頁
   不會跟著其他分頁的詢價車變動重繪（徽章會更新、送出內容以 storage 為準）；
   ④ localStorage 寫入失敗（隱私模式／容量滿）時 `inquiry.ts` 的 `writeItems` 吞掉錯誤，按鈕仍顯示「已加入 ✓」，
-  客戶到詢價單才發現是空的（2026-11-18 REVIEW-TRMARK3 盲審 6.1 Sol 擴權題）
+  客戶到詢價單才發現是空的（2026-11-18 REVIEW-TRMARK3 盲審 6.1 Sol 擴權題）；
+  ⑤ 詢價車存「加入當下」的型號：合併頁拆出停產型號後（2040、HT-680D），之前已加入的「HT-610α / HT-680D」
+  仍掛在現行 slug 下、不會標停產（REVIEW-NOTION-DISC 6.1 擴權題）；⑥ 停產狀態以整頁為單位，合併頁只有部分型號
+  停產時只能拆頁（REVIEW-NOTION-DISC 5.6 擴權題）
   （原 ④ 舊站 `index.htm`、`map1~3.html` 無轉址 stub → 2026-11-12 已補，見 SEO 現況）
 - [ ] **Raytech 廠牌頁**（待業主決定）：使用者 2026-11-18 確認有代理 Raytech，但 `brands.ts` 只有 8 個 logo 廠牌，
   Raytech 沒有 `/brands/raytech/` 與代理廠牌總覽入口。要加就照「加廠牌頁」流程（logo、slug、filter `Raytech`、
@@ -272,6 +309,11 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
    就是我們」）。網站可公開寫「台灣總代理」——由 `src/data/brands.ts` 的 `role` 欄位驅動
    （首頁 hero／description、公司簡介、廠牌頁、Kyoritsu 產品頁品牌標籤）。**其他廠牌代理關係
    未確認，`role` 一律不填、不得寫「總代理」**；要加須業主逐一確認
+8. **對外一律寫「替代機種」**（2026-11-20 使用者裁決）：`replacedBy` 也用於公司推薦與跨廠牌替代（如 DHH→ETCR1600），
+   產品頁、產品卡、詢價單、列表說明都改「替代機種」（取代決策 6 的「可改選下列後繼機種」）；原廠自己宣稱的接替關係
+   （HTE-700D「HT-680 系列後繼機種」）可寫在特點
+9. **DO5000 維持「已停產」**（2026-11-20 使用者裁決）：Notion 表註記「不據此對外宣稱全球停產」（原廠 Seaward 仍有
+   產品頁），但業主選擇照一般停產處理
 
 ## 測試 know-how
 
@@ -294,6 +336,12 @@ demonbane0.github.io/conwenweb 自動 301 轉址）
   UAC，之後背景審查即正常（2026-11-12 實證）。呼叫一律 `-s read-only`、prompt 寫檔後
   `"$(cat file)"` 傳入、`< /dev/null`
 
+- **headless Edge 一律加 `--disable-extensions --disable-sync`**：新設定檔會被 Windows 帳號自動登入並同步使用者的
+  擴充功能（feebee、Tampermonkey…會開分頁），CDP 腳本抓第一個 page 會抓到擴充的歡迎頁而卡住；腳本改用
+  `PUT /json/new` 開自己的分頁（2026-11-20 實踩）
+- **Git Bash 傳 `/products/...` 給 node 會被 MSYS 轉成 `C:/Program Files/Git/products/...`**：CDP 截圖腳本收到
+  壞網址、量到空白頁卻 exit 0。指令前加 `MSYS_NO_PATHCONV=1`（2026-11-20 實踩）
+- **兩個 Codex 盲審同時背景跑可能被記憶體不足回收**（本機 16GB，2026-11-20 兩個都零交付）：記憶體緊時依序跑
 - **headless 手機截圖不可用 `--window-size`**（Windows DPI 縮放會讓 layout
   viewport 比截圖寬 → 右側元素被裁掉造成假警報）。正確做法：CDP
   `Emulation.setDeviceMetricsOverride {width:390, mobile:true}` +

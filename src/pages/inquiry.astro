@@ -10,7 +10,7 @@ const products = await getCollection("products");
 const discontinuedNotes = Object.fromEntries(
   products.filter(isDiscontinued).map((product) => {
     const successor = resolveSuccessor(product, products);
-    return [product.id, successor ? `已停產，後繼機種 ${successor.data.model}` : "已停產"];
+    return [product.id, successor ? `已停產，替代機種 ${successor.data.model}` : "已停產"];
   }),
 );
 ---

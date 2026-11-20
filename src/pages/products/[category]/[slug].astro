@@ -53,7 +53,7 @@ const successorName = successor
   : "";
 const pageDescription = [
   `${productName}。`,
-  discontinued ? (successor ? `本型號已停產，後繼機種為 ${successorName}。` : "本型號已停產，歡迎洽詢替代機種。") : "",
+  discontinued ? (successor ? `本型號已停產，可改選替代機種 ${successorName}。` : "本型號已停產，歡迎洽詢替代機種。") : "",
   product.data.features[0] ? `${product.data.features[0]}。` : "",
   brandInfo?.role
     ? `耕紋貿易為${brandFullName(brandInfo)}${brandInfo.role}，北中南三據點提供選型報價與維修保固服務。`
@@ -133,14 +133,14 @@ const breadcrumbJsonLd = JSON.stringify({
                 <p class="discontinued-notice__title">本型號已停產</p>
                 {successor ? (
                   <>
-                    <p>可改選下列後繼機種，規格與報價歡迎洽詢；既有設備仍可洽詢維修服務。</p>
+                    <p>可改選下列替代機種，規格與報價歡迎洽詢；既有設備仍可洽詢維修服務。</p>
                     <a class="successor-link" href={withBase(productPath(successor.id))}>
                       <span class="successor-link__media">
                         {/* 型號品名已是連結可見文字，縮圖設為裝飾避免讀屏重複朗讀 */}
                         <img src={withBase(successor.data.image)} alt="" loading="lazy" decoding="async" />
                       </span>
                       <span class="successor-link__text">
-                        <span class="successor-link__label">後繼機種</span>
+                        <span class="successor-link__label">替代機種</span>
                         <span class="successor-link__model">{successor.data.model}</span>
                         <span>{successor.data.title}</span>
                       </span>
